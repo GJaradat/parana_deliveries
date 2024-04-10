@@ -15,7 +15,6 @@ public class Route {
 
     @JsonIgnoreProperties({ "routes" })
     @OneToMany(mappedBy = "route")
-    @JoinColumn(name = "delivery_id")
     private List<Delivery> deliveries;
 
     @JsonIgnoreProperties({ "routes" })

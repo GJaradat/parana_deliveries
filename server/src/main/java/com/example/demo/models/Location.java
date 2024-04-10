@@ -23,7 +23,7 @@ public class Location {
     @Column (name = "longitude")
     private double longitude;
 
-    @OneToMany(mappedBy = "delivery")
+    @OneToMany(mappedBy = "location")
     @JsonIgnoreProperties({"locations"})
     private List<Delivery> deliveries;
 
