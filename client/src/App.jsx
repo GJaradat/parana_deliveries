@@ -4,6 +4,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import RoutesContainer from './containers/RoutesContainer';
 import FleetContainer from './containers/FleetContainer';
 import HomepageContainer from './containers/HomepageContainer';
+import DeliveriesContainer from './containers/DeliveriesContainer';
 import Navigation from './components/Navigation';
 
 function App() {
@@ -28,6 +29,10 @@ function App() {
         {
           path: "/fleet",
           element: <FleetContainer />
+        },
+        {
+          path: "/deliveries",
+          element: <DeliveriesContainer />
         }
       ]}
   ]);
