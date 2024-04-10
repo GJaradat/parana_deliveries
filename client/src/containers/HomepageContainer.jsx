@@ -1,4 +1,6 @@
+import Navigation from "../components/Navigation";
 import logo from "../assets/logo_vertical_parana.png"
+
 
 const HomepageContainer = () => {
     return ( 
@@ -7,6 +9,7 @@ const HomepageContainer = () => {
                 <img src={logo} alt="logo" id="home-logo"></img>
             </div>
             <p>Hello from Homepage Container</p>
+            < Navigation/>
         </>
      );
 }
