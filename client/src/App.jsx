@@ -13,15 +13,15 @@ function App() {
     {
       path: "/",
       element:<HomepageContainer />
-    },
-    {
-      path: "/home",
-      element:<HomepageContainer />
-    },
-    {
-      path: "/",
+       },
+        {
+          path: "/home",
+          element:<HomepageContainer />
+        },
+      {path: "/",
       element: <Navigation />,
       children: [
+  
         {
           path: "/routes",
           element: <RoutesContainer />
