@@ -29,8 +29,7 @@ public class Route {
 //    CONSTRUCTOR
     public Route(){}
 
-    public Route(long id, List<Delivery> deliveries, Truck truck, StatusEnum routeStatus) {
-        this.id = id;
+    public Route(List<Delivery> deliveries, Truck truck, StatusEnum routeStatus) {
         this.deliveries = deliveries;
         this.truck = truck;
         this.routeStatus = routeStatus;
@@ -45,11 +44,11 @@ public class Route {
         this.id = id;
     }
 
-    public Delivery getDeliveries() {
+    public List<Delivery> getDeliveries() {
         return deliveries;
     }
 
-    public void setDeliveries(Delivery deliveries) {
+    public void setDeliveries(List<Delivery> deliveries) {
         this.deliveries = deliveries;
     }
 

@@ -21,8 +21,7 @@ public class Delivery {
 //    CONSTRUCTOR
     public Delivery(){}
 
-    public Delivery(long id, Location location, boolean isDelivered) {
-        this.id = id;
+    public Delivery(Location location, boolean isDelivered) {
         this.location = location;
         this.isDelivered = isDelivered;
     }
