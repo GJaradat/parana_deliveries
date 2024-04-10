@@ -2,6 +2,8 @@ package com.example.demo.models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "trucks")
 public class Truck {
@@ -17,12 +19,17 @@ public class Truck {
     @Column
     private AvailabilityEnum availability;
 
+    @OneToMany
+    @Column
+    private List<Route> routesList;
+
     public Truck(){}
 
-    public Truck(String name, int capacity){
+    public Truck(String name, int capacity, List<Route> routesList){
         this.name = name;
         this.capacity = capacity;
         this.availability = AvailabilityEnum.IN_DEPOT;
+        this.routesList = routesList;
     }
 
     public long getId() {

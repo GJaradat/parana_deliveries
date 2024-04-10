@@ -32,10 +32,15 @@ public class DataLoader implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
-        Truck truck1 = new Truck("Leopard", 3000);
-        Truck truck2 = new Truck("Panda", 500);
-        Truck truck3 = new Truck("Goose", 1000);
-        Truck truck4 = new Truck("Monkey", 2000);
+        List<Route> routesList1 = new ArrayList<>();
+        List<Route> routesList2 = new ArrayList<>();
+        List<Route> routesList3 = new ArrayList<>();
+        List<Route> routesList4 = new ArrayList<>();
+
+        Truck truck1 = new Truck("Leopard", 3000, routesList1);
+        Truck truck2 = new Truck("Panda", 500, routesList2);
+        Truck truck3 = new Truck("Goose", 1000, routesList3);
+        Truck truck4 = new Truck("Monkey", 2000, routesList4);
 
         truckRepository.save(truck1);
         truckRepository.save(truck2);
@@ -86,14 +91,32 @@ public class DataLoader implements ApplicationRunner {
         deliveryRepository.save(delivery9);
         deliveryRepository.save(delivery10);
 
-        List<Delivery> deliveryList = new ArrayList<>();
+        List<Delivery> deliveryList1 = new ArrayList<>();
+        deliveryList1.add(delivery1);
+        deliveryList1.add(delivery6);
+        deliveryList1.add(delivery10);
 
-        Route route1 = new Route(deliveryList, truck1, StatusEnum.IN_PROGRESS);
-        Route route2 = new Route(deliveryList, truck2, StatusEnum.IN_PROGRESS);
-        Route route3 = new Route(deliveryList, truck4, StatusEnum.PENDING);
+
+        List<Delivery> deliveryList2 = new ArrayList<>();
+        deliveryList2.add(delivery2);
+        deliveryList2.add(delivery5);
+        deliveryList2.add(delivery8);
+
+        List<Delivery> deliveryList3 = new ArrayList<>();
+        deliveryList3.add(delivery3);
+        deliveryList3.add(delivery4);
+        deliveryList3.add(delivery7);
+        deliveryList3.add(delivery9);
+
+        Route route1 = new Route(deliveryList1, truck1, StatusEnum.IN_PROGRESS);
+        Route route2 = new Route(deliveryList2, truck2, StatusEnum.IN_PROGRESS);
+        Route route3 = new Route(deliveryList3, truck4, StatusEnum.PENDING);
 
         routeRepository.save(route1);
         routeRepository.save(route2);
         routeRepository.save(route3);
+
+
+
     }
 }

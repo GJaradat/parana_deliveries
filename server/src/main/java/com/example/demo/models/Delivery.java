@@ -10,6 +10,10 @@ public class Delivery {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @ManyToOne
+    @JoinColumn(name = "route_id")
+    private Route route;
+
     @JsonIgnoreProperties("delivery_id")
     @ManyToOne
     @JoinColumn(name = "location_id")
