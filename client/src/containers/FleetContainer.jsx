@@ -16,11 +16,12 @@ const FleetContainer = () => {
         loadTrucks();        
     }, []);
     
+    console.log(trucks);
     
     return ( 
         <>
             <p>Hello from Fleet Container</p>
-            <TruckList trucks={trucks}/>
+            <TruckList trucks={trucks} />
         </>
      );
 }
