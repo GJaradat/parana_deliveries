@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import com.example.demo.models.Route;
+import com.example.demo.models.StatusEnum;
 import com.example.demo.repositories.RouteRepository;
 import com.example.demo.repositories.TruckRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,19 @@ public class RouteService {
     public Optional<Route> getRouteById(long id){
         Optional<Route> route = routeRepository.findById(id);
         return route;
+    }
+
+    public Route updateRouteStatus(long id, StatusEnum newStatus){
+        Optional<Route> targetRoute = getRouteById(id);
+
+        if(targetRoute.isEmpty()){
+            return null;
+        }
+
+        Route routeToUpdate = targetRoute.get();
+        routeToUpdate.setRouteStatus(newStatus);
+        routeRepository.save(routeToUpdate);
+        return routeToUpdate;
     }
 
 }
