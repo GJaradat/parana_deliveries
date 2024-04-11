@@ -1,7 +1,8 @@
-const Truck = () => {
+const Truck = ({ truck }) => {
     return ( 
         <>
-            <p>Hello from Truck Component</p>
+            <p>{truck.name}</p>
+
         </>
      );
 }

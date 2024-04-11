@@ -1,10 +1,14 @@
 import Truck from './Truck'
 
-const TruckList = () => {
+const TruckList = ( { trucks } ) => {
+   
+   const mappedTrucks = trucks.map((truck) => {
+    return <Truck truck={truck} key={truck.id}/>
+   })
+   
     return ( 
         <>
-            <p>Hello from TruckList Component</p>
-            <Truck />
+            {mappedTrucks};
         </>
      );
 }
