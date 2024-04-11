@@ -42,4 +42,13 @@ public class RouteController {
         return new ResponseEntity<>(updatedRoute, HttpStatus.OK);
     }
 
+    @PostMapping
+    public ResponseEntity<Route> postRoute(){
+        Route newRoute = routeService.createRoute();
+        if(newRoute == null){
+            return new ResponseEntity<>(null, HttpStatus.SERVICE_UNAVAILABLE);
+        }
+        return new ResponseEntity<>(newRoute, HttpStatus.CREATED);
+    }
+
 }
