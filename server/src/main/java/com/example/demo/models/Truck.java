@@ -20,9 +20,8 @@ public class Truck {
     @Column
     private AvailabilityEnum availability;
 
-    @OneToMany
-    @Column
-    private List<Route> routesList;
+    @OneToMany(mappedBy = "truck")
+    private List<Route> routes;
 
     public Truck(){}
 
@@ -30,7 +29,7 @@ public class Truck {
         this.name = name;
         this.capacity = capacity;
         this.availability = AvailabilityEnum.IN_DEPOT;
-        this.routesList = new ArrayList<>();
+        this.routes = new ArrayList<>();
     }
 
     public long getId() {
@@ -61,11 +60,19 @@ public class Truck {
         return availability;
     }
 
+
     public void setAvailability(AvailabilityEnum availability) {
         this.availability = availability;
     }
-    
-    public void addRoute(Route route){
-        this.routesList.add(route);
+    public List<Route> getRoutes() {
+        return routes;
     }
+    public void setRoutes(List<Route> routes) {
+        this.routes = routes;
+    }
+
+    public void addRoute(Route route){
+        this.routes.add(route);
+    }
+
 }

@@ -55,4 +55,12 @@ public class Delivery {
     public void setDelivered(boolean delivered) {
         isDelivered = delivered;
     }
+
+    public Route getRoute() {
+        return route;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
+    }
 }
