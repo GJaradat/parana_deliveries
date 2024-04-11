@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import TruckList from '../components/TruckList'
+import TruckSearch from '../components/TruckSearch';
 
 const FleetContainer = () => {
     
     const [trucks, setTrucks] = useState([]);
+    const [searchValue, setSearchValue] = useState("");
 
     const loadTrucks = async () => {
         const response = await fetch("http://localhost:8080/trucks");
@@ -16,12 +18,18 @@ const FleetContainer = () => {
         loadTrucks();        
     }, []);
     
-    console.log(trucks);
+    const filteredTrucks = trucks.filter((truck)=> {
+        if(searchValue){
+            return truck.name.toLowerCase().includes(searchValue.toLowerCase());
+        }
+        return truck;
+    })
     
     return ( 
         <>
-            <p>Hello from Fleet Container</p>
-            <TruckList trucks={trucks} />
+            <h2>Delivery Fleet</h2>
+            <TruckSearch setSearchValue={setSearchValue} />
+            <TruckList trucks={filteredTrucks}  />
         </>
      );
 }
