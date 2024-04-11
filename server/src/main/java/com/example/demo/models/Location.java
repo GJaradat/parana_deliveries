@@ -22,7 +22,6 @@ public class Location {
 
     @Column (name = "longitude")
     private double longitude;
-
 //    CONSTRUCTOR
 
     public Location(String address, double latitude, double longitude) {
