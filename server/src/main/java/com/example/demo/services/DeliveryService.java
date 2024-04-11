@@ -25,7 +25,7 @@ public class DeliveryService {
 
     public Delivery completeDelivery(long id){
         Delivery delivery = deliveryRepository.findById(id).get();
-        delivery.setDelivered(true);
+        delivery.setDelivered(!delivery.isDelivered());
         deliveryRepository.save(delivery);
         return delivery;
     }
