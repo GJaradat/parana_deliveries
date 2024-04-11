@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RouteService {
@@ -16,6 +17,11 @@ public class RouteService {
 
     public List<Route> getAllRoutes() {
         return routeRepository.findAll();
+    }
+
+    public Optional<Route> getRouteById(long id){
+        Optional<Route> route = routeRepository.findById(id);
+        return route;
     }
 
 }
