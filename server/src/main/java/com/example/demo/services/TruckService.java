@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.models.AvailabilityEnum;
 import com.example.demo.models.Truck;
 import com.example.demo.repositories.TruckRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +21,12 @@ public class TruckService {
 
     public Optional<Truck> getTruckById(Long id){
         return truckRepository.findById(id);
+    }
+
+    public Optional<Truck> changeTruckAvailability(AvailabilityEnum truckStatus, long id) {
+        Optional<Truck> truckToUpdate = truckRepository.findById(id);
+        truckToUpdate.get().setAvailability(truckStatus);
+        truckRepository.save(truckToUpdate.get());
+        return  truckToUpdate;
     }
 }
