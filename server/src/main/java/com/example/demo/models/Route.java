@@ -19,7 +19,7 @@ public class Route {
     private List<Delivery> deliveries;
 
     @JsonIgnoreProperties({ "routes" })
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "truck_id")
     private Truck truck;
 
@@ -67,4 +67,13 @@ public class Route {
     public void setRouteStatus(StatusEnum routeStatus) {
         this.routeStatus = routeStatus;
     }
+
+    public void addDelivery(Delivery delivery){
+        this.deliveries.add(delivery);
+    }
+
+    public void removeDelivery(Delivery delivery){
+        this.deliveries.remove(delivery);
+    }
+
 }
