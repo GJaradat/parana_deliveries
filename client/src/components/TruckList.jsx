@@ -8,7 +8,7 @@ const TruckList = ( { trucks } ) => {
    
     return ( 
         <>
-            {mappedTrucks};
+            {mappedTrucks}
         </>
      );
 }
