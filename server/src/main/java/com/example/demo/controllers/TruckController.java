@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/chocolates")
+@RequestMapping(value = "/trucks")
 public class TruckController {
 
     @Autowired
