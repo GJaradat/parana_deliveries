@@ -25,9 +25,9 @@ public class Delivery {
 //    CONSTRUCTOR
     public Delivery(){}
 
-    public Delivery(Location location, boolean isDelivered) {
+    public Delivery(Location location) {
         this.location = location;
-        this.isDelivered = isDelivered;
+        this.isDelivered = false;
     }
 
 //    GETTERS & SETTERS

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jdk.jshell.Snippet;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -28,8 +29,8 @@ public class Route {
 //    CONSTRUCTOR
     public Route(){}
 
-    public Route(List<Delivery> deliveries, Truck truck, StatusEnum routeStatus) {
-        this.deliveries = deliveries;
+    public Route(Truck truck, StatusEnum routeStatus) {
+        this.deliveries = new ArrayList<>();
         this.truck = truck;
         this.routeStatus = routeStatus;
     }
