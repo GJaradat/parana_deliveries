@@ -5,10 +5,7 @@ import com.example.demo.services.DeliveryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +29,11 @@ public class DeliveryController {
             return new ResponseEntity<>(delivery.get(), HttpStatus.FOUND);
         }
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+
+    @PatchMapping(value = "/{id}")
+    private ResponseEntity<Delivery> setDelivered(@PathVariable long id){
+        return new ResponseEntity<>(deliveryService.completeDelivery(id), HttpStatus.OK);
     }
 
 
