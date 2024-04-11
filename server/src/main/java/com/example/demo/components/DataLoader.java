@@ -5,6 +5,7 @@ import com.example.demo.repositories.DeliveryRepository;
 import com.example.demo.repositories.LocationRepository;
 import com.example.demo.repositories.RouteRepository;
 import com.example.demo.repositories.TruckRepository;
+import org.hibernate.bytecode.internal.bytebuddy.BytecodeProviderImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -42,6 +43,9 @@ public class DataLoader implements ApplicationRunner {
         truckRepository.save(truck3);
         truckRepository.save(truck4);
 
+//        Warehouse location
+        Location buckinghamPalace = new Location("London SW1A 1AA", 51.501596, 0.141290);
+
         Location location1 = new Location("75 Gloucester Rd, South Kensington, London SW7 4SS", 51.494737, 0.182668);
         Location location2 = new Location("16-17 Wardour St, London W1F 8AT", 51.510953, 0.131792);
         Location location3 = new Location("3 Cranbourn St, London WC2H 7AL", 51.511533, 0.129323);
@@ -53,6 +57,7 @@ public class DataLoader implements ApplicationRunner {
         Location location9 = new Location("Praed St, London W2 1RH", 51.516026, 0.175029);
         Location location10 = new Location("Outer Cir, London NW1 4RY", 51.535597, 0.153254);
 
+        locationRepository.save(buckinghamPalace);
         locationRepository.save(location1);
         locationRepository.save(location2);
         locationRepository.save(location3);
