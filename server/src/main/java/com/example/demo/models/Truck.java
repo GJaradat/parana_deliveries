@@ -1,5 +1,6 @@
 package com.example.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class Truck {
     @Column
     private AvailabilityEnum availability;
 
+    @JsonIgnoreProperties({"truck"})
     @OneToMany(mappedBy = "truck")
     private List<Route> routes;
 
