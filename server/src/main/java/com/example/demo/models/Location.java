@@ -23,14 +23,13 @@ public class Location {
     @Column (name = "longitude")
     private double longitude;
 
-    @OneToMany(mappedBy = "delivery")
+    @OneToMany(mappedBy = "location")
     @JsonIgnoreProperties({"locations"})
     private List<Delivery> deliveries;
 
 //    CONSTRUCTOR
 
-    public Location(Long id, String address, double latitude, double longitude) {
-        this.id = id;
+    public Location(String address, double latitude, double longitude) {
         this.address = address;
         this.latitude = latitude;
         this.longitude = longitude;
