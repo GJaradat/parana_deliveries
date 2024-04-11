@@ -22,5 +22,5 @@ public class DeliveryService {
     public Optional<Delivery> getDeliveryById(long id){
         return deliveryRepository.findById(id);
     }
-    
+
 }
