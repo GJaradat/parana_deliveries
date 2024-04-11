@@ -2,6 +2,7 @@ package com.example.demo.models;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,11 +26,11 @@ public class Truck {
 
     public Truck(){}
 
-    public Truck(String name, int capacity, List<Route> routesList){
+    public Truck(String name, int capacity){
         this.name = name;
         this.capacity = capacity;
         this.availability = AvailabilityEnum.IN_DEPOT;
-        this.routesList = routesList;
+        this.routesList = new ArrayList<>();
     }
 
     public long getId() {
@@ -62,5 +63,9 @@ public class Truck {
 
     public void setAvailability(AvailabilityEnum availability) {
         this.availability = availability;
+    }
+    
+    public void addRoute(Route route){
+        this.routesList.add(route);
     }
 }

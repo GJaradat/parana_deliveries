@@ -32,15 +32,10 @@ public class DataLoader implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
-        List<Route> routesList1 = new ArrayList<>();
-        List<Route> routesList2 = new ArrayList<>();
-        List<Route> routesList3 = new ArrayList<>();
-        List<Route> routesList4 = new ArrayList<>();
-
-        Truck truck1 = new Truck("Leopard", 3000, routesList1);
-        Truck truck2 = new Truck("Panda", 500, routesList2);
-        Truck truck3 = new Truck("Goose", 1000, routesList3);
-        Truck truck4 = new Truck("Monkey", 2000, routesList4);
+        Truck truck1 = new Truck("Leopard", 3000);
+        Truck truck2 = new Truck("Panda", 500);
+        Truck truck3 = new Truck("Goose", 1000);
+        Truck truck4 = new Truck("Monkey", 2000);
 
         truckRepository.save(truck1);
         truckRepository.save(truck2);
@@ -69,16 +64,16 @@ public class DataLoader implements ApplicationRunner {
         locationRepository.save(location9);
         locationRepository.save(location10);
 
-        Delivery delivery1 = new Delivery(location3, true);
-        Delivery delivery2 = new Delivery(location2, true);
-        Delivery delivery3 = new Delivery(location1, true);
-        Delivery delivery4 = new Delivery(location10, true);
-        Delivery delivery5 = new Delivery(location4, true);
-        Delivery delivery6 = new Delivery(location5, true);
-        Delivery delivery7 = new Delivery(location7, true);
-        Delivery delivery8 = new Delivery(location8, true);
-        Delivery delivery9 = new Delivery(location9, true);
-        Delivery delivery10 = new Delivery(location6, false);
+        Delivery delivery1 = new Delivery(location3);
+        Delivery delivery2 = new Delivery(location2);
+        Delivery delivery3 = new Delivery(location1);
+        Delivery delivery4 = new Delivery(location10);
+        Delivery delivery5 = new Delivery(location4);
+        Delivery delivery6 = new Delivery(location5);
+        Delivery delivery7 = new Delivery(location7);
+        Delivery delivery8 = new Delivery(location8);
+        Delivery delivery9 = new Delivery(location9);
+        Delivery delivery10 = new Delivery(location6);
 
         deliveryRepository.save(delivery1);
         deliveryRepository.save(delivery2);
@@ -91,26 +86,9 @@ public class DataLoader implements ApplicationRunner {
         deliveryRepository.save(delivery9);
         deliveryRepository.save(delivery10);
 
-        List<Delivery> deliveryList1 = new ArrayList<>();
-        deliveryList1.add(delivery1);
-        deliveryList1.add(delivery6);
-        deliveryList1.add(delivery10);
-
-
-        List<Delivery> deliveryList2 = new ArrayList<>();
-        deliveryList2.add(delivery2);
-        deliveryList2.add(delivery5);
-        deliveryList2.add(delivery8);
-
-        List<Delivery> deliveryList3 = new ArrayList<>();
-        deliveryList3.add(delivery3);
-        deliveryList3.add(delivery4);
-        deliveryList3.add(delivery7);
-        deliveryList3.add(delivery9);
-
-        Route route1 = new Route(deliveryList1, truck1, StatusEnum.IN_PROGRESS);
-        Route route2 = new Route(deliveryList2, truck2, StatusEnum.IN_PROGRESS);
-        Route route3 = new Route(deliveryList3, truck4, StatusEnum.PENDING);
+        Route route1 = new Route(truck1, StatusEnum.IN_PROGRESS);
+        Route route2 = new Route(truck2, StatusEnum.IN_PROGRESS);
+        Route route3 = new Route(truck4, StatusEnum.PENDING);
 
         routeRepository.save(route1);
         routeRepository.save(route2);

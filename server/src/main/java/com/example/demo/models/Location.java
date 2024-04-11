@@ -23,10 +23,6 @@ public class Location {
     @Column (name = "longitude")
     private double longitude;
 
-    @OneToMany(mappedBy = "delivery")
-    @JsonIgnoreProperties({"locations"})
-    private List<Delivery> deliveries;
-
 //    CONSTRUCTOR
 
     public Location(String address, double latitude, double longitude) {
