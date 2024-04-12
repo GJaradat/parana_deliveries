@@ -1,7 +1,6 @@
 import React,{ useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "../styles/RouteMapStyles.css";
-
 import payload from "../samplePayload.JSON";
 
 const RouteMap = ( {} ) => {
@@ -35,8 +34,8 @@ const RouteMap = ( {} ) => {
 
     const generateCoordinates = () => {
         
-        console.log(route);
-        const coordinatesArray = [[-0.140634,51.501476]];  // first coordinates are always warehouse
+        
+        let coordinatesArray = [[-0.140634, 51.501476]];  // first coordinates are always warehouse
 
         const routesCoordinates = route.deliveries.forEach((delivery) => {
             const lng = delivery.location.longitude;
@@ -44,12 +43,19 @@ const RouteMap = ( {} ) => {
             coordinatesArray.push([lng,lat]);
         })
         
-        return coordinatesArray.join(";")
+        let moreCoordinates = "";
+        for (let i = 0; i < coordinatesArray.length; i+=2){
+            moreCoordinates += coordinatesArray[i] + ';' + coordinatesArray[i+1];
+            
+        return moreCoordinates;
+        }
     }
 
     const getRoutesFromAPI = async (coordinates) => {
+        console.log(coordinates);
         const response = await fetch (`https://api.mapbox.com/optimized-trips/v1/mapbox/driving/${coordinates}?access_token=${mapboxgl.accessToken}`);
         const jsonData = await response.json();
+        console.log(jsonData)
         setOptRoute(jsonData);
     }
 
@@ -58,13 +64,40 @@ const RouteMap = ( {} ) => {
         const coordinates = generateCoordinates();
         
         //Make GET request to Optimization API 
-        getRoutesFromAPI(coordinates);
-        console.log(optRoute); 
+        getRoutesFromAPI(coordinates); 
 
         //Display route on map
-        
+
+            // map.addSource('route', {  
+            // type: 'geojson',  
+            // data: optRoute  
+            // });  
+            
+            // map.addLayer(  
+            // {  
+            // id: 'routeline-active',  
+            // type: 'line',  
+            // source: 'route',  
+            // layout: {  
+            // 'line-join': 'round',  
+            // 'line-cap': 'round'  
+            // },  
+            // paint: {  
+            // 'line-color': '#3887be',  
+            // 'line-width': ['interpolate', ['linear'], ['zoom'], 12, 3, 22, 12]  
+            // }  
+            // },  
+            // 'waterway-label'  
+            // );
+          
+            
     }
+
+    useEffect(() => {
+        console.log(optRoute);
+    }, [optRoute]);
     
+
     return ( 
         <>
             <div>
