@@ -1,9 +1,20 @@
-import { Outlet} from "react-router-dom";
+import { Link, Outlet} from "react-router-dom";
 
 const Navigation = () => {
     return ( 
         <>
-            <p> Hello from Navigation Component</p>
+            <li>
+                 <Link to="/fleet">Fleet</Link>
+            </li> 
+
+            <li>
+                <Link to="/routes">Routes</Link>
+            </li>
+
+            <li>
+                <Link to="/deliveries">Deliveries</Link>
+            </li>
+
             <Outlet />
         </>
      );
