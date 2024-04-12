@@ -14,7 +14,7 @@ public class Route {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @JsonIgnoreProperties({ "routes" })
+    @JsonIgnoreProperties({ "route" })
     @OneToMany(mappedBy = "route")
     private List<Delivery> deliveries;
 
@@ -70,6 +70,7 @@ public class Route {
 
     public void addDelivery(Delivery delivery){
         this.deliveries.add(delivery);
+        delivery.setRoute(this);
     }
 
     public void removeDelivery(Delivery delivery){
