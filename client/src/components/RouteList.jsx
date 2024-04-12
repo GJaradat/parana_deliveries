@@ -1,10 +1,14 @@
 import Route from './Route'
 
-const RouteList = () => {
+const RouteList = ({routes}) => {
+
+    const mappedRoutes = routes.map((route)=>{
+        return <Route key={route.id} route={route} />
+    });
+
     return ( 
         <>
-            <p>Hello from RouteList Component</p>
-            <Route />
+            {mappedRoutes}
         </>
      );
 }
