@@ -1,0 +1,51 @@
+body {
+    background-color: #007B63;
+}
+
+#fleet_title {
+    margin-left: 40px;
+    color: antiquewhite;
+}
+.truck {
+    text-align: left;
+    border: 2px;
+    border-color: black;
+    border-style: solid;
+    border-radius: 10px;
+    margin: 40px;
+    padding-left: 20px;
+    background-color: #F6D779;
+}
+
+.trucklist {
+    padding-top: 40px;
+    display: block;
+    justify-content: space-around;
+}
+
+.truck_search {
+    margin-left: 40px;
+    width: 400px;
+    height: 38px;
+    border-radius: 10px;
+    float: left;
+    align-items: center;
+}
+
+.sort {
+    display: flex;
+    justify-content: end;
+    margin-right: 40px;
+    float: right;
+}
+
+#sort_text {
+    float:left;
+    text-align: center;
+    width: 250px;
+    height: 45px;
+    border-radius: 10px;
+    background-color: white;
+    border-color: black;
+    border-width: 2px;
+}
