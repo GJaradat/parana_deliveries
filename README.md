@@ -14,6 +14,22 @@
 ### External APIs Used
 
 ## Installation Instructions
+- In the terminal, navigate to the directory you want to copy the repository into. 
+- Run the command `git clone git@github.com:GJaradat/parana_deliveries.git`
+- Run the command `git pull` to ensure you have the latest version.
+  
+(backend setup)
+- Open the server directory in your preferred IDE (we used IntelliJ).
+- In the terminal, create the linked database by running the command `createdb deliveries_db`.
+- Run the server.
+
+(frontend setup)
+- Open the client directory in your preferred IDE (we used VSCode).
+- In the client folder, create the file .env
+- In the .env file paste the code `REACT_APP_MAPBOX_KEY = [your mapbox access key here]`.
+- In the terminal, run the command `npm i`.
+- In the terminal, run the command `npm i mapbox-gl`.
+- Run the frontend application by entering the command `npm start` in the termainal.
 
 ## Diagrams
 ### Wireframes
@@ -36,11 +52,11 @@
 **(Frontend)**
 - HomePage: localhost:3000/ OR localhost:3000/home
    - User can navigate to other pages
-- Delivery Fleet Page: http://localhost:3000/fleet
+- Delivery Fleet Page: localhost:3000/fleet
    - User can see all vehicles and their details
    - User can search for vehicles by name
    - User can filter vehivles by availability status
-- Delivery Routes Page: http://localhost:3000/fleet
+- Delivery Routes Page: localhost:3000/fleet
    - User can see all routes and their details
    - User can search for routes by the name of their assigned vehicle
    - User can filter routes by status
