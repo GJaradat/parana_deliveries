@@ -6,6 +6,7 @@ import RouteSort from '../components/RouteSort';
 const RoutesContainer = () => {
     
     const [routes, setRoutes] = useState([]);
+    const [sortValue, setSortValue] = useState("");
 
     const loadRoutes = async () => {
         const response = await fetch("http://localhost:8080/routes");
@@ -16,12 +17,19 @@ const RoutesContainer = () => {
     useEffect(()=> {
         loadRoutes();
     }, []);
+
+    const filteredRoutes = routes.filter((route)=>{
+        if(sortValue){
+            return route.routeStatus.toLowerCase().includes(sortValue.toLowerCase());
+        }
+        return route;
+    })
     
     return ( 
         <>
             <h2>Delivery Routes</h2>
-            <RouteSort/>
-            <RouteList routes={routes} />
+            <RouteSort setSortValue={setSortValue}/>
+            <RouteList routes={filteredRoutes} />
             <RouteMap />
         </>
      );
