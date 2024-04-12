@@ -28,3 +28,8 @@
 
 ## Credits and Acknowledgements
 **Project Team**
+- Gabriel Dzharadat (https://github.com/GJaradat))
+- Kajanan Lingkeswaran(https://github.com/KajananGit)
+- Leila Peltier (https://github.com/L1ly-42)
+- Yeabsira Negash (https://github.com/Y-Negash)
+- Zarrin Rahman (https://github.com/z-for-zarrin)
