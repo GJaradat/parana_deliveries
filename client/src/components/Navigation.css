@@ -1,0 +1,8 @@
+#navbar {
+    display: flex;
+    justify-content: space-around;
+    list-style-type: none;
+}
+#fleetLink, #routesLink, #deliveriesLink {
+    text-decoration: none;
+}
