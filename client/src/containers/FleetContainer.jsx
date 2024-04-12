@@ -30,8 +30,6 @@ const FleetContainer = () => {
         return truck;
     })
 
-    console.log(sortValue);
-    console.log(filteredTrucks);
     
     return ( 
         <>
