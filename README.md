@@ -1,17 +1,52 @@
 # [CAPSTONE PROJECT NAME HERE]
+![image](https://github.com/GJaradat/parana_deliveries/assets/108727885/a0ffee2c-76f9-4ed6-991d-7bdcb6bdcb1c)
+
+
 
 ## Table of Contents 
-1. [Project Description](#project-description)
-2. [Installation instructions](#installation-instructions)
-3. [Diagrams](#diagrams)
-4. [MVP and Extensions](#mvp-and-extensions)
-5. [API Routes Table](#api-routes-table)
-6. [Credits and Acknowledgements](#credits-and-acknowledgements)
+1. [Introduction](#introduction)
+2. [Technology](#technology)
+3. [Installation instructions](#installation-instructions)
+4. [Diagrams](#diagrams)
+5. [MVP and Extensions](#mvp-and-extensions)
+6. [API Routes Table](#api-routes-table)
+7. [Credits and Acknowledgements](#credits-and-acknowledgements)
 
-## Project Description
-### Aims
-### Libraries Used
+## Introduction
+
+## Technology
+Purpose of Technology usage: The objective is to enhance learning and skill development as an integral component of the bootcamp experience hence why the following technologies were used.
+### Tech Stack
+- Java
+- SpringBoot
+- PostgreSQL Database
+- JavaScript
+- HTML
+- CSS
+- React
+
+### SpringBoot Configuration:
+- Maven Project
+- Spring Boot: Ver. 3.2.3
+- Spring Boot Dev Tools
+- Spring Web
+- PostgreSQL Driver
+- Spring Data JPA
+
+### React Libraries Used:
+- react-router-dom
+- *react-modal(?)*
+
 ### External APIs Used
+1. [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js/api/) to display the maps which can display markers of delivery locations.
+2. [Optimization API v1](https://docs.mapbox.com/api/navigation/optimization-v1/#example-request-retrieve-an-optimization) to calculate the shortest distance of a given route.
+
+Please note that to use these APIs you need to create an account on the Mapbox website and create an access token. 
+For instructions on generating a token, click [here](https://docs.mapbox.com/help/tutorials/use-mapbox-gl-js-with-react/).
+
+For a tutorial of the MapBox GL JS API, click [here](https://docs.mapbox.com/help/tutorials/use-mapbox-gl-js-with-react/).
+
+For a tutorial of the MapBox Optimisation API v1, click [here](https://docs.mapbox.com/help/tutorials/optimization-api/).
 
 ## Installation Instructions
 - In the terminal, navigate to the directory you want to copy the repository into. 
@@ -60,6 +95,8 @@
    - User can see all routes and their details
    - User can search for routes by the name of their assigned vehicle
    - User can filter routes by status
+- Add Basic CSS Styling to the webpages
+  
 (use external API to dynamically generate routes and display them on a map) - COMING SOON
 
 ### Extensions
