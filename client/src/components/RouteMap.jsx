@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import React,{ useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "../styles/RouteMapStyles.css";
 
@@ -12,7 +12,7 @@ const RouteMap = ( {} ) => {
     const [lng,setLng] = useState(-0.140634);
     const [zoom, setZoom] = useState(12);
 
-    mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;  //parana_routes no secret scopes
+    mapboxgl.accessToken = `${process.env.REACT_APP_MAPBOX_KEY}`;
 
     useEffect(() => {
         if (map.current) return; // initialize map only once
