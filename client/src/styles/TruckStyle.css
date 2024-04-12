@@ -21,3 +21,10 @@ body {
     display: block;
     justify-content: space-around;
 }
+
+.truck_search {
+    margin-left: 20px;
+    width: 400px;
+    height: 30px;
+    border-radius: 10px;
+}
