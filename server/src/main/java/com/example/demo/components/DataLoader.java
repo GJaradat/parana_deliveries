@@ -80,6 +80,20 @@ public class DataLoader implements ApplicationRunner {
         Delivery delivery9 = new Delivery(location9);
         Delivery delivery10 = new Delivery(location6);
 
+        Route route1 = new Route(truck1, StatusEnum.IN_PROGRESS);
+        Route route2 = new Route(truck2, StatusEnum.IN_PROGRESS);
+        Route route3 = new Route(truck4, StatusEnum.PENDING);
+
+        route1.addDelivery(delivery1);
+        route1.addDelivery(delivery2);
+        route1.addDelivery(delivery3);
+        route1.addDelivery(delivery4);
+        route1.addDelivery(delivery5);
+
+        routeRepository.save(route1);
+        routeRepository.save(route2);
+        routeRepository.save(route3);
+
         deliveryRepository.save(delivery1);
         deliveryRepository.save(delivery2);
         deliveryRepository.save(delivery3);
@@ -91,13 +105,7 @@ public class DataLoader implements ApplicationRunner {
         deliveryRepository.save(delivery9);
         deliveryRepository.save(delivery10);
 
-        Route route1 = new Route(truck1, StatusEnum.IN_PROGRESS);
-        Route route2 = new Route(truck2, StatusEnum.IN_PROGRESS);
-        Route route3 = new Route(truck4, StatusEnum.PENDING);
 
-        routeRepository.save(route1);
-        routeRepository.save(route2);
-        routeRepository.save(route3);
 
 
 
