@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import RouteList from '../components/RouteList'
 import RouteMap from '../components/RouteMap';
 import RouteSort from '../components/RouteSort';
+import RouteSearch from '../components/RouteSearch';
 
 const RoutesContainer = () => {
     
@@ -28,6 +29,7 @@ const RoutesContainer = () => {
     return ( 
         <>
             <h2>Delivery Routes</h2>
+            <RouteSearch />
             <RouteSort setSortValue={setSortValue}/>
             <RouteList routes={filteredRoutes} />
             <RouteMap />
