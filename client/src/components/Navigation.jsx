@@ -1,11 +1,26 @@
-import { Outlet} from "react-router-dom";
+import { Link, Outlet} from "react-router-dom";
+import "./Navigation.css";
 
 const Navigation = () => {
     return ( 
         <>
-            <p> Hello from Navigation Component</p>
-            <Outlet />
-        </>
+            <nav>
+                <ul id="navbar">
+                    <li>
+                        <Link id="fleetLink" to="/fleet">Fleet</Link>
+                    </li> 
+
+                    <li>
+                        <Link id="routesLink" to="/routes">Routes</Link>
+                    </li>
+
+                    <li>
+                        <Link id="deliveriesLink" to="/deliveries">Deliveries</Link>
+                    </li>
+                </ul>
+            </nav>
+        <Outlet />
+    </>
      );
 }
  
