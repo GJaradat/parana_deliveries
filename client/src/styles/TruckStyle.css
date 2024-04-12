@@ -1,15 +1,23 @@
+body {
+    background-color: #007B63;
+}
+
+#fleet_title {
+    color: antiquewhite;
+}
 .truck {
     text-align: left;
     border: 2px;
     border-color: black;
     border-style: solid;
     border-radius: 10px;
-    margin: 10px;
+    margin: 40px;
     padding-left: 20px;
+    background-color: #F6D779;
 }
 
 .trucklist {
+    padding-top: 40px;
     display: block;
-    justify-content: center;
-    
+    justify-content: space-around;
 }
