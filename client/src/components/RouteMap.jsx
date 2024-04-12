@@ -59,17 +59,10 @@ const RouteMap = ( {} ) => {
         
         //Make GET request to Optimization API 
         getRoutesFromAPI(coordinates);
-        console.log(optRoute)
+        console.log(optRoute); 
+
         //Display route on map
         
-
-        // const response = await fetch(`https://api.mapbox.com/optimized-trips/v2?access_token=${mapboxgl.accessToken}`, {
-        //     method: "POST",
-        //     headers: {"Content-Type": "application/json"},
-        //     body: JSON.stringify(payload)
-        //     }
-        // );
-        // console.log(response);
     }
     
     return ( 
