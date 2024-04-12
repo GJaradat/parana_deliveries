@@ -3,6 +3,7 @@ body {
 }
 
 #fleet_title {
+    margin-left: 40px;
     color: antiquewhite;
 }
 .truck {
@@ -23,8 +24,28 @@ body {
 }
 
 .truck_search {
-    margin-left: 20px;
+    margin-left: 40px;
     width: 400px;
-    height: 30px;
+    height: 38px;
     border-radius: 10px;
+    float: left;
+    align-items: center;
+}
+
+.sort {
+    display: flex;
+    justify-content: end;
+    margin-right: 40px;
+    float: right;
+}
+
+#sort_text {
+    float:left;
+    text-align: center;
+    width: 250px;
+    height: 45px;
+    border-radius: 10px;
+    background-color: white;
+    border-color: black;
+    border-width: 2px;
 }
