@@ -30,12 +30,10 @@ const FleetContainer = () => {
         return truck;
     })
 
-    console.log(sortValue);
-    console.log(filteredTrucks);
     
     return ( 
         <>
-            <h2>Delivery Fleet</h2>
+            <h2 id='fleet_title'>Delivery Fleet</h2>
             <TruckSearch setSearchValue={setSearchValue} />
             <TruckSort setSortValue={setSortValue} />
             <TruckList trucks={filteredTrucks}  />

@@ -3,9 +3,9 @@ const TruckSort = ( {setSortValue} ) => {
 
     return ( 
         <>
-
-            <select className="sort"
-                    
+        <section className="sort">
+            <select 
+                    id="sort_text"
                     defaultValue="select-availability-status"
                     onChange={(event) => setSortValue(event.target.value)}>
                 <option disabled value={"select-availability-status"}>Sort by Availability</option>
@@ -14,6 +14,7 @@ const TruckSort = ( {setSortValue} ) => {
                 <option value={"OUT_FOR_DELIVERY"}>Out For Delivery</option>
                 <option value={"UNDER_MAINTENACE"}>Under Maintenance</option>
             </select>
+        </section>
         </>
      );
 }
