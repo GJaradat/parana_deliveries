@@ -1,0 +1,88 @@
+{
+    "version": 1,
+    "locations": [
+        {
+            "name" : "Warehouse",
+            "coordinates": [-0.140634, 51.501476]
+        },
+        {   "name" : "Place_1",
+            "coordinates": [0.182668, 51.494737]
+        },
+        {
+            "name" : "Place_2",
+            "coordinates": [0.131792, 51.510953]
+        },
+        {
+            "name" : "Place_3",
+            "coordinates": [0.129323, 51.511533]
+        },
+        {
+            "name" : "Place_4",
+            "coordinates" : [0.126054, 51.518690]
+        },
+        {
+            "name" : "Place_5",
+            "coordinates" : [0.174269, 51.498873]
+        }        
+    ],
+    "vehicles": [
+        {
+            "name" : "Leopard",
+            "start_location" : "Warehouse",
+            "end_location" : "Warehouse",
+            "capacities" : {
+                "packages" : 2
+            }
+        },
+        {
+            "name" : "Panda",
+            "start_location" : "Warehouse",
+            "end_location" : "Warehouse",
+            "capacities" : {
+                "packages" : 2
+            }
+        },
+        {
+            "name" : "Goose",
+            "start_location" : "Warehouse",
+            "end_location" : "Warehouse",
+            "capacities" : {
+                "packages" : 3
+            }
+        }
+    ],
+    "shipments": [
+        {
+            "name":"Delivery_1",
+            "from":"Warehouse",
+            "to":"Place_1",
+            "size": {
+                "packages": 1
+            }
+        },
+        {
+            "name": "Delivery_2",
+            "from": "Warehouse",
+            "to": "Place_2",
+            "size": {
+                "packages": 1
+            }
+        },
+        {
+            "name": "Delivery_3",
+            "from": "Warehouse",
+            "to": "Place_3",
+            "size": {
+                "packages": 2
+            }
+        },
+        {
+            "name": "Delivery_4",
+            "from": "Warehouse",
+            "to": "Place_4",
+            "size": {
+                "packages": 1
+            }
+        }
+    ]
+}
