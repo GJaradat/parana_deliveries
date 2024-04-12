@@ -1,3 +1,5 @@
+import DeliveryList from "./DeliveryList";
+
 const Route = ({route}) => {
 
 
@@ -19,8 +21,10 @@ const Route = ({route}) => {
             <h3>Route {route.id}</h3>
             <p>Status: {routeStatus()}</p>
             <p>Truck: {route.truck.name}</p>
-            <p>Deliveries: {route.deliveries}</p>
-
+            <p>Deliveries: </p>
+                <div>
+                    <DeliveryList deliveries = {route.deliveries} />
+                </div>
         </>
      );
 }
