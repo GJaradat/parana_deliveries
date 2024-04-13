@@ -2,6 +2,7 @@ import React,{ useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "../styles/RouteMapStyles.css";
 import payload from "../samplePayload.JSON";
+import polyline from '@mapbox/polyline';
 
 const RouteMap = ( {} ) => {
     const mapContainerRef = useRef(null);
@@ -16,6 +17,7 @@ const RouteMap = ( {} ) => {
     mapboxgl.accessToken = `${process.env.REACT_APP_MAPBOX_KEY}`;
 
     useEffect(() => {
+       
         if (map.current) return; // initialize map only once
         map.current = new mapboxgl.Map({
           container: mapContainerRef.current,
@@ -25,6 +27,8 @@ const RouteMap = ( {} ) => {
         });
         getRoute();
     }, []);
+
+    
 
     const getRoute = async () => {
         const response = await fetch("http://localhost:8080/routes/1");
@@ -58,8 +62,26 @@ const RouteMap = ( {} ) => {
     const getRoutesFromAPI = async (pushedCoordinates) => {
         const response = await fetch (`https://api.mapbox.com/optimized-trips/v1/mapbox/driving/${pushedCoordinates}?access_token=${mapboxgl.accessToken}`);
         const jsonData = await response.json();
-        
         setOptRoute(jsonData);
+        
+        const tripPolyline = optRoute.trips[0].geometry;
+        const line = polyline.toGeoJSON(tripPolyline);
+        
+        map.current.addSource('route', {
+            'type':'geojson',
+            'data':line
+        });
+
+        map.current.addLayer({
+            'id': 'route-line',
+            'type': 'line',
+            'source': 'route',
+            'paint': {
+              'line-color': '#888',
+              'line-width': 8
+            }
+          });
+        
     }
 
     const calculateRoutes = () => {
@@ -68,13 +90,15 @@ const RouteMap = ( {} ) => {
         
         //Make GET request to Optimization API 
         getRoutesFromAPI(coordinates); 
+        
 
-        // Display route on map
        
     }
 
+        
     useEffect(() => {
         console.log(optRoute);
+       
     }, [optRoute]);
     
 
