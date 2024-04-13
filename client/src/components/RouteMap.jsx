@@ -42,7 +42,6 @@ const RouteMap = ( {} ) => {
             const lat = delivery.location.latitude;
             coordinatesArray.push(lng,lat);
         })
-        console.log(coordinatesArray);
 
         let pushedCoordinates = "";
         for (let i = 0; i < coordinatesArray.length; i+=2){
