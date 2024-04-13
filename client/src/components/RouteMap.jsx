@@ -57,10 +57,9 @@ const RouteMap = ( {} ) => {
     }
 
     const getRoutesFromAPI = async (pushedCoordinates) => {
-        console.log(pushedCoordinates)
         const response = await fetch (`https://api.mapbox.com/optimized-trips/v1/mapbox/driving/${pushedCoordinates}?access_token=${mapboxgl.accessToken}`);
         const jsonData = await response.json();
-        console.log(jsonData)
+        
         setOptRoute(jsonData);
     }
 
