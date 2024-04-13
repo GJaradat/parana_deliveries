@@ -35,25 +35,30 @@ const RouteMap = ( {} ) => {
     const generateCoordinates = () => {
         
         
-        let coordinatesArray = [[-0.140634, 51.501476]];  // first coordinates are always warehouse
+        const coordinatesArray = [-0.140634, 51.501476];  // first coordinates are always warehouse
 
         const routesCoordinates = route.deliveries.forEach((delivery) => {
             const lng = delivery.location.longitude;
             const lat = delivery.location.latitude;
-            coordinatesArray.push([lng,lat]);
+            coordinatesArray.push(lng,lat);
         })
-        
-        let moreCoordinates = "";
+        console.log(coordinatesArray);
+
+        let pushedCoordinates = "";
         for (let i = 0; i < coordinatesArray.length; i+=2){
-            moreCoordinates += coordinatesArray[i] + ';' + coordinatesArray[i+1];
-            
-        return moreCoordinates;
+            if (i < coordinatesArray.length - 2){
+                pushedCoordinates += coordinatesArray[i] + ',' + coordinatesArray[i+1] + ';';
+            } 
+            if (i >= coordinatesArray.length - 2){
+                pushedCoordinates += coordinatesArray[i] + ',' + coordinatesArray[i+1];
+            }
         }
+        return pushedCoordinates;
     }
 
-    const getRoutesFromAPI = async (coordinates) => {
-        console.log(coordinates);
-        const response = await fetch (`https://api.mapbox.com/optimized-trips/v1/mapbox/driving/${coordinates}?access_token=${mapboxgl.accessToken}`);
+    const getRoutesFromAPI = async (pushedCoordinates) => {
+        console.log(pushedCoordinates)
+        const response = await fetch (`https://api.mapbox.com/optimized-trips/v1/mapbox/driving/${pushedCoordinates}?access_token=${mapboxgl.accessToken}`);
         const jsonData = await response.json();
         console.log(jsonData)
         setOptRoute(jsonData);
@@ -66,31 +71,8 @@ const RouteMap = ( {} ) => {
         //Make GET request to Optimization API 
         getRoutesFromAPI(coordinates); 
 
-        //Display route on map
-
-            // map.addSource('route', {  
-            // type: 'geojson',  
-            // data: optRoute  
-            // });  
-            
-            // map.addLayer(  
-            // {  
-            // id: 'routeline-active',  
-            // type: 'line',  
-            // source: 'route',  
-            // layout: {  
-            // 'line-join': 'round',  
-            // 'line-cap': 'round'  
-            // },  
-            // paint: {  
-            // 'line-color': '#3887be',  
-            // 'line-width': ['interpolate', ['linear'], ['zoom'], 12, 3, 22, 12]  
-            // }  
-            // },  
-            // 'waterway-label'  
-            // );
-          
-            
+        // Display route on map
+       
     }
 
     useEffect(() => {
