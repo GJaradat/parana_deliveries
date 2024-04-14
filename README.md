@@ -1,16 +1,15 @@
-# [CAPSTONE PROJECT NAME HERE]
+
 ![image](https://github.com/GJaradat/parana_deliveries/assets/108727885/a0ffee2c-76f9-4ed6-991d-7bdcb6bdcb1c)
-
-
 
 ## Table of Contents 
 1. [Introduction](#introduction)
 2. [Technology](#technology)
 3. [Installation instructions](#installation-instructions)
-4. [Diagrams](#diagrams)
-5. [MVP and Extensions](#mvp-and-extensions)
+4. [MVP and Extensions](#mvp-and-extensions)
+5. [Diagrams](#diagrams)
 6. [API Routes Table](#api-routes-table)
-7. [Credits and Acknowledgements](#credits-and-acknowledgements)
+7. [Other Deliverables](#other-deliverables)
+8. [Credits and Acknowledgements](#credits-and-acknowledgements)
 
 ## Introduction
 
@@ -54,22 +53,19 @@ For a tutorial of the MapBox Optimisation API v1, click [here](https://docs.mapb
 - Run the command `git pull` to ensure you have the latest version.
   
 (backend setup)
-- Open the server directory in your preferred IDE (we used IntelliJ).
-- In the terminal, create the linked database by running the command `createdb deliveries_db`.
-- Run the server.
+1. Install Postman, Postico, PostgreSQL, and your preferred IDE.
+2. Open the server directory in your preferred IDE (we used IntelliJ).
+3. In the terminal, create the linked database by running the command `createdb deliveries_db`.
+4. Run the server.
 
 (frontend setup)
-- Open the client directory in your preferred IDE (we used VSCode).
-- In the client folder, create the file .env
-- In the .env file paste the code `REACT_APP_MAPBOX_KEY = [your mapbox access key here]`.
-- In the terminal, run the command `npm i`.
-- In the terminal, run the command `npm i mapbox-gl`.
-- Run the frontend application by entering the command `npm start` in the termainal.
-
-## Diagrams
-### Wireframes
-### UML Diagram
-### Entity Relationship Diagram
+1. Download Node.js.
+2. Open the client directory in your preferred IDE (we used VSCode).
+3. In the client folder, create the file .env
+4. In the .env file paste the code `REACT_APP_MAPBOX_KEY = [your mapbox access key here]`.
+5. In the terminal, run the command `npm i`.
+6. In the terminal, run the command `npm i mapbox-gl`.
+7. Run the frontend application by entering the command `npm start` in the termainal.
 
 ## MVP and Extensions
 ### MVP
@@ -90,18 +86,59 @@ For a tutorial of the MapBox Optimisation API v1, click [here](https://docs.mapb
 - Delivery Fleet Page: localhost:3000/fleet
    - User can see all vehicles and their details
    - User can search for vehicles by name
-   - User can filter vehivles by availability status
-- Delivery Routes Page: localhost:3000/fleet
+   - User can filter vehicles by availability status
+   - User can edit the availability ststus of a vehicle (COMING SOON)
+- Delivery Routes Page: localhost:3000/routes
    - User can see all routes and their details
    - User can search for routes by the name of their assigned vehicle
    - User can filter routes by status
+   - User can edit the status of a route (COMING SOON)
 - Add Basic CSS Styling to the webpages
   
 (use external API to dynamically generate routes and display them on a map) - COMING SOON
 
 ### Extensions
+**(Backend)**
+- Add/Delete vehicles based on demand
+- Display all packages
+- Display a specified package
+- Update the status of a delivery
+- Display a delivery's packages
+- Add a new delivery
+- Route assigning to a vehicle now accounts for the maximum weight capacity of that vehicle
+
+**(Frontend)**
+- Delivery Fleet Page: localhost:3000/fleet
+  - Display the page as a series of dropdown menus that will open up to show more information about the selected vehicle
+- Delivery Routes Page: localhost:3000/routes
+  - Use maps to visualise the individual routes
+- Delivery Page: localhost:3000/deliveries
+  - User can view all deliveries 
+  - User can filter deliveries by package to enable package tracking
+  - User can view past deliveries via status filtering
+
+## Diagrams
+*(Preliminary)*
+*(TODO: Wireframes and Component Diagram)*
+### Wireframes
+### Component Diagram
+### UML Diagram
+![image](https://github.com/GJaradat/parana_deliveries/assets/108727885/a5d06a99-7969-4b34-bdad-7321dbe691bb)
+
+### Entity Relationship Diagram
+![image](https://github.com/GJaradat/parana_deliveries/assets/108727885/49960a12-3adf-4967-a71c-1985b945ab5b)
 
 ## API Routes Table
+*(TODO: Deliveries + Packages Route table)*
+![Trucks](https://github.com/GJaradat/parana_deliveries/assets/108727885/7c88bc3d-9f66-464e-bda7-2090402d593c)
+![Routes](https://github.com/GJaradat/parana_deliveries/assets/108727885/7f3bdd51-1d5d-4cec-ac12-93b3af7d2e6f)
+
+
+## Other Deliverables
+These can be found in the projectDeliverables folder and contain the following:
+- Business Case
+- Risk Register
+- Retrospectives
 
 ## Credits and Acknowledgements
 **Project Team**
