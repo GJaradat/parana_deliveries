@@ -33,6 +33,13 @@ public class RouteController {
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
+    @GetMapping(value = "/generateRoutes")
+    public ResponseEntity<List<Route>> generateRoutes(){
+        routeService.generateRoutes();
+        List<Route> routeList = routeService.getAllRoutes();
+        return new ResponseEntity<>(routeList, HttpStatus.OK);
+    }
+
     @PatchMapping(value = "/{id}/status")
     public ResponseEntity<Route> updateRouteStatus(@PathVariable long id, @RequestBody StatusEnum newStatus){
         Route updatedRoute = routeService.updateRouteStatus(id, newStatus);
