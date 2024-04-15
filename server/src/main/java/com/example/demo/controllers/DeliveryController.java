@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.models.Delivery;
+import com.example.demo.models.DeliveryDTO;
 import com.example.demo.services.DeliveryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,6 +35,12 @@ public class DeliveryController {
     @PatchMapping(value = "/{id}")
     private ResponseEntity<Delivery> setDelivered(@PathVariable long id){
         return new ResponseEntity<>(deliveryService.completeDelivery(id), HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<Delivery> addNewDelivery(@RequestBody DeliveryDTO newDeliveryDTO){
+        Delivery newDelivery = deliveryService.saveDelivery(newDeliveryDTO);
+        return new ResponseEntity<>(newDelivery, HttpStatus.CREATED);
     }
 
 
