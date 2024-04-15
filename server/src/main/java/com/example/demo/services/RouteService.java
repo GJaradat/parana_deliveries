@@ -60,6 +60,15 @@ public class RouteService {
         return newRoute;
     }
 
+    public boolean areAllTrue(ArrayList<Boolean> array){
+        for(boolean bool : array){
+            if(!bool){
+                return false;
+            }
+        }
+        return true;
+    }
+
     public List<ClusterDTO> kMeansClustering(int k, List<Delivery> deliveries) {
         // k = trucksActiveToday
         // 1. find extremes of values in locations to define boundary
@@ -87,7 +96,7 @@ public class RouteService {
 
         int repeats = 0;
         boolean clusterSizesCoolAndGood = false;
-        while(repeats < 50 /*&& !clusterSizesCoolAndGood*/) {
+        while(repeats < 50 && !clusterSizesCoolAndGood) {
             // 3. assign each delivery to closest centroid
             for(ClusterDTO cluster : clusters) {
                 cluster.setDeliveries(new ArrayList<>());
@@ -98,6 +107,9 @@ public class RouteService {
                 for(int i=1; i < clusters.size(); i++){
                     double distance = clusters.get(i).calculateDistance(delivery.getLocation());
                     if(distance < clusters.get(closetClusterIndex).calculateDistance(delivery.getLocation())){
+                        if(clusters.get(i).getDeliveries().size() == 11){
+                            continue;
+                        }
                         closetClusterIndex = i;
                     }
                 }
@@ -107,17 +119,10 @@ public class RouteService {
             ArrayList<Boolean> clusterSizesAllowed = new ArrayList<>();
             for(ClusterDTO cluster : clusters){
                 cluster.setCentroid(cluster.calculateAveragePoint());
-                clusterSizesAllowed.add(cluster.isSizeAllowed());
+                clusterSizesAllowed.add(cluster.isSizeAllowed()); // put all cluster sizeIsAllowed properties into array
             }
             // 5. repeat from step 3
-            for(boolean bool : clusterSizesAllowed){
-                if(!bool){
-                    clusterSizesCoolAndGood = false;
-                    break;
-                } else if(repeats >= 15) {
-                    clusterSizesCoolAndGood = true;
-                }
-            }
+            clusterSizesCoolAndGood = areAllTrue(clusterSizesAllowed);
             repeats++;
         }
 
