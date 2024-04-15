@@ -13,7 +13,6 @@ public class LocationService {
     LocationRepository locationRepository;
 
     public Location saveLocation(Location newLocation){
-        locationRepository.f
         locationRepository.save(newLocation);
         return newLocation;
     };
