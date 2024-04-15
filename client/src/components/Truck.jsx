@@ -19,8 +19,8 @@ const Truck = ({ truck, patchTrucks }) => {
         }
     }
 
-    const handleChange = async(e) =>{
-        await setAvailabilityState(e.target.value);
+    const handleClick = (e) =>{
+        //setAvailabilityState(e.target.value);
         e.preventDefault();
         let newTruck = {
             id: truck.id,
@@ -44,11 +44,13 @@ const Truck = ({ truck, patchTrucks }) => {
                     <select name="editAvailabilityDropdown" 
                     className="updateStatusDropdown" 
                     defaultValue={truck.availability} 
-                    onChange={handleChange}>
+                    onChange={(e)=>{setAvailabilityState(e.target.value)}}
+                    >
                         <option value="IN_DEPOT"> In Depot</option>
                         <option value="OUT_FOR_DELIVERY">Out For Delivery</option>
                         <option value="UNDER_MAINTENANCE"> Under Maintenance</option>
                     </select>
+                    <button onClick={handleClick}>Change Availability</button>
                 </article>
               
                 </article>
