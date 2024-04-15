@@ -18,13 +18,13 @@ public class Location {
     private String address;
 
     @Column (name = "latitude")
-    private double latitude;
+    private Double latitude;
 
     @Column (name = "longitude")
-    private double longitude;
+    private Double longitude;
 //    CONSTRUCTOR
 
-    public Location(String address, double latitude, double longitude) {
+    public Location(String address, Double latitude, Double longitude) {
         this.address = address;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -52,19 +52,19 @@ public class Location {
         this.address = address;
     }
 
-    public double getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(double latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public double getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
