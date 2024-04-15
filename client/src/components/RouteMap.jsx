@@ -1,8 +1,8 @@
 import React,{ useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "../styles/RouteMapStyles.css";
-
 import payload from "../samplePayload.JSON";
+import polyline from '@mapbox/polyline';
 
 const RouteMap = ( {} ) => {
     const mapContainerRef = useRef(null);
@@ -17,6 +17,7 @@ const RouteMap = ( {} ) => {
     mapboxgl.accessToken = `${process.env.REACT_APP_MAPBOX_KEY}`;
 
     useEffect(() => {
+       
         if (map.current) return; // initialize map only once
         map.current = new mapboxgl.Map({
           container: mapContainerRef.current,
@@ -27,6 +28,8 @@ const RouteMap = ( {} ) => {
         getRoute();
     }, []);
 
+    
+
     const getRoute = async () => {
         const response = await fetch("http://localhost:8080/routes/1");
         const jsonData = await response.json();
@@ -35,22 +38,50 @@ const RouteMap = ( {} ) => {
 
     const generateCoordinates = () => {
         
-        console.log(route);
-        const coordinatesArray = [[-0.140634,51.501476]];  // first coordinates are always warehouse
+        
+        const coordinatesArray = [-0.140634, 51.501476];  // first coordinates are always warehouse
 
         const routesCoordinates = route.deliveries.forEach((delivery) => {
             const lng = delivery.location.longitude;
             const lat = delivery.location.latitude;
-            coordinatesArray.push([lng,lat]);
+            coordinatesArray.push(lng,lat);
         })
-        
-        return coordinatesArray.join(";")
+
+        let pushedCoordinates = "";
+        for (let i = 0; i < coordinatesArray.length; i+=2){
+            if (i < coordinatesArray.length - 2){
+                pushedCoordinates += coordinatesArray[i] + ',' + coordinatesArray[i+1] + ';';
+            } 
+            if (i >= coordinatesArray.length - 2){
+                pushedCoordinates += coordinatesArray[i] + ',' + coordinatesArray[i+1];
+            }
+        }
+        return pushedCoordinates;
     }
 
-    const getRoutesFromAPI = async (coordinates) => {
-        const response = await fetch (`https://api.mapbox.com/optimized-trips/v1/mapbox/driving/${coordinates}?access_token=${mapboxgl.accessToken}`);
+    const getRoutesFromAPI = async (pushedCoordinates) => {
+        const response = await fetch (`https://api.mapbox.com/optimized-trips/v1/mapbox/driving/${pushedCoordinates}?access_token=${mapboxgl.accessToken}`);
         const jsonData = await response.json();
         setOptRoute(jsonData);
+        
+        const tripPolyline = optRoute.trips[0].geometry;
+        const line = polyline.toGeoJSON(tripPolyline);
+        
+        map.current.addSource('route', {
+            'type':'geojson',
+            'data':line
+        });
+
+        map.current.addLayer({
+            'id': 'route-line',
+            'type': 'line',
+            'source': 'route',
+            'paint': {
+              'line-color': '#2D304E',
+              'line-width': 8
+            }
+          });
+        
     }
 
     const calculateRoutes = () => {
@@ -58,13 +89,19 @@ const RouteMap = ( {} ) => {
         const coordinates = generateCoordinates();
         
         //Make GET request to Optimization API 
-        getRoutesFromAPI(coordinates);
-        console.log(optRoute); 
-
-        //Display route on map
+        getRoutesFromAPI(coordinates); 
         
+
+       
     }
+
+        
+    useEffect(() => {
+        console.log(optRoute);
+       
+    }, [optRoute]);
     
+
     return ( 
         <>
             <div>

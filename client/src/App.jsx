@@ -1,5 +1,6 @@
 import './App.css';
 
+import 'mapbox-gl/dist/mapbox-gl.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import RoutesContainer from './containers/RoutesContainer';
 import FleetContainer from './containers/FleetContainer';
