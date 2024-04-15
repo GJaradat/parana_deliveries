@@ -5,19 +5,6 @@ const Route = ({route, patchRoutes}) => {
 
     const[routeStatus, setRouteStatus] = useState(route.status);
 
-    // const routeStatus = () => {
-        
-    //     if(route.status === "PENDING"){
-    //         return "Pending";
-    //     }
-    //     if(route.status === "IN_PROGRESS"){
-    //         return "In Progress";
-    //     }
-    //     if(route.status === "COMPLETED"){
-    //         return "Completed";
-    //     }
-    // }
-
     const handleClick = (e) => {
         e.preventDefault();
         let newRoute = {

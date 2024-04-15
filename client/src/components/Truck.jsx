@@ -4,21 +4,6 @@ const Truck = ({ truck, patchTrucks }) => {
 
     const[availabilityState, setAvailabilityState] = useState(truck.availability);
 
-    
-    const availabilityStatus = () => {
-        if(truck.availability === "IN_DEPOT"){
-            return "In Depot"
-        }
-
-        if(truck.availability === "OUT_FOR_DELIVERY"){
-            return "Out For Delivery"
-        }
-
-        if(truck.availability === "UNDER_MAINTENANCE"){
-            return "Under Maintenance"
-        }
-    }
-
     const handleClick = (e) =>{
         //setAvailabilityState(e.target.value);
         e.preventDefault();
