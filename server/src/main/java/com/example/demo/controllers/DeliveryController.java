@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.models.Delivery;
+import com.example.demo.models.DeliveryDTO;
 import com.example.demo.services.DeliveryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,5 +37,20 @@ public class DeliveryController {
         return new ResponseEntity<>(deliveryService.completeDelivery(id), HttpStatus.OK);
     }
 
+    @PostMapping
+    public ResponseEntity<Delivery> addNewDelivery(@RequestBody DeliveryDTO newDeliveryDTO) {
+        Delivery newDelivery = deliveryService.saveDelivery(newDeliveryDTO);
+        return new ResponseEntity<>(newDelivery, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Long> deleteDelivery(@PathVariable long id){
+        Optional<Delivery> delivery = deliveryService.findDelivery(id);
+        if(delivery.isPresent()){
+            deliveryService.deleteDelivery(id);
+            return new ResponseEntity<>(id, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
 
 }

@@ -41,7 +41,7 @@ public class RouteService {
             return null;
         }
         Route routeToUpdate = targetRoute.get();
-        routeToUpdate.setRouteStatus(newStatus);
+        routeToUpdate.setStatus(newStatus);
         routeRepository.save(routeToUpdate);
         return routeToUpdate;
     }

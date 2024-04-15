@@ -1,29 +1,41 @@
+import { useState } from "react";
 import DeliveryList from "./DeliveryList";
 
-const Route = ({route}) => {
+const Route = ({route, patchRoutes}) => {
 
+    const[routeStatus, setRouteStatus] = useState(route.status);
 
-    const routeStatus = () => {
-        
-        if(route.routeStatus === "PENDING"){
-            return "Pending";
+    const handleClick = (e) => {
+        e.preventDefault();
+        let newRoute = {
+            id: route.id,
+            deliveries: route.deliveries,
+            status: routeStatus,
+            truck: route.truck
         }
-        if(route.routeStatus === "IN_PROGRESS"){
-            return "In Progress";
-        }
-        if(route.routeStatus === "COMPLETED"){
-            return "Completed";
-        }
+        patchRoutes(newRoute);
     }
 
     return ( 
         <>
             <h3>Route {route.id}</h3>
-            <p>Status: {routeStatus()}</p>
+        <article id="statusContainer">
+            <p>Status: </p>
+            <select 
+                className="updateStatusDropdown"
+                defaultValue={routeStatus}
+                onChange={(e) => {setRouteStatus(e.target.value)}}
+                >
+                <option value="PENDING">Pending</option>
+                <option value="IN_PROGRESS">In Progress</option>
+                <option value="COMPLETED">Completed</option>
+            </select>
+            <button onClick={handleClick}>Update Status</button>
+         </article>
             <p>Truck: {route.truck.name}</p>
                 <div>
                     <DeliveryList deliveries = {route.deliveries} />
-                </div>
+                </div>  
         </>
      );
 }

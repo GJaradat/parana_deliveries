@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.models.AvailabilityEnum;
 import com.example.demo.models.Truck;
+import com.example.demo.models.TruckDTO;
 import com.example.demo.services.TruckService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,11 @@ public class TruckController {
         return new ResponseEntity<>(newTruck, HttpStatus.OK);
     }
     return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+
+    @PostMapping
+    public ResponseEntity<Truck> postTruck(@RequestBody TruckDTO truckDTO){
+        Truck newTruck = truckService.createTruck(truckDTO);
+        return new ResponseEntity<>(newTruck, HttpStatus.CREATED);
     }
 }
