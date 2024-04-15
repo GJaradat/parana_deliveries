@@ -3,7 +3,7 @@ import DeliveryList from "./DeliveryList";
 
 const Route = ({route, patchRoutes}) => {
 
-    const[routeStatus, setRouteStatus] = useState(route.routeStatus);
+    const[routeStatus, setRouteStatus] = useState(route.status);
 
     const handleClick = (e) => {
         e.preventDefault();
@@ -20,7 +20,7 @@ const Route = ({route, patchRoutes}) => {
         <>
             <h3>Route {route.id}</h3>
         <article id="statusContainer">
-            <p>Status: thiss {route.routeStatus} </p>
+            <p>Status: </p>
             <select 
                 className="updateStatusDropdown"
                 defaultValue={routeStatus}
