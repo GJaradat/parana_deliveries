@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface DeliveryRepository extends JpaRepository<Delivery, Long> {
 
-    public List<Delivery> findByDelivered(boolean bool);
+    public List<Delivery> findByIsDelivered(boolean bool);
 }

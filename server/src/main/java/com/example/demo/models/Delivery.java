@@ -20,7 +20,7 @@ public class Delivery {
     @JoinColumn(name = "location_id")
     private Location location;
 
-    @Column(name = "delivered")
+    @Column(name = "is_delivered")
     private boolean isDelivered;
 
 //    CONSTRUCTOR
