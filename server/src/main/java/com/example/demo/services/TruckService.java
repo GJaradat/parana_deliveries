@@ -2,6 +2,7 @@ package com.example.demo.services;
 
 import com.example.demo.models.AvailabilityEnum;
 import com.example.demo.models.Truck;
+import com.example.demo.models.TruckDTO;
 import com.example.demo.repositories.TruckRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,5 +29,12 @@ public class TruckService {
         truckToUpdate.get().setAvailability(truckStatus);
         truckRepository.save(truckToUpdate.get());
         return  truckToUpdate;
+    }
+
+    public Truck createTruck(TruckDTO truckDTO){
+        Truck newTruck = new Truck(truckDTO.getName(), truckDTO.getCapacity());
+        truckRepository.save(newTruck);
+        return newTruck;
+
     }
 }
