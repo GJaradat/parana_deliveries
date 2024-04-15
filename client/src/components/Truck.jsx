@@ -1,3 +1,4 @@
+import '../styles/TruckStyle.css';
 const Truck = ({ truck }) => {
     
     
@@ -17,9 +18,11 @@ const Truck = ({ truck }) => {
     
     return ( 
         <>
-            <h3>Truck: {truck.name}</h3>
-            <p>Capacity: {truck.capacity}</p>
-            <p>Availability: {availabilityStatus()}</p>
+            <article className='truck'>
+                <h3>Truck: {truck.name}</h3>
+                <p>Capacity: {truck.capacity}</p>
+                <p>Availability: {availabilityStatus()}</p>
+                </article>
         </>
      );
 }
