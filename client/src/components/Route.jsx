@@ -1,7 +1,8 @@
 import DeliveryList from "./DeliveryList";
 
-const Route = ({route}) => {
+const Route = ({route, patchRoutes}) => {
 
+    // const[routeState, setRouteState] = 
 
     const routeStatus = () => {
         

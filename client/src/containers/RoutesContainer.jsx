@@ -20,6 +20,18 @@ const RoutesContainer = () => {
         loadRoutes();
     }, []);
 
+    const patchRoutes = async (route) => {
+        await fetch(`http://localhost:8080/routes/${route.id}/status`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(route.routeStatus)
+        });
+        await loadRoutes();
+    }
+
+
     const filteredRoutes = routes.filter((route)=>{
         if(sortValue){
             return route.routeStatus.toLowerCase().includes(sortValue.toLowerCase());
@@ -35,7 +47,7 @@ const RoutesContainer = () => {
             <h2>Delivery Routes</h2>
             <RouteSearch setSearchValue={setSearchValue}/>
             <RouteSort setSortValue={setSortValue}/>
-            <RouteList routes={filteredRoutes} />
+            <RouteList routes={filteredRoutes} patchRoutes={patchRoutes} />
             <RouteMap />
         </>
      );

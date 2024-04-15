@@ -24,15 +24,15 @@ public class Route {
     private Truck truck;
 
     @Column
-    private StatusEnum routeStatus;
+    private StatusEnum status;
 
 //    CONSTRUCTOR
     public Route(){}
 
-    public Route(Truck truck, StatusEnum routeStatus) {
+    public Route(Truck truck, StatusEnum status) {
         this.deliveries = new ArrayList<>();
         this.truck = truck;
-        this.routeStatus = routeStatus;
+        this.status = status;
     }
 
 //    GETTERS & SETTERS
@@ -61,11 +61,11 @@ public class Route {
     }
 
     public StatusEnum getRouteStatus() {
-        return routeStatus;
+        return status;
     }
 
-    public void setRouteStatus(StatusEnum routeStatus) {
-        this.routeStatus = routeStatus;
+    public void setStatus(StatusEnum status) {
+        this.status = status;
     }
 
     public void addDelivery(Delivery delivery){
