@@ -24,16 +24,18 @@ const Truck = ({ truck }) => {
             <article className='truck'>
                 <h3>Truck: {truck.name}</h3>
                 <p>Capacity: {truck.capacity}</p>
-                <p>Availability: {availabilityStatus()}</p>
+                <article id='availabilityContainer'>
+                    <p>Availability: </p>
 
-                <select name="editAvailabilityDropdown" 
-                id="editAvailabilityDropdown" 
-                // defaultValue={truck.availability} 
-                onChange={((e)=>setAvailability(e.target.value))}>
-                    <option value="IN_DEPOT"> In Depot</option>
-                    <option value="OUT_FOR_DELIVERY">Out For Delivery</option>
-                    <option value="UNDER_MAINTENANCE"> Under Maintenance</option>
-                </select>
+                    <select name="editAvailabilityDropdown" 
+                    id="editAvailabilityDropdown" 
+                    defaultValue={truck.availability} 
+                    onChange={((e)=>setAvailability(e.target.value))}>
+                        <option value="IN_DEPOT"> In Depot</option>
+                        <option value="OUT_FOR_DELIVERY">Out For Delivery</option>
+                        <option value="UNDER_MAINTENANCE"> Under Maintenance</option>
+                    </select>
+                </article>
               
                 </article>
 

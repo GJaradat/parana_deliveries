@@ -49,3 +49,17 @@ body {
     border-color: black;
     border-width: 2px;
 }
+
+#availabilityContainer{
+    display: flex;
+}
+
+#editAvailabilityDropdown{
+    background-color: #F6D779;
+    /* border-color: #F6D779; */
+    margin: 10px;
+    font-size: 17px;
+    text-align: center;
+    
+
+}
