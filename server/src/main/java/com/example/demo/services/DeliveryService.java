@@ -2,6 +2,7 @@ package com.example.demo.services;
 
 import com.example.demo.models.Delivery;
 import com.example.demo.repositories.DeliveryRepository;
+import com.example.demo.repositories.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,8 @@ public class DeliveryService {
 
     @Autowired
     DeliveryRepository deliveryRepository;
+
+
 
 
     public List<Delivery> getAllDeliveries(){
@@ -29,5 +32,10 @@ public class DeliveryService {
         deliveryRepository.save(delivery);
         return delivery;
     }
+
+//    public Delivery saveDelivery(int locationId){
+//
+//        return delivery;
+//    }
 
 }
