@@ -1,10 +1,9 @@
 import React,{ useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "../styles/RouteMapStyles.css";
-import payload from "../samplePayload.JSON";
-import polyline from '@mapbox/polyline';
 
 const RouteMap = ( {} ) => {
+    
     const mapContainerRef = useRef(null);
     const map = useRef(null);
     // Starting lattitude and longitude states (aka the 'warehouse' location)
@@ -15,6 +14,7 @@ const RouteMap = ( {} ) => {
     const [optRoute, setOptRoute] = useState(null);
 
     mapboxgl.accessToken = `${process.env.REACT_APP_MAPBOX_KEY}`;
+
 
     useEffect(() => {
        
@@ -28,7 +28,6 @@ const RouteMap = ( {} ) => {
         getRoute();
     }, []);
 
-    
 
     const getRoute = async () => {
         const response = await fetch("http://localhost:8080/routes/1");
@@ -37,7 +36,6 @@ const RouteMap = ( {} ) => {
     }
 
     const generateCoordinates = () => {
-        
         
         const coordinatesArray = ["-0.140634,51.501476"];  // first coordinates are always warehouse
 
@@ -52,16 +50,15 @@ const RouteMap = ( {} ) => {
     }
 
     const getRoutesFromAPI = async (coordinates) => {
-        const response = await fetch (`https://api.mapbox.com/optimized-trips/v1/mapbox/driving/${coordinates}?access_token=${mapboxgl.accessToken}`);
+        const response = await fetch (`https://api.mapbox.com/optimized-trips/v1/mapbox/driving/${coordinates}?access_token=${mapboxgl.accessToken}&geometries=geojson`);
         const jsonData = await response.json();
         setOptRoute(jsonData);
         
-        const tripPolyline = optRoute.trips[0].geometry;
-        const line = polyline.toGeoJSON(tripPolyline);
+        const tripLine = optRoute.trips[0].geometry;
         
         map.current.addSource('route', {
             'type':'geojson',
-            'data':line
+            'data':tripLine
         });
 
         map.current.addLayer({
