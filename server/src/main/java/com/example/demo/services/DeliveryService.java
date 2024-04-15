@@ -22,12 +22,6 @@ public class DeliveryService {
     @Autowired
     LocationRepository locationRepository;
 
-    @Autowired
-    RouteRepository routeRepository;
-
-
-
-
     public List<Delivery> getAllDeliveries(){
         return deliveryRepository.findAll();
     }
