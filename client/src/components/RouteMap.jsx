@@ -39,28 +39,20 @@ const RouteMap = ( {} ) => {
     const generateCoordinates = () => {
         
         
-        const coordinatesArray = [-0.140634, 51.501476];  // first coordinates are always warehouse
+        const coordinatesArray = ["-0.140634,51.501476"];  // first coordinates are always warehouse
 
-        const routesCoordinates = route.deliveries.forEach((delivery) => {
+        route.deliveries.forEach((delivery) => {
             const lng = delivery.location.longitude;
             const lat = delivery.location.latitude;
-            coordinatesArray.push(lng,lat);
+            coordinatesArray.push(lng+","+lat);
         })
 
-        let pushedCoordinates = "";
-        for (let i = 0; i < coordinatesArray.length; i+=2){
-            if (i < coordinatesArray.length - 2){
-                pushedCoordinates += coordinatesArray[i] + ',' + coordinatesArray[i+1] + ';';
-            } 
-            if (i >= coordinatesArray.length - 2){
-                pushedCoordinates += coordinatesArray[i] + ',' + coordinatesArray[i+1];
-            }
-        }
-        return pushedCoordinates;
+        console.log(coordinatesArray.join(";"));
+        return coordinatesArray.join(";");
     }
 
-    const getRoutesFromAPI = async (pushedCoordinates) => {
-        const response = await fetch (`https://api.mapbox.com/optimized-trips/v1/mapbox/driving/${pushedCoordinates}?access_token=${mapboxgl.accessToken}`);
+    const getRoutesFromAPI = async (coordinates) => {
+        const response = await fetch (`https://api.mapbox.com/optimized-trips/v1/mapbox/driving/${coordinates}?access_token=${mapboxgl.accessToken}`);
         const jsonData = await response.json();
         setOptRoute(jsonData);
         
