@@ -66,7 +66,6 @@ public class DataLoader implements ApplicationRunner {
         Location location12 = new Location("The Tate Modern, Bankside, London SE1 9TG, UK", 51.508500, -0.094000);
         Location location13 = new Location("The National Gallery of British Art, Trafalgar Square, London WC2N 5DN, UK", 51.508229, -0.128040);
 
-
         locationRepository.save(location1);
         locationRepository.save(location2);
         locationRepository.save(location3);

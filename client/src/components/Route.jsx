@@ -24,7 +24,10 @@ const Route = ({route, patchRoutes}) => {
             <p>Status: </p>
             <select 
                 className="updateStatusDropdown"
+<<<<<<< HEAD
 
+=======
+>>>>>>> 732dda7cc2f32b6671a5ae1806c586891db4dd48
                 defaultValue={route.status}
                 onChange={(e) => {setRouteStatus(e.target.value)}}
                 >
