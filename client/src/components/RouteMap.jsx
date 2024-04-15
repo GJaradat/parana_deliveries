@@ -77,7 +77,7 @@ const RouteMap = ( {} ) => {
             'type': 'line',
             'source': 'route',
             'paint': {
-              'line-color': '#888',
+              'line-color': '#2D304E',
               'line-width': 8
             }
           });
