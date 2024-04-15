@@ -1,1 +1,149 @@
-CAPSTONE PROJECT
+
+![image](https://github.com/GJaradat/parana_deliveries/assets/108727885/a0ffee2c-76f9-4ed6-991d-7bdcb6bdcb1c)
+
+## Table of Contents 
+1. [Introduction](#introduction)
+2. [Technology](#technology)
+3. [Installation instructions](#installation-instructions)
+4. [MVP and Extensions](#mvp-and-extensions)
+5. [Diagrams](#diagrams)
+6. [API Routes Table](#api-routes-table)
+7. [Other Deliverables](#other-deliverables)
+8. [Credits and Acknowledgements](#credits-and-acknowledgements)
+
+## Introduction
+
+## Technology
+Purpose of Technology usage: The objective is to enhance learning and skill development as an integral component of the bootcamp experience hence why the following technologies were used.
+### Tech Stack
+- Java
+- SpringBoot
+- PostgreSQL Database
+- JavaScript
+- HTML
+- CSS
+- React
+
+### SpringBoot Configuration:
+- Maven Project
+- Spring Boot: Ver. 3.2.3
+- Spring Boot Dev Tools
+- Spring Web
+- PostgreSQL Driver
+- Spring Data JPA
+
+### React Libraries Used:
+- react-router-dom
+- *react-modal(?)*
+
+### External APIs Used
+1. [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js/api/) to display the maps which can display markers of delivery locations.
+2. [Optimization API v1](https://docs.mapbox.com/api/navigation/optimization-v1/#example-request-retrieve-an-optimization) to calculate the shortest distance of a given route.
+
+Please note that to use these APIs you need to create an account on the Mapbox website and create an access token. 
+For instructions on generating a token, click [here](https://docs.mapbox.com/help/tutorials/use-mapbox-gl-js-with-react/).
+
+For a tutorial of the MapBox GL JS API, click [here](https://docs.mapbox.com/help/tutorials/use-mapbox-gl-js-with-react/).
+
+For a tutorial of the MapBox Optimisation API v1, click [here](https://docs.mapbox.com/help/tutorials/optimization-api/).
+
+## Installation Instructions
+- In the terminal, navigate to the directory you want to copy the repository into. 
+- Run the command `git clone git@github.com:GJaradat/parana_deliveries.git`
+- Run the command `git pull` to ensure you have the latest version.
+  
+(backend setup)
+1. Install Postman, Postico, PostgreSQL, and your preferred IDE.
+2. Open the server directory in your preferred IDE (we used IntelliJ).
+3. In the terminal, create the linked database by running the command `createdb deliveries_db`.
+4. Run the server.
+
+(frontend setup)
+1. Download Node.js.
+2. Open the client directory in your preferred IDE (we used VSCode).
+3. In the client folder, create the file .env
+4. In the .env file paste the code `REACT_APP_MAPBOX_KEY = [your mapbox access key here]`.
+5. In the terminal, run the command `npm i`.
+6. In the terminal, run the command `npm i mapbox-gl`.
+7. Run the frontend application by entering the command `npm start` in the termainal.
+
+## MVP and Extensions
+### MVP
+**(Backend)**
+- Display all vehicles
+- Display a specified vehicle
+- Update the availability status of a vehicle (In Depot/Out For Delivery/Under Maintenance)
+- Display all delivery routes
+- Display a specified delivery route
+- Update the status of a route (Pending/In Progress/Complete)
+- Add a new route
+- Display all Delivery locations
+- Display a specifed delivery location
+
+**(Frontend)**
+- HomePage: localhost:3000/ OR localhost:3000/home
+   - User can navigate to other pages
+- Delivery Fleet Page: localhost:3000/fleet
+   - User can see all vehicles and their details
+   - User can search for vehicles by name
+   - User can filter vehicles by availability status
+   - User can edit the availability ststus of a vehicle (COMING SOON)
+- Delivery Routes Page: localhost:3000/routes
+   - User can see all routes and their details
+   - User can search for routes by the name of their assigned vehicle
+   - User can filter routes by status
+   - User can edit the status of a route (COMING SOON)
+- Add Basic CSS Styling to the webpages
+  
+(use external API to dynamically generate routes and display them on a map) - COMING SOON
+
+### Extensions
+**(Backend)**
+- Add/Delete vehicles based on demand
+- Display all packages
+- Display a specified package
+- Update the status of a delivery
+- Display a delivery's packages
+- Add a new delivery
+- Route assigning to a vehicle now accounts for the maximum weight capacity of that vehicle
+
+**(Frontend)**
+- Delivery Fleet Page: localhost:3000/fleet
+  - Display the page as a series of dropdown menus that will open up to show more information about the selected vehicle
+- Delivery Routes Page: localhost:3000/routes
+  - Use maps to visualise the individual routes
+- Delivery Page: localhost:3000/deliveries
+  - User can view all deliveries 
+  - User can filter deliveries by package to enable package tracking
+  - User can view past deliveries via status filtering
+
+## Diagrams
+*(Preliminary)*
+*(TODO: Wireframes and Component Diagram)*
+### Wireframes
+### Component Diagram
+### UML Diagram
+![image](https://github.com/GJaradat/parana_deliveries/assets/108727885/a5d06a99-7969-4b34-bdad-7321dbe691bb)
+
+### Entity Relationship Diagram
+![image](https://github.com/GJaradat/parana_deliveries/assets/108727885/49960a12-3adf-4967-a71c-1985b945ab5b)
+
+## API Routes Table
+*(TODO: Deliveries + Packages Route table)*
+![Trucks](https://github.com/GJaradat/parana_deliveries/assets/108727885/7c88bc3d-9f66-464e-bda7-2090402d593c)
+![Routes](https://github.com/GJaradat/parana_deliveries/assets/108727885/7f3bdd51-1d5d-4cec-ac12-93b3af7d2e6f)
+
+
+## Other Deliverables
+These can be found in the projectDeliverables folder and contain the following:
+- Business Case
+- Risk Register
+- Retrospectives
+
+## Credits and Acknowledgements
+**Project Team**
+- Gabriel Dzharadat (https://github.com/GJaradat))
+- Kajanan Lingkeswaran(https://github.com/KajananGit)
+- Leila Peltier (https://github.com/L1ly-42)
+- Yeabsira Negash (https://github.com/Y-Negash)
+- Zarrin Rahman (https://github.com/z-for-zarrin)
