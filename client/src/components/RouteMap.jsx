@@ -44,8 +44,6 @@ const RouteMap = ( {} ) => {
             const lat = delivery.location.latitude;
             coordinatesArray.push(lng+","+lat);
         })
-
-        console.log(coordinatesArray.join(";"));
         return coordinatesArray.join(";");
     }
 
@@ -53,9 +51,17 @@ const RouteMap = ( {} ) => {
         const response = await fetch (`https://api.mapbox.com/optimized-trips/v1/mapbox/driving/${coordinates}?access_token=${mapboxgl.accessToken}&geometries=geojson`);
         const jsonData = await response.json();
         setOptRoute(jsonData);
-        
+    }
+
+    const displayMarkers = (coordinates) => {
+       
+
+    };
+    
+    const displayRoutes = () => {
+       
         const tripLine = optRoute.trips[0].geometry;
-        
+
         map.current.addSource('route', {
             'type':'geojson',
             'data':tripLine
@@ -67,27 +73,31 @@ const RouteMap = ( {} ) => {
             'source': 'route',
             'paint': {
               'line-color': '#2D304E',
-              'line-width': 8
+              'line-width': 4
             }
           });
+
+        
+          
         
     }
+
+
 
     const calculateRoutes = () => {
         // Need A semicolon-separated list of {longitude},{latitude} coordinates.
         const coordinates = generateCoordinates();
         
         //Make GET request to Optimization API 
-        getRoutesFromAPI(coordinates); 
-        
-
-       
+       getRoutesFromAPI(coordinates); 
+       displayMarkers(coordinates);
     }
 
         
     useEffect(() => {
-        console.log(optRoute);
-       
+        if(optRoute){
+            displayRoutes();
+        }
     }, [optRoute]);
     
 

@@ -24,7 +24,7 @@ const Route = ({route, patchRoutes}) => {
             <p>Status: </p>
             <select 
                 className="updateStatusDropdown"
-                defaultValue={routeStatus}
+                defaultValue={route.status}
                 onChange={(e) => {setRouteStatus(e.target.value)}}
                 >
                 <option value="PENDING">Pending</option>

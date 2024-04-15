@@ -6,23 +6,23 @@
             "coordinates": [-0.140634, 51.501476]
         },
         {   "name" : "Place_1",
-            "coordinates": [0.182668, 51.494737]
+            "coordinates": [51.494737, -0.182668]
         },
         {
             "name" : "Place_2",
-            "coordinates": [0.131792, 51.510953]
+            "coordinates": [-0.131792, 51.510953]
         },
         {
             "name" : "Place_3",
-            "coordinates": [0.129323, 51.511533]
+            "coordinates": [-0.129323, 51.511533]
         },
         {
             "name" : "Place_4",
-            "coordinates" : [0.126054, 51.518690]
+            "coordinates" : [-0.126054, 51.518690]
         },
         {
             "name" : "Place_5",
-            "coordinates" : [0.174269, 51.498873]
+            "coordinates" : [-0.174269, 51.498873]
         }        
     ],
     "vehicles": [
