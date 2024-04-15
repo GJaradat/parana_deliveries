@@ -30,7 +30,7 @@ const RouteMap = ( {} ) => {
 
 
     const getRoute = async () => {
-        const response = await fetch("http://localhost:8080/routes/1");
+        const response = await fetch("http://localhost:8080/routes/3");
         const jsonData = await response.json();
         setRoute(jsonData);
     }
