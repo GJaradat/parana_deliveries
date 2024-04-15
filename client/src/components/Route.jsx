@@ -14,6 +14,7 @@ const Route = ({route, patchRoutes}) => {
             truck: route.truck
         }
         patchRoutes(newRoute);
+        alert("Route status successfully updated!")
     }
 
     return ( 

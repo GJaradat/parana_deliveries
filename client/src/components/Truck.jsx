@@ -14,6 +14,7 @@ const Truck = ({ truck, patchTrucks }) => {
             routes: truck.routes
         };
         patchTrucks(newTruck);
+        alert("Truck availability successfully updated!")
     }
 
     
