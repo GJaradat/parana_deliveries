@@ -3,6 +3,7 @@ package com.example.demo.services;
 import com.example.demo.models.Delivery;
 import com.example.demo.models.DeliveryDTO;
 import com.example.demo.models.Location;
+import com.example.demo.models.Route;
 import com.example.demo.repositories.DeliveryRepository;
 import com.example.demo.repositories.LocationRepository;
 import com.example.demo.repositories.RouteRepository;
@@ -48,5 +49,14 @@ public class DeliveryService {
         deliveryRepository.save(newDelivery);
         return newDelivery;
     }
+
+    public Optional<Delivery> findDelivery(long id){
+        Optional<Delivery> delivery = deliveryRepository.findById(id);
+        return delivery;
+    }
+    public void deleteDelivery(long id){
+        deliveryRepository.deleteById(id);
+    }
+
 
 }

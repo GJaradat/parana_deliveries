@@ -1,6 +1,7 @@
 package com.example.demo.models;
 
 public class DeliveryDTO {
+    private long routeId;
     private long locationId;
     private boolean isDelivered;
 
@@ -10,7 +11,7 @@ public class DeliveryDTO {
         this.locationId = locationId;
         this.isDelivered = false;
     }
-    
+
     public long getLocationId() {
         return locationId;
     }
@@ -25,5 +26,13 @@ public class DeliveryDTO {
 
     public void setDelivered(boolean delivered) {
         isDelivered = delivered;
+    }
+
+    public long getRouteId() {
+        return routeId;
+    }
+
+    public void setRouteId(long routeId) {
+        this.routeId = routeId;
     }
 }

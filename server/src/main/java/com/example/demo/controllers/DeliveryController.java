@@ -38,10 +38,19 @@ public class DeliveryController {
     }
 
     @PostMapping
-    public ResponseEntity<Delivery> addNewDelivery(@RequestBody DeliveryDTO newDeliveryDTO){
+    public ResponseEntity<Delivery> addNewDelivery(@RequestBody DeliveryDTO newDeliveryDTO) {
         Delivery newDelivery = deliveryService.saveDelivery(newDeliveryDTO);
         return new ResponseEntity<>(newDelivery, HttpStatus.CREATED);
     }
 
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Long> deleteDelivery(@PathVariable long id){
+        Optional<Delivery> delivery = deliveryService.findDelivery(id);
+        if(delivery.isPresent()){
+            deliveryService.deleteDelivery(id);
+            return new ResponseEntity<>(id, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
 
 }
