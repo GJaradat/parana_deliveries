@@ -139,7 +139,7 @@ public class RouteService {
         for(ClusterDTO cluster : clusters){
             Route newRoute = createRoute();
             newRoute.setDeliveries(cluster.getDeliveries());
-            newRoute.setRouteStatus(StatusEnum.IN_PROGRESS);
+            newRoute.setStatus(StatusEnum.IN_PROGRESS);
             routeRepository.save(newRoute);
             newRoutes.add(newRoute);
             for(Delivery delivery : newRoute.getDeliveries()){
