@@ -50,7 +50,21 @@ public class DataLoader implements ApplicationRunner {
         truckRepository.save(truck7);
 
 //        Warehouse location
-      
+        Location location1 = new Location("Buckingham Palace, London SW1A 1AA, UK", 51.501476, -0.140634);
+
+        Location location2 = new Location("The British Museum, Great Russell Street, London WC1B 3DG, UK", 51.519520, -0.126090);
+        Location location3 = new Location("The London Eye, County Hall, Westminster Bridge Road, London SE1 7PB, UK", 51.503324, -0.119543);
+        Location location4 = new Location("The Shard, 31 London Bridge Street, London SE1 9SG, UK", 51.506686, -0.085309);
+        Location location5 = new Location("The Natural History Museum, Cromwell Road, London SW7 5BD, UK", 51.497499, -0.173333);
+        Location location6 = new Location("The Science Museum, Exhibition Road, London SW7 2DD, UK", 51.497500, -0.173333);
+        Location location7 = new Location("The British Library, 96 Euston Road, London NW1 2DB, UK", 51.524550, -0.133060);
+        Location location8 = new Location("The National Gallery, Trafalgar Square, London WC2N 5DN, UK", 51.508229, -0.128040);
+        Location location9 = new Location("The Royal Albert Hall, Kensington Gore, London SW7 2AP, UK", 51.495300, -0.172300);
+        Location location10 = new Location("The Royal Opera House, Bow Street, London WC2E 9DD, UK", 51.515700, -0.127600);
+        Location location11 = new Location("The National Portrait Gallery, Malet Street, London WC1H 0EH, UK", 51.519100, -0.126000);
+        Location location12 = new Location("The Tate Modern, Bankside, London SE1 9TG, UK", 51.508500, -0.094000);
+        Location location13 = new Location("The National Gallery of British Art, Trafalgar Square, London WC2N 5DN, UK", 51.508229, -0.128040);
+
         locationRepository.save(location1);
         locationRepository.save(location2);
         locationRepository.save(location3);
