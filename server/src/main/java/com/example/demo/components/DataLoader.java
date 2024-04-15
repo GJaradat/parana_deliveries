@@ -50,20 +50,7 @@ public class DataLoader implements ApplicationRunner {
         truckRepository.save(truck7);
 
 //        Warehouse location
-<<<<<<< HEAD
-        Location buckinghamPalace = new Location("London SW1A 1AA", 51.501596, -0.141290);
 
-        Location location1 = new Location("75 Gloucester Rd, South Kensington, London SW7 4SS", 51.494737, -0.182668);
-        Location location2 = new Location("16-17 Wardour St, London W1F 8AT", 51.510953, -0.131792);
-        Location location3 = new Location("3 Cranbourn St, London WC2H 7AL", 51.511533, -0.129323);
-        Location location4 = new Location("Great Russell St, London WC1B 3DG", 51.518690, -0.126054);
-        Location location5 = new Location("Lambeth Rd, London SE1 6HZ", 51.497141, -0.108623);
-        Location location6 = new Location("Peninsula Square, London SE10 0DX", 51.501506, -0.004784);
-        Location location7 = new Location("Eastmoor St, London SE7 8LX", 51.494423, -0.037935);
-        Location location8 = new Location("Exhibition Rd, South Kensington, London SW7 2AZ", 51.498873, -0.174269);
-        Location location9 = new Location("Praed St, London W2 1RH", 51.516026, -0.175029);
-        Location location10 = new Location("Outer Cir, London NW1 4RY", 51.535597, -0.153254);
-=======
         Location location1 = new Location("Buckingham Palace, London SW1A 1AA, UK", 51.501476, -0.140634);
 
         Location location2 = new Location("The British Museum, Great Russell Street, London WC1B 3DG, UK", 51.519520, -0.126090);
@@ -79,7 +66,6 @@ public class DataLoader implements ApplicationRunner {
         Location location12 = new Location("The Tate Modern, Bankside, London SE1 9TG, UK", 51.508500, -0.094000);
         Location location13 = new Location("The National Gallery of British Art, Trafalgar Square, London WC2N 5DN, UK", 51.508229, -0.128040);
 
->>>>>>> 45ed92cc99343f2bda121946b8200cf1cf090ce0
 
         locationRepository.save(location1);
         locationRepository.save(location2);
