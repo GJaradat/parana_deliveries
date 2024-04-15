@@ -51,9 +51,12 @@ const RouteMap = ( {} ) => {
         const response = await fetch (`https://api.mapbox.com/optimized-trips/v1/mapbox/driving/${coordinates}?access_token=${mapboxgl.accessToken}&geometries=geojson`);
         const jsonData = await response.json();
         setOptRoute(jsonData);
-        
-
     }
+
+    const displayMarkers = (coordinates) => {
+       
+
+    };
     
     const displayRoutes = () => {
        
@@ -73,6 +76,10 @@ const RouteMap = ( {} ) => {
               'line-width': 4
             }
           });
+
+        
+          
+        
     }
 
 
@@ -83,6 +90,7 @@ const RouteMap = ( {} ) => {
         
         //Make GET request to Optimization API 
        getRoutesFromAPI(coordinates); 
+       displayMarkers(coordinates);
     }
 
         
