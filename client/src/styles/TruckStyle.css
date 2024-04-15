@@ -54,7 +54,7 @@ body {
     display: flex;
 }
 
-#editAvailabilityDropdown{
+.updateStatusDropdown{
     background-color: #F6D779;
     /* border-color: #F6D779; */
     margin: 10px;

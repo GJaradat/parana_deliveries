@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import '../styles/TruckStyle.css';
-const Truck = ({ truck }) => {
+const Truck = ({ truck, patchTrucks }) => {
 
-    const[availability, setAvailability] = useState(truck.availability);
+    const[availabilityState, setAvailabilityState] = useState(truck.availability);
 
     
     const availabilityStatus = () => {
@@ -18,6 +18,20 @@ const Truck = ({ truck }) => {
             return "Under Maintenance"
         }
     }
+
+    const handleChange = async(e) =>{
+        await setAvailabilityState(e.target.value);
+        e.preventDefault();
+        let newTruck = {
+            id: truck.id,
+            name: truck.name,
+            availability: availabilityState,
+            capacity: truck.capacity,
+            routes: truck.routes
+        };
+        patchTrucks(newTruck);
+    }
+
     
     return ( 
         <>
@@ -28,9 +42,9 @@ const Truck = ({ truck }) => {
                     <p>Availability: </p>
 
                     <select name="editAvailabilityDropdown" 
-                    id="editAvailabilityDropdown" 
+                    className="updateStatusDropdown" 
                     defaultValue={truck.availability} 
-                    onChange={((e)=>setAvailability(e.target.value))}>
+                    onChange={handleChange}>
                         <option value="IN_DEPOT"> In Depot</option>
                         <option value="OUT_FOR_DELIVERY">Out For Delivery</option>
                         <option value="UNDER_MAINTENANCE"> Under Maintenance</option>

@@ -1,9 +1,9 @@
 import Truck from './Truck'
 
-const TruckList = ( { trucks } ) => {
+const TruckList = ( { trucks, patchTrucks } ) => {
    
    const mappedTrucks = trucks.map((truck) => {
-    return <Truck truck={truck} key={truck.id} />
+    return <Truck truck={truck} key={truck.id} patchTrucks={patchTrucks}/>
    })
    
     return ( 
