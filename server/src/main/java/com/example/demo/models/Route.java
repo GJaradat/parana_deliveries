@@ -60,7 +60,7 @@ public class Route {
         this.truck = truck;
     }
 
-    public StatusEnum getRouteStatus() {
+    public StatusEnum getStatus() {
         return status;
     }
 

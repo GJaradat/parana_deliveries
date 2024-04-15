@@ -26,9 +26,10 @@ const RoutesContainer = () => {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(route.routeStatus)
+            body: JSON.stringify(route.status)
         });
         await loadRoutes();
+        console.log(route.status);
     }
 
 

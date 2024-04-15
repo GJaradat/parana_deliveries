@@ -5,7 +5,6 @@ const Truck = ({ truck, patchTrucks }) => {
     const[availabilityState, setAvailabilityState] = useState(truck.availability);
 
     const handleClick = (e) =>{
-        //setAvailabilityState(e.target.value);
         e.preventDefault();
         let newTruck = {
             id: truck.id,
