@@ -56,7 +56,7 @@ const RouteMap = ( {} ) => {
             
             // });
         }
-    },[route])
+    },[optRoute])
 
 
     const getRoute = async () => {
@@ -154,3 +154,21 @@ const RouteMap = ( {} ) => {
 }
  
 export default RouteMap;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
