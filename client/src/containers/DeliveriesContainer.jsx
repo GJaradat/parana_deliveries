@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import DeliveryList from '../components/DeliveryList'
+import RouteMap from '../components/RouteMap';
 
 const DeliveriesContainer = () => {
 
@@ -19,6 +20,7 @@ const DeliveriesContainer = () => {
         <>
             <p>Hello from Deliveries Container</p>
             <DeliveryList deliveries={deliveries} />
+            <RouteMap />
         </> 
     );
 }
