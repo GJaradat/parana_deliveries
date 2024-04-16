@@ -10,8 +10,7 @@ const RouteMap = ( {} ) => {
     const [lat,setLat] = useState(51.501476);
     const [lng,setLng] = useState(-0.140634);
     const [zoom, setZoom] = useState(12);
-    const [route, setRoute] = useState(null);
-    const [optRoute, setOptRoute] = useState(null);
+    const [optRoutes, setOptRoutes] = useState([]);
 
     const [routes, setRoutes] = useState(null);
 
@@ -36,12 +35,10 @@ const RouteMap = ( {} ) => {
         
     useEffect(() => {
         if (routes !== null){
-        console.log(routes);
-        getRoute();
+        
         routes.forEach(route => {
                 // Create a HTML element for each marker
                 route.deliveries.forEach(delivery => {
-                    console.log(delivery.location)
                     const el = document.createElement('div');
                     el.className = 'marker'; 
                     let coord = [delivery.location.longitude,delivery.location.latitude]
@@ -59,19 +56,6 @@ const RouteMap = ( {} ) => {
         }
     },[routes])
 
-
-    const getRoute = async () => {
-        const response = await fetch("http://localhost:8080/routes/3");
-        const jsonData = await response.json();
-        setRoute(jsonData);
-    }
-
-    // const getRoutes = async () => {
-    //     const response = await fetch("http://localhost:8080/routes");
-    //     const jsonData = await response.json();
-    //     setRoutes(jsonData);
-    // }
-
     const generateRoutes = async () => {
         const response = await fetch("http://localhost:8080/routes/generateRoutes");
         const jsonData = await response.json();
@@ -82,8 +66,8 @@ const RouteMap = ( {} ) => {
         const jsonData = await response.json();
         setRoutes(jsonData);
     }
-
-    const generateCoordinates = () => {
+    
+    const generateCoordinates = (route) => {
         
         const coordinatesArray = ["-0.140634,51.501476"];  // first coordinates are always warehouse
 
@@ -94,59 +78,53 @@ const RouteMap = ( {} ) => {
         })
         return coordinatesArray.join(";");
     }
-
-    const getRoutesFromAPI = async (coordinates) => {
-        const response = await fetch (`https://api.mapbox.com/optimized-trips/v1/mapbox/driving/${coordinates}?access_token=${mapboxgl.accessToken}&geometries=geojson`);
-        const jsonData = await response.json();
-        setOptRoute(jsonData);
-    }
-
-    const displayMarkers = (coordinates) => {
-       
-
-    };
     
-    const displayRoutes = () => {
+    const randomHexColorCode = () => {
+        let n = (Math.random() * 0xfffff * 1000000).toString(16);
+        return '#' + n.slice(0, 6);
+      };
+
+    const displayRoutes = (optRoute, index) => {
        
         const tripLine = optRoute.trips[0].geometry;
 
-        map.current.addSource('route', {
+        map.current.addSource(`route${index}`, {
             'type':'geojson',
             'data':tripLine
         });
 
         map.current.addLayer({
-            'id': 'route-line',
+            'id': `route-line${index}`,
             'type': 'line',
-            'source': 'route',
+            'source': `route${index}`,
             'paint': {
-              'line-color': '#2D304E',
+              'line-color': `${randomHexColorCode()}`,
               'line-width': 4
             }
           });
 
-        
-          
-        
     }
 
-
-
-    const calculateRoutes = () => {
-        // Need A semicolon-separated list of {longitude},{latitude} coordinates.
-        const coordinates = generateCoordinates();
-        
-        //Make GET request to Optimization API 
-       getRoutesFromAPI(coordinates); 
-       displayMarkers(coordinates);
+    const calculateRoutes = async () => {
+        // Optimise each route
+        const routeRequests = routes.map( async ( route ) => {
+            const coordinate = generateCoordinates(route);
+            console.log(coordinate);
+            const currentOptRoute = await fetch (`https://api.mapbox.com/optimized-trips/v1/mapbox/driving/${coordinate}?access_token=${mapboxgl.accessToken}&geometries=geojson`);
+            return await currentOptRoute.json();
+        })
+        const currentOptRoutes = await Promise.all(routeRequests);
+        setOptRoutes(currentOptRoutes);
+    
     }
-
         
     useEffect(() => {
-        if(optRoute){
-            displayRoutes();
+        if(optRoutes){
+            optRoutes.map( (optRoute, index) => {
+                displayRoutes(optRoute, index);
+            })
         }
-    }, [optRoute]);
+    }, [optRoutes]);
     
 
     return ( 
