@@ -33,7 +33,7 @@ public class RouteController {
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping(value = "/generateRoutes")
+    @PostMapping(value = "/generateRoutes")
     public ResponseEntity<List<Route>> generateRoutes(){
         List<Route> routeList = routeService.generateRoutes();
         return new ResponseEntity<>(routeList, HttpStatus.OK);
