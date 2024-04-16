@@ -7,13 +7,11 @@
   min-height: 100vh;
 }
 
-h1 {
-  text-align: center;
-  background-color: #F5CE92;
-  /* color: ; */
-  font-size: 60px;
-  padding: 7px;
- 
+#headerLogo{
+  max-width: 60%;
+  margin-top: 20px;
+  height: 150px;
+
 
 }
 
