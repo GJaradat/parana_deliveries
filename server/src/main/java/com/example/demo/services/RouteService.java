@@ -107,46 +107,50 @@ public class RouteService {
         return clusters;
     }
 
-    private List<ClusterDTO> kMeansClustering(int k, List<Delivery> deliveries) {
+    private void reassignClusters(List<ClusterDTO> clusters,
+                 List<Delivery> deliveries,
+                 Map<Delivery, ClusterDTO> clusterMapCurrent) {
+        for(ClusterDTO cluster : clusters) {
+            cluster.setDeliveries(new ArrayList<>());
+        }
+        for(Delivery delivery : deliveries){
+            int closestClusterIndex = clusters.indexOf(clusterMapCurrent.get(delivery));
+            for(int i=0; i < clusters.size(); i++){
+
+                if(clusters.get(i).getDeliveries().size() == 11){continue;}
+                double distance = clusters.get(i).calculateDistance(delivery.getLocation());
+                if(distance < clusters.get(closestClusterIndex).calculateDistance(delivery.getLocation())){
+                    closestClusterIndex = i;
+                }
+            }
+            clusters.get(closestClusterIndex).addDelivery(delivery);
+            clusterMapCurrent.put(delivery, clusters.get(closestClusterIndex));
+        }
+    }
+
+    private List<ClusterDTO> kMeansClustering(int k, List<Delivery> deliveries, int maxIterations) {
         // k = trucksActiveToday
         // 1. find extremes of values in locations to define boundary
         Double[] boundary = setBoundary(deliveries);
         // 2. randomly assign k centroids within boundary
         ArrayList<ClusterDTO> clusters = initialiseCentroids(k, boundary);
 
-        int repeats = 0;
-
+        int iterations = 0;
         boolean clustersConverged = false;
         Map<Delivery, ClusterDTO> clusterMapCurrent = new HashMap<>();
-        Map<Delivery, ClusterDTO> clusterMapPrevious = new HashMap<>();
+        Map<Delivery, ClusterDTO> clusterMapPrevious;
         for(Delivery delivery : deliveries){
             clusterMapCurrent.put(delivery, clusters.get(0));
         }
-        while(repeats < 50 && !clustersConverged) {
 
-            // 3. assign each delivery to closest centroid
-            for(ClusterDTO cluster : clusters) {
-                cluster.setDeliveries(new ArrayList<>());
-            }
-            for(Delivery delivery : deliveries){
-                int closestClusterIndex = clusters.indexOf(clusterMapCurrent.get(delivery));
-                for(int i=0; i < clusters.size(); i++){
+        while(iterations < maxIterations && !clustersConverged) {
 
-                    if(clusters.get(i).getDeliveries().size() == 11){continue;}
-                    double distance = clusters.get(i).calculateDistance(delivery.getLocation());
-                    if(distance < clusters.get(closestClusterIndex).calculateDistance(delivery.getLocation())){
-                        closestClusterIndex = i;
-                    }
-                }
-                clusters.get(closestClusterIndex).addDelivery(delivery);
-                clusterMapPrevious = clusterMapCurrent;
-                clusterMapCurrent.put(delivery, clusters.get(closestClusterIndex));
-            }
-
+            // 3. assign each delivery to closest centroid and check against previous iteration
+            clusterMapPrevious = clusterMapCurrent;
+            reassignClusters(clusters, deliveries, clusterMapCurrent);
             clustersConverged = clusterMapCurrent.equals(clusterMapPrevious);
-
             // remove dummy cluster after first iteration
-            if(repeats == 0) {
+            if(iterations == 0) {
                 clusters.remove(0);
             }
 
@@ -154,8 +158,9 @@ public class RouteService {
             for(ClusterDTO cluster : clusters){
                 cluster.setCentroid(cluster.calculateAveragePoint());
             }
+
             // 5. repeat from step 3
-            repeats++;
+            iterations++;
         }
         return clusters;
     }
@@ -168,7 +173,7 @@ public class RouteService {
         int proposedTrucks = (int) Math.ceil(deliveriesToday.size()/5.0);
         int trucksActiveToday = Math.min(maxTrucks, proposedTrucks);
         // pass these trucks into k-means algorithm to assign deliveries
-        List<ClusterDTO> clusters = kMeansClustering(trucksActiveToday, deliveriesToday);
+        List<ClusterDTO> clusters = kMeansClustering(trucksActiveToday, deliveriesToday, 50);
         // make new route for each cluster and add deliveries
         List<Route> newRoutes = new ArrayList<>();
         for(ClusterDTO cluster : clusters){
