@@ -16,6 +16,10 @@ public class Truck {
 
     @Column
     private String name;
+
+    @Column(name = "image_URL")
+    private String imageURL;
+
     @Column
     private int capacity;
     @Column
@@ -27,7 +31,7 @@ public class Truck {
 
     public Truck(){}
 
-    public Truck(String name, int capacity){
+    public Truck(String name, String imageURL, int capacity){
         this.name = name;
         this.capacity = capacity;
         this.availability = AvailabilityEnum.IN_DEPOT;
@@ -48,6 +52,14 @@ public class Truck {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public int getCapacity() {

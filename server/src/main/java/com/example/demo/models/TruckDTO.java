@@ -3,6 +3,7 @@ package com.example.demo.models;
 public class TruckDTO {
 
     private String name;
+    private String imageURL;
     private int capacity;
 
     public TruckDTO() {}
@@ -21,5 +22,13 @@ public class TruckDTO {
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 }
