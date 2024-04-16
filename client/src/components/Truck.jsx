@@ -37,7 +37,7 @@ const Truck = ({ truck, patchTrucks }) => {
                         <option value="OUT_FOR_DELIVERY">Out For Delivery</option>
                         <option value="UNDER_MAINTENANCE"> Under Maintenance</option>
                     </select>
-                    <button onClick={handleClick}>Change Availability</button>
+                    <button id="availabilityButton" onClick={handleClick}>Update</button>
                 </article>
               
             </article>
