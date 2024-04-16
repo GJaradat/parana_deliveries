@@ -56,19 +56,6 @@ const RouteMap = ( {} ) => {
         }
     },[routes])
 
-
-    // const getRoute = async () => {
-    //     const response = await fetch("http://localhost:8080/routes/1");
-    //     const jsonData = await response.json();
-    //     setRoute(jsonData);
-    // }
-
-    // const getRoutes = async () => {
-    //     const response = await fetch("http://localhost:8080/routes");
-    //     const jsonData = await response.json();
-    //     setRoutes(jsonData);
-    // }
-
     const generateRoutes = async () => {
         const response = await fetch("http://localhost:8080/routes/generateRoutes");
         const jsonData = await response.json();
@@ -78,14 +65,6 @@ const RouteMap = ( {} ) => {
         const response = await fetch("http://localhost:8080/routes");
         const jsonData = await response.json();
         setRoutes(jsonData);
-    }
-
-    const getRoutesFromAPI = async (coordinates) => {
-        const response = await fetch (`https://api.mapbox.com/optimized-trips/v1/mapbox/driving/${coordinates}?access_token=${mapboxgl.accessToken}&geometries=geojson`);
-        const jsonData = await response.json();
-        console.log(jsonData);
-        setOptRoutes([...optRoutes,jsonData]);
-        
     }
     
     const generateCoordinates = (route) => {
@@ -100,62 +79,51 @@ const RouteMap = ( {} ) => {
         return coordinatesArray.join(";");
     }
     
-    const displayRoutes = (optRoute) => {
+    const randomHexColorCode = () => {
+        let n = (Math.random() * 0xfffff * 1000000).toString(16);
+        return '#' + n.slice(0, 6);
+      };
+
+    const displayRoutes = (optRoute, index) => {
        
         const tripLine = optRoute.trips[0].geometry;
 
-        map.current.addSource('route', {
+        map.current.addSource(`route${index}`, {
             'type':'geojson',
             'data':tripLine
         });
 
         map.current.addLayer({
-            'id': 'route-line',
+            'id': `route-line${index}`,
             'type': 'line',
-            'source': 'route',
+            'source': `route${index}`,
             'paint': {
-              'line-color': '#2D304E',
+              'line-color': `${randomHexColorCode()}`,
               'line-width': 4
             }
           });
 
     }
 
-
-
     const calculateRoutes = async () => {
         // Optimise each route
-
-        routes.forEach(( route ) => {
-            // Need A semicolon-separated list of {longitude},{latitude} coordinates.
-            const coordinates = generateCoordinates(route);
-            
-            //Make GET request to Optimization API 
-            getRoutesFromAPI(coordinates); 
-
+        const routeRequests = routes.map( async ( route ) => {
+            const coordinate = generateCoordinates(route);
+            console.log(coordinate);
+            const currentOptRoute = await fetch (`https://api.mapbox.com/optimized-trips/v1/mapbox/driving/${coordinate}?access_token=${mapboxgl.accessToken}&geometries=geojson`);
+            return await currentOptRoute.json();
         })
-
-        console.log(optRoutes)
+        const currentOptRoutes = await Promise.all(routeRequests);
+        setOptRoutes(currentOptRoutes);
     
     }
-    // const fetchPokemon = async () => {
-    //     const response = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=1302")
-    //     const pokemonData = await response.json();
-    //     const urlObjects = pokemonData.results;
-    //     const pokemonRequests = urlObjects.map(async urlObject => {
-    //         const pokemonResponse = await fetch(urlObject.url);
-    //         return await pokemonResponse.json();
-    //     });
-    //     const pokemonInfo = await Promise.all(pokemonRequests);
-    //     setPokemon(pokemonInfo);
-    // }
         
     useEffect(() => {
-        // if(optRoutes){
-        //     optRoutes.map( optRoute => {
-        //         displayRoutes(optRoute);
-        //     })
-        // }
+        if(optRoutes){
+            optRoutes.map( (optRoute, index) => {
+                displayRoutes(optRoute, index);
+            })
+        }
     }, [optRoutes]);
     
 
