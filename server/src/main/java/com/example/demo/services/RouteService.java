@@ -86,11 +86,7 @@ public class RouteService {
         return boundary;
     }
 
-    private List<ClusterDTO> kMeansClustering(int k, List<Delivery> deliveries) {
-        // k = trucksActiveToday
-        // 1. find extremes of values in locations to define boundary
-        Double[] boundary = setBoundary(deliveries);
-        // 2. randomly assign k centroids within boundary
+    private ArrayList<ClusterDTO> initialiseCentroids(int k, Double[] boundary) {
         ArrayList<ClusterDTO> clusters = new ArrayList<>();
         for(int i=0; i < k; i++){
             Random random = new Random();
@@ -100,6 +96,15 @@ public class RouteService {
             ClusterDTO newCluster = new ClusterDTO(newCentroid);
             clusters.add(newCluster);
         }
+        return clusters;
+    }
+
+    private List<ClusterDTO> kMeansClustering(int k, List<Delivery> deliveries) {
+        // k = trucksActiveToday
+        // 1. find extremes of values in locations to define boundary
+        Double[] boundary = setBoundary(deliveries);
+        // 2. randomly assign k centroids within boundary
+        ArrayList<ClusterDTO> clusters = initialiseCentroids(k, boundary);
 
         int repeats = 0;
         boolean clusterSizesCoolAndGood = false;
