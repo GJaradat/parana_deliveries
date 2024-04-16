@@ -1,21 +1,37 @@
 body {
-    background-color: #007B63;
+    background-color: #058b70;
 }
 
 #fleet_title {
     margin-left: 40px;
-    color: antiquewhite;
+    color: white;
+    font-size: xx-large;
 }
+
+h3 {
+    font-size: x-large;
+}
+
 .truck {
-    text-align: left;
+    text-align: center;
+    margin-top: 40px;
+    margin-left: 25%;
+    margin-right: 25%;
+    padding-left: 20px;
+    max-height: 500px;
     border: 2px;
     border-color: black;
     border-style: solid;
     border-radius: 10px;
-    margin: 40px;
-    padding-left: 20px;
     background-color: #F6D779;
 }
+
+#truckImage{
+    max-width: 230px;
+    max-height: 400px;
+    margin: auto;
+}
+
 
 .trucklist {
     padding-top: 40px;
@@ -25,19 +41,23 @@ body {
 
 .truck_search {
     margin-left: 40px;
-    width: 400px;
+    width: 350px;
+    max-width: 30vw;
     height: 38px;
     border-radius: 10px;
     float: left;
-    align-items: center;
     padding-left: 10px;
+    border-color: black;
+    border-width: 2px;
 }
 
 .sort {
     display: flex;
     justify-content: end;
-    margin-right: 40px;
+    margin-right: 50px;
     float: right;
+    max-width: 30vw;
+    width: 350px;
 }
 
 #sort_text {
@@ -54,14 +74,23 @@ body {
 
 #availabilityContainer{
     display: flex;
+    justify-content: center;
+    margin: auto;
+    max-width: 20%;
+   
 }
 
 .updateStatusDropdown{
     background-color: #F6D779;
-    /* border-color: #F6D779; */
+    border-color: #F6D779;
     margin: 10px;
     font-size: 17px;
     text-align: center;
-    
+}
 
+#availabilityButton{
+    border-radius: 7px;
+    margin-top: 10px;
+    height: 30px;
+    background-color: #da9938;
 }
