@@ -13,11 +13,17 @@ const RouteMap = ( {} ) => {
     const [route, setRoute] = useState(null);
     const [optRoute, setOptRoute] = useState(null);
 
+    const [routes, setRoutes] = useState(null);
+
     mapboxgl.accessToken = `${process.env.REACT_APP_MAPBOX_KEY}`;
 
 
     useEffect(() => {
        
+        if (routes === null){
+        generateRoutes();
+        }
+
         if (map.current) return; // initialize map only once
         map.current = new mapboxgl.Map({
           container: mapContainerRef.current,
@@ -25,14 +31,56 @@ const RouteMap = ( {} ) => {
           center: [lng, lat],
           zoom: zoom
         });
+        getRoutes();
+        }, []);
+        
+    useEffect(() => {
+        if (routes !== null){
+        console.log(routes);
         getRoute();
-    }, []);
+        routes.forEach(route => {
+                // Create a HTML element for each marker
+                route.deliveries.forEach(delivery => {
+                    console.log(delivery.location)
+                    const el = document.createElement('div');
+                    el.className = 'marker'; 
+                    let coord = [delivery.location.longitude,delivery.location.latitude]
+                    // Make a popup to attach to marker
+                    const popup = new mapboxgl.Popup().setHTML(  
+                        `<h3>Delivery #${delivery.location.id}</h3>
+                        <p>${delivery.location.address}</p>` 
+                       );  
+
+                    // Make a marker for each coordinate and add to the map
+                    new mapboxgl.Marker(el).setLngLat(coord).addTo(map.current).setPopup(popup);
+                })
+            
+            });
+        }
+    },[routes])
 
 
     const getRoute = async () => {
-        const response = await fetch("http://localhost:8080/routes/1");
+        const response = await fetch("http://localhost:8080/routes/3");
         const jsonData = await response.json();
         setRoute(jsonData);
+    }
+
+    // const getRoutes = async () => {
+    //     const response = await fetch("http://localhost:8080/routes");
+    //     const jsonData = await response.json();
+    //     setRoutes(jsonData);
+    // }
+
+    const generateRoutes = async () => {
+        const response = await fetch("http://localhost:8080/routes/generateRoutes");
+        const jsonData = await response.json();
+    }
+
+    const getRoutes = async () => {
+        const response = await fetch("http://localhost:8080/routes");
+        const jsonData = await response.json();
+        setRoutes(jsonData);
     }
 
     const generateCoordinates = () => {
