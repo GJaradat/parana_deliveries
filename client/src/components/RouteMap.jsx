@@ -35,7 +35,7 @@ const RouteMap = ( {} ) => {
         
     useEffect(() => {
         if (routes !== null){
-        console.log(routes);
+        
         routes.forEach(route => {
                 // Create a HTML element for each marker
                 route.deliveries.forEach(delivery => {
@@ -57,11 +57,11 @@ const RouteMap = ( {} ) => {
     },[routes])
 
 
-    const getRoute = async () => {
-        const response = await fetch("http://localhost:8080/routes/1");
-        const jsonData = await response.json();
-        setRoute(jsonData);
-    }
+    // const getRoute = async () => {
+    //     const response = await fetch("http://localhost:8080/routes/1");
+    //     const jsonData = await response.json();
+    //     setRoute(jsonData);
+    // }
 
     // const getRoutes = async () => {
     //     const response = await fetch("http://localhost:8080/routes");
@@ -83,10 +83,11 @@ const RouteMap = ( {} ) => {
     const getRoutesFromAPI = async (coordinates) => {
         const response = await fetch (`https://api.mapbox.com/optimized-trips/v1/mapbox/driving/${coordinates}?access_token=${mapboxgl.accessToken}&geometries=geojson`);
         const jsonData = await response.json();
-        setOptRoutes([...jsonData]);
-        console.log(optRoutes)
+        console.log(jsonData);
+        setOptRoutes([...optRoutes,jsonData]);
+        
     }
-
+    
     const generateCoordinates = (route) => {
         
         const coordinatesArray = ["-0.140634,51.501476"];  // first coordinates are always warehouse
@@ -128,12 +129,14 @@ const RouteMap = ( {} ) => {
         routes.forEach(( route ) => {
             // Need A semicolon-separated list of {longitude},{latitude} coordinates.
             const coordinates = generateCoordinates(route);
-            console.log(coordinates);
             
             //Make GET request to Optimization API 
             getRoutesFromAPI(coordinates); 
 
         })
+
+        console.log(optRoutes)
+    
     }
     // const fetchPokemon = async () => {
     //     const response = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=1302")
@@ -148,11 +151,11 @@ const RouteMap = ( {} ) => {
     // }
         
     useEffect(() => {
-        if(optRoutes){
-            optRoutes.map( optRoute => {
-                displayRoutes(optRoute);
-            })
-        }
+        // if(optRoutes){
+        //     optRoutes.map( optRoute => {
+        //         displayRoutes(optRoute);
+        //     })
+        // }
     }, [optRoutes]);
     
 
