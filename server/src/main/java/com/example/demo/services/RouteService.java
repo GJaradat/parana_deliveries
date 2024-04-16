@@ -60,7 +60,7 @@ public class RouteService {
         return newRoute;
     }
 
-    public boolean areAllTrue(ArrayList<Boolean> array){
+    private boolean areAllTrue(ArrayList<Boolean> array) {
         for(boolean bool : array){
             if(!bool){
                 return false;
@@ -69,26 +69,33 @@ public class RouteService {
         return true;
     }
 
-    public List<ClusterDTO> kMeansClustering(int k, List<Delivery> deliveries) {
-        // k = trucksActiveToday
-        // 1. find extremes of values in locations to define boundary
+    private Double[] setBoundary(List<Delivery> deliveries) {
         double latMin = 180, latMax = -180, lngMin = 180, lngMax = -180;
+        Double[] boundary = new Double[4];
         for(int i=0; i < deliveries.size(); i++){
             latMin = Math.min(latMin, deliveries.get(i).getLocation().getLatitude());
             latMax = Math.max(latMax, deliveries.get(i).getLocation().getLatitude());
             lngMin = Math.min(lngMin, deliveries.get(i).getLocation().getLongitude());
             lngMax = Math.max(lngMax, deliveries.get(i).getLocation().getLongitude());
         }
-        latMin += (latMax - latMin)/4;
-        latMax -= (latMax - latMin)/4;
-        lngMin += (lngMax - lngMin)/4;
-        lngMax -= (lngMax - lngMin)/4;
+        boundary[0] = latMin + (latMax - latMin)/4;
+        boundary[1] = latMax - (latMax - latMin)/4;
+        boundary[2] = lngMin + (lngMax - lngMin)/4;
+        boundary[3] = lngMax - (lngMax - lngMin)/4;
+
+        return boundary;
+    }
+
+    private List<ClusterDTO> kMeansClustering(int k, List<Delivery> deliveries) {
+        // k = trucksActiveToday
+        // 1. find extremes of values in locations to define boundary
+        Double[] boundary = setBoundary(deliveries);
         // 2. randomly assign k centroids within boundary
         ArrayList<ClusterDTO> clusters = new ArrayList<>();
         for(int i=0; i < k; i++){
             Random random = new Random();
-            double randomLat = latMin + (random.nextDouble() * (latMax - latMin));
-            double randomLng = lngMin + (random.nextDouble() * (lngMax - lngMin));
+            double randomLat = boundary[0] + (random.nextDouble() * (boundary[1] - boundary[0]));
+            double randomLng = boundary[2] + (random.nextDouble() * (boundary[3] - boundary[4]));
             Double[] newCentroid = {randomLat, randomLng};
             ClusterDTO newCluster = new ClusterDTO(newCentroid);
             clusters.add(newCluster);
