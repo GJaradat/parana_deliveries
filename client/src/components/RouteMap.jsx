@@ -56,6 +56,19 @@ const RouteMap = ( {} ) => {
         }
     },[routes])
 
+
+    const getRoute = async () => {
+        const response = await fetch("http://localhost:8080/routes/1");
+        const jsonData = await response.json();
+        setRoute(jsonData);
+    }
+
+    // const getRoutes = async () => {
+    //     const response = await fetch("http://localhost:8080/routes");
+    //     const jsonData = await response.json();
+    //     setRoutes(jsonData);
+    // }
+
     const generateRoutes = async () => {
         const response = await fetch("http://localhost:8080/routes/generateRoutes");
         const jsonData = await response.json();
