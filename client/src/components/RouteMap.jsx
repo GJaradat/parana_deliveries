@@ -45,8 +45,14 @@ const RouteMap = ( {} ) => {
                     const el = document.createElement('div');
                     el.className = 'marker'; 
                     let coord = [delivery.location.longitude,delivery.location.latitude]
+                    // Make a popup to attach to marker
+                    const popup = new mapboxgl.Popup().setHTML(  
+                        `<h3>Delivery #${delivery.location.id}</h3>
+                        <p>${delivery.location.address}</p>` 
+                       );  
+
                     // Make a marker for each coordinate and add to the map
-                    new mapboxgl.Marker(el).setLngLat(coord).addTo(map.current);
+                    new mapboxgl.Marker(el).setLngLat(coord).addTo(map.current).setPopup(popup);
                 })
             
             });
