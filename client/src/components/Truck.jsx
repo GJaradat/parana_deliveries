@@ -22,7 +22,9 @@ const Truck = ({ truck, patchTrucks }) => {
         <>
             <article className='truck'>
                 <h3>Truck: {truck.name}</h3>
+                <img id="truckImage" src={truck.imageURL} alt="truck picture"/> 
                 <p>Capacity: {truck.capacity}</p>
+
                 <article id='availabilityContainer'>
                     <p>Availability: </p>
 
@@ -35,10 +37,10 @@ const Truck = ({ truck, patchTrucks }) => {
                         <option value="OUT_FOR_DELIVERY">Out For Delivery</option>
                         <option value="UNDER_MAINTENANCE"> Under Maintenance</option>
                     </select>
-                    <button onClick={handleClick}>Change Availability</button>
+                    <button id="availabilityButton" onClick={handleClick}>Update</button>
                 </article>
               
-                </article>
+            </article>
 
         </>
      );

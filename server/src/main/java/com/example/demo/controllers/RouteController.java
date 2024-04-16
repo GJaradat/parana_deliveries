@@ -57,4 +57,10 @@ public class RouteController {
         return new ResponseEntity<>(newRoute, HttpStatus.CREATED);
     }
 
+    @DeleteMapping
+    public ResponseEntity<String> deleteAllRoutes() {
+        routeService.deleteAllRoutes();
+        return new ResponseEntity<>("All routes deleted and truck statuses reset", HttpStatus.OK);
+    }
+
 }

@@ -32,9 +32,16 @@ public class TruckService {
     }
 
     public Truck createTruck(TruckDTO truckDTO){
-        Truck newTruck = new Truck(truckDTO.getName(), truckDTO.getCapacity());
-        truckRepository.save(newTruck);
-        return newTruck;
+        //Adding placeholder image in case user does not bother to add a truck url
+        if(truckDTO.getImageURL() == "" || truckDTO.getImageURL() == null){
+            Truck newTruck = new Truck(truckDTO.getName(), "https://image.spreadshirtmedia.net/image-server/v1/products/T1459A839PA4459PT28D197361856W8333H10000/views/1,width=120,height=120,appearanceId=839,backgroundColor=F2F2F2/monster-truck-axolotl-sticker.jpg", truckDTO.getCapacity());
+            truckRepository.save(newTruck);
+            return newTruck;
+        } else {
+            Truck newTruck = new Truck(truckDTO.getName(), truckDTO.getImageURL(), truckDTO.getCapacity());
+            truckRepository.save(newTruck);
+            return newTruck;
+        }
 
     }
 }
