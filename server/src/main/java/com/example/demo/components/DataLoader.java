@@ -33,13 +33,13 @@ public class DataLoader implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
-        Truck truck1 = new Truck("Jaguar", 3000);
-        Truck truck2 = new Truck("Gorilla", 500);
-        Truck truck3 = new Truck("Mongoose", 1000);
-        Truck truck4 = new Truck("Toucan", 2000);
-        Truck truck5 = new Truck("Capybara", 2000);
-        Truck truck6 = new Truck("Anaconda", 2000);
-        Truck truck7 = new Truck("Sloth", 2000);
+        Truck truck1 = new Truck("Sloth","https://i.ibb.co/MCy52Yr/truck-svgrepo-com-fotor-20240416105953.png", 2000);
+        Truck truck2 = new Truck("Gorilla","https://i.ibb.co/DYKX1r3/truck-gorilla-svgrepo-com-fotor-20240416112046.png", 500);
+        Truck truck3 = new Truck("Frog","https://i.ibb.co/VvNKz69/truck-frog-svgrepo-com-fotor-2024041611331.png", 1000);
+        Truck truck4 = new Truck("Toucan","https://i.ibb.co/zRyFGF2/truck-toucan-svgrepo-com-fotor-20240416111538.png", 2000);
+        Truck truck5 = new Truck("Capybara","https://i.ibb.co/pLWnmmC/truck-capybara-svgrepo-com-fotor-20240416114345.png", 2000);
+        Truck truck6 = new Truck("Anaconda","https://i.ibb.co/kJkXfcq/truck-anaconda-svgrepo-com-fotor-20240416111213.png", 2000);
+        Truck truck7 = new Truck("Tiger", "https://i.ibb.co/NV0h5zW/truck-tiger-svgrepo-com-fotor-20240416112933.png", 3000);
 
         truckRepository.save(truck1);
         truckRepository.save(truck2);
