@@ -20,9 +20,9 @@ const RouteMap = ( {} ) => {
 
     useEffect(() => {
        
-        if (routes === null){
-        generateRoutes();
-        }
+        // if (routes === null){
+        // generateRoutes();
+        // }
 
         if (map.current) return; // initialize map only once
         map.current = new mapboxgl.Map({
@@ -31,19 +31,18 @@ const RouteMap = ( {} ) => {
           center: [lng, lat],
           zoom: zoom
         });
-        getRoutes();
         }, []);
         
     useEffect(() => {
-        if (routes !== null){
-        console.log(routes);
+        
         getRoute();
-        routes.forEach(route => {
+        if (route !== null){
+            // routes.forEach(route => {
+
                 // Create a HTML element for each marker
                 route.deliveries.forEach(delivery => {
-                    console.log(delivery.location)
-                    const el = document.createElement('div');
-                    el.className = 'marker'; 
+                    // console.log(delivery.location)
+                    const el = createElement('div', {className: 'marker'});
                     let coord = [delivery.location.longitude,delivery.location.latitude]
                     // Make a popup to attach to marker
                     const popup = new mapboxgl.Popup().setHTML(  
@@ -55,13 +54,13 @@ const RouteMap = ( {} ) => {
                     new mapboxgl.Marker(el).setLngLat(coord).addTo(map.current).setPopup(popup);
                 })
             
-            });
+            // });
         }
-    },[routes])
+    },[route])
 
 
     const getRoute = async () => {
-        const response = await fetch("http://localhost:8080/routes/3");
+        const response = await fetch("http://localhost:8080/routes/2");
         const jsonData = await response.json();
         setRoute(jsonData);
     }
@@ -72,16 +71,16 @@ const RouteMap = ( {} ) => {
     //     setRoutes(jsonData);
     // }
 
-    const generateRoutes = async () => {
-        const response = await fetch("http://localhost:8080/routes/generateRoutes");
-        const jsonData = await response.json();
-    }
+    // const generateRoutes = async () => {
+    //     const response = await fetch("http://localhost:8080/routes/generateRoutes");
+    //     const jsonData = await response.json();
+    // }
 
-    const getRoutes = async () => {
-        const response = await fetch("http://localhost:8080/routes");
-        const jsonData = await response.json();
-        setRoutes(jsonData);
-    }
+    // const getRoutes = async () => {
+    //     const response = await fetch("http://localhost:8080/routes");
+    //     const jsonData = await response.json();
+    //     setRoutes(jsonData);
+    // }
 
     const generateCoordinates = () => {
         
@@ -123,14 +122,7 @@ const RouteMap = ( {} ) => {
 
     }
 
-    const displayMarkers = () => {
-       
-        const element = createElement('div', {className: 'marker'});
-        const coordinate = generateCoordinates();
-        console.log(coordinate);
-        new mapboxgl.Marker(element).setLngLat(coordinate).addTo(map.current);
-        
-    }
+    
 
 
     const calculateRoutes = () => {
@@ -145,9 +137,8 @@ const RouteMap = ( {} ) => {
         
     useEffect(() => {
         if(optRoute){
+            console.log(route);
             displayRoutes();
-            displayMarkers();
-           
         }
     }, [optRoute]);
     
