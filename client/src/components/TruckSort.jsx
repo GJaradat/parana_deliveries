@@ -12,7 +12,7 @@ const TruckSort = ( {setSortValue} ) => {
                 <option value={""}>All</option>
                 <option value={"IN_DEPOT"}>In Depot</option>
                 <option value={"OUT_FOR_DELIVERY"}>Out For Delivery</option>
-                <option value={"UNDER_MAINTENACE"}>Under Maintenance</option>
+                <option value={"UNDER_MAINTENANCE"}>Under Maintenance</option>
             </select>
         </section>
         </>
