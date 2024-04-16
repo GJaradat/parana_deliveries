@@ -45,9 +45,7 @@ public class ClusterDTO {
     //    ADDITIONAL METHODS
     public void addDelivery(Delivery delivery) {
         this.deliveries.add(delivery);
-        if(this.deliveries.size() < 11){
-            this.sizeAllowed = true;
-        }
+        this.sizeAllowed = this.deliveries.size() <= 11;
     }
 
     public double calculateDistance(Location location) {

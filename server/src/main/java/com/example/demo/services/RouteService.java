@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
 @Service
 public class RouteService {
@@ -60,14 +57,19 @@ public class RouteService {
         return newRoute;
     }
 
-    public boolean areAllTrue(ArrayList<Boolean> array){
-        for(boolean bool : array){
-            if(!bool){
-                return false;
-            }
+    public void deleteAllRoutes(){
+        List<Delivery> allDeliveries = deliveryRepository.findAll();
+        for(Delivery delivery : allDeliveries) {
+            delivery.setRoute(null);
         }
-        return true;
+        routeRepository.deleteAll();
+        List<Truck> allTrucks = truckRepository.findAll();
+        for(Truck truck : allTrucks) {
+            truck.setAvailability(AvailabilityEnum.IN_DEPOT);
+            truckRepository.save(truck);
+        }
     }
+
 
     public List<ClusterDTO> kMeansClustering(int k, List<Delivery> deliveries) {
         // k = trucksActiveToday
@@ -85,6 +87,12 @@ public class RouteService {
         lngMax -= (lngMax - lngMin)/4;
         // 2. randomly assign k centroids within boundary
         ArrayList<ClusterDTO> clusters = new ArrayList<>();
+
+        // dummy cluster to initially assign all deliveries to
+        Double[] dummyCentroid = {-22.951916,-43.2130675};
+        ClusterDTO dummyCluster = new ClusterDTO(dummyCentroid);
+        clusters.add(dummyCluster);
+
         for(int i=0; i < k; i++){
             Random random = new Random();
             double randomLat = latMin + (random.nextDouble() * (latMax - latMin));
@@ -95,38 +103,48 @@ public class RouteService {
         }
 
         int repeats = 0;
-        boolean clusterSizesCoolAndGood = false;
-        while(repeats < 50 && !clusterSizesCoolAndGood) {
+        boolean clustersConverged = false;
+        Map<Delivery, ClusterDTO> clusterMapCurrent = new HashMap<>();
+        Map<Delivery, ClusterDTO> clusterMapPrevious = new HashMap<>();
+        for(Delivery delivery : deliveries){
+            clusterMapCurrent.put(delivery, dummyCluster);
+        }
+        while(repeats < 50 && !clustersConverged) {
             // 3. assign each delivery to closest centroid
             for(ClusterDTO cluster : clusters) {
                 cluster.setDeliveries(new ArrayList<>());
             }
             for(Delivery delivery : deliveries){
-                ArrayList<Double> distances = new ArrayList<>();
-                int closetClusterIndex = 0;
-                for(int i=1; i < clusters.size(); i++){
+                int closestClusterIndex = clusters.indexOf(clusterMapCurrent.get(delivery));
+                for(int i=0; i < clusters.size(); i++){
+
+                    if(clusters.get(i).getDeliveries().size() == 11){continue;}
                     double distance = clusters.get(i).calculateDistance(delivery.getLocation());
-                    if(distance < clusters.get(closetClusterIndex).calculateDistance(delivery.getLocation())){
-                        if(clusters.get(i).getDeliveries().size() == 11){
-                            continue;
-                        }
-                        closetClusterIndex = i;
+                    if(distance < clusters.get(closestClusterIndex).calculateDistance(delivery.getLocation())){
+                        closestClusterIndex = i;
                     }
                 }
-                clusters.get(closetClusterIndex).addDelivery(delivery);
+                clusters.get(closestClusterIndex).addDelivery(delivery);
+                clusterMapPrevious = clusterMapCurrent;
+                clusterMapCurrent.put(delivery, clusters.get(closestClusterIndex));
             }
+
+            clustersConverged = clusterMapCurrent.equals(clusterMapPrevious);
+            // remove dummy cluster after first iteration
+            if(repeats == 0) {
+                clusters.remove(0);
+            }
+
             // 4. redefine centroids based on clusters
-            ArrayList<Boolean> clusterSizesAllowed = new ArrayList<>();
             for(ClusterDTO cluster : clusters){
                 cluster.setCentroid(cluster.calculateAveragePoint());
-                clusterSizesAllowed.add(cluster.isSizeAllowed()); // put all cluster sizeIsAllowed properties into array
             }
             // 5. repeat from step 3
-            clusterSizesCoolAndGood = areAllTrue(clusterSizesAllowed);
             repeats++;
         }
 
         // max 10 repeats
+
         return clusters;
     }
 
@@ -142,6 +160,9 @@ public class RouteService {
         // make new route for each cluster and add deliveries
         List<Route> newRoutes = new ArrayList<>();
         for(ClusterDTO cluster : clusters){
+            if(cluster.getDeliveries().isEmpty()){
+                continue;
+            }
             Route newRoute = createRoute();
             newRoute.setDeliveries(cluster.getDeliveries());
             newRoute.setStatus(StatusEnum.IN_PROGRESS);
