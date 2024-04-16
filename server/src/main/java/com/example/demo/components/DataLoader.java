@@ -172,11 +172,6 @@ public class DataLoader implements ApplicationRunner {
         Delivery delivery26 = new Delivery(location26);
         deliveryRepository.save(delivery26);
 
-        Location location27 = new Location("Amersham, HP6 5AZ, UK", 51.674128, -0.606514);
-        locationRepository.save(location27);
-        Delivery delivery27 = new Delivery(location27);
-        deliveryRepository.save(delivery27);
-
         Location location28 = new Location("Ampere Way, CR0 3JX, UK", 51.382299, -0.123637);
         locationRepository.save(location28);
         Delivery delivery28 = new Delivery(location28);

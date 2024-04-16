@@ -12,6 +12,7 @@
 8. [Credits and Acknowledgements](#credits-and-acknowledgements)
 
 ## Introduction
+The aim of this project is to create a logistics application for a (fictional) online retailer called Paraná. The main features are managing vehicles and deliveries, and generating routes for distribution of deliveries. Routes are generated dynamically based on the locations of deliveries, with the help of MapBox Optimisation API v1. This was created as a final project for the 13th cohort of the [Bright Network Technology Academy](https://techacademy.brightnetwork.co.uk/).
 
 ## Technology
 Purpose of Technology usage: The objective is to enhance learning and skill development as an integral component of the bootcamp experience hence why the following technologies were used.
@@ -70,15 +71,15 @@ For a tutorial of the MapBox Optimisation API v1, click [here](https://docs.mapb
 ## MVP and Extensions
 ### MVP
 **(Backend)**
-- Display all vehicles
-- Display a specified vehicle
-- Update the availability status of a vehicle (In Depot/Out For Delivery/Under Maintenance)
-- Display all delivery routes
-- Display a specified delivery route
-- Update the status of a route (Pending/In Progress/Complete)
-- Add a new route
+- Display all Trucks
+- Display a specified Truck
+- Update the availability status of a Truck (In Depot/Out For Delivery/Under Maintenance)
+- Display all delivery Routes
+- Display a specified delivery Route
+- Update the status of a Route (```PENDING```/```IN_PROGRESS```/```COMPLETE```)
+- Add a new Route
 - Display all Delivery locations
-- Display a specifed delivery location
+- Display a specifed Delivery location
 
 **(Frontend)**
 - HomePage: localhost:3000/ OR localhost:3000/home
