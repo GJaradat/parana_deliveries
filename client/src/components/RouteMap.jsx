@@ -1,4 +1,4 @@
-import React,{ useEffect, useRef, useState } from "react";
+import React,{ createElement, useEffect, useRef, useState } from "react";
 import mapboxgl, { Marker } from "mapbox-gl";
 import "../styles/RouteMapStyles.css";
 
@@ -75,6 +75,15 @@ const RouteMap = ( {} ) => {
 
     }
 
+    const displayMarkers = () => {
+       
+        const element = createElement('div', {className: 'marker'});
+        const coordinate = generateCoordinates();
+        console.log(coordinate);
+        new mapboxgl.Marker(element).setLngLat(coordinate).addTo(map.current);
+        
+    }
+
 
     const calculateRoutes = () => {
         // Need A semicolon-separated list of {longitude},{latitude} coordinates.
@@ -84,15 +93,13 @@ const RouteMap = ( {} ) => {
        getRoutesFromAPI(coordinates); 
     }
 
-    const separateCoordinates = () => {
-        const allCoordinates = optRoute.trips[0].geometry;
-        console.log(allCoordinates)
-    }
+    
         
     useEffect(() => {
         if(optRoute){
             displayRoutes();
-            separateCoordinates();
+            displayMarkers();
+           
         }
     }, [optRoute]);
     
@@ -103,7 +110,6 @@ const RouteMap = ( {} ) => {
                 <div ref={mapContainerRef} className="map-container" />
             </div>
             <button onClick={calculateRoutes}>make routes</button>
-            <Marker />
         </>
      );
 }
