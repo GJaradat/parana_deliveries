@@ -33,6 +33,7 @@ public class Truck {
 
     public Truck(String name, String imageURL, int capacity){
         this.name = name;
+        this.imageURL = imageURL;
         this.capacity = capacity;
         this.availability = AvailabilityEnum.IN_DEPOT;
         this.routes = new ArrayList<>();

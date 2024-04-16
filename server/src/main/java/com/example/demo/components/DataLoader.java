@@ -33,13 +33,13 @@ public class DataLoader implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
-        Truck truck1 = new Truck("Jaguar", 3000);
-        Truck truck2 = new Truck("Gorilla", 500);
-        Truck truck3 = new Truck("Mongoose", 1000);
-        Truck truck4 = new Truck("Toucan", 2000);
-        Truck truck5 = new Truck("Capybara", 2000);
-        Truck truck6 = new Truck("Anaconda", 2000);
-        Truck truck7 = new Truck("Sloth", 2000);
+        Truck truck1 = new Truck("Jaguar", "https://image.spreadshirtmedia.net/image-server/v1/products/T1459A839PA4459PT28D197361856W8333H10000/views/1,width=120,height=120,appearanceId=839,backgroundColor=F2F2F2/monster-truck-axolotl-sticker.jpg", 3000);
+        Truck truck2 = new Truck("Gorilla","https://image.spreadshirtmedia.net/image-server/v1/products/T1459A839PA4459PT28D197361856W8333H10000/views/1,width=120,height=120,appearanceId=839,backgroundColor=F2F2F2/monster-truck-axolotl-sticker.jpg", 500);
+        Truck truck3 = new Truck("Mongoose","https://image.spreadshirtmedia.net/image-server/v1/products/T1459A839PA4459PT28D197361856W8333H10000/views/1,width=120,height=120,appearanceId=839,backgroundColor=F2F2F2/monster-truck-axolotl-sticker.jpg", 1000);
+        Truck truck4 = new Truck("Toucan","https://image.spreadshirtmedia.net/image-server/v1/products/T1459A839PA4459PT28D197361856W8333H10000/views/1,width=120,height=120,appearanceId=839,backgroundColor=F2F2F2/monster-truck-axolotl-sticker.jpg", 2000);
+        Truck truck5 = new Truck("Capybara","https://image.spreadshirtmedia.net/image-server/v1/products/T1459A839PA4459PT28D197361856W8333H10000/views/1,width=120,height=120,appearanceId=839,backgroundColor=F2F2F2/monster-truck-axolotl-sticker.jpg", 2000);
+        Truck truck6 = new Truck("Anaconda","https://image.spreadshirtmedia.net/image-server/v1/products/T1459A839PA4459PT28D197361856W8333H10000/views/1,width=120,height=120,appearanceId=839,backgroundColor=F2F2F2/monster-truck-axolotl-sticker.jpg", 2000);
+        Truck truck7 = new Truck("Sloth","https://image.spreadshirtmedia.net/image-server/v1/products/T1459A839PA4459PT28D197361856W8333H10000/views/1,width=120,height=120,appearanceId=839,backgroundColor=F2F2F2/monster-truck-axolotl-sticker.jpg", 2000);
 
         truckRepository.save(truck1);
         truckRepository.save(truck2);
