@@ -69,7 +69,7 @@ public class RouteService {
             truckRepository.save(truck);
         }
     }
-    
+
 
     public List<ClusterDTO> kMeansClustering(int k, List<Delivery> deliveries) {
         // k = trucksActiveToday
@@ -160,6 +160,9 @@ public class RouteService {
         // make new route for each cluster and add deliveries
         List<Route> newRoutes = new ArrayList<>();
         for(ClusterDTO cluster : clusters){
+            if(cluster.getDeliveries().isEmpty()){
+                continue;
+            }
             Route newRoute = createRoute();
             newRoute.setDeliveries(cluster.getDeliveries());
             newRoute.setStatus(StatusEnum.IN_PROGRESS);
