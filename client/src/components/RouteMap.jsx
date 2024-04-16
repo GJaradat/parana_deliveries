@@ -1,5 +1,5 @@
 import React,{ useEffect, useRef, useState } from "react";
-import mapboxgl from "mapbox-gl";
+import mapboxgl, { Marker } from "mapbox-gl";
 import "../styles/RouteMapStyles.css";
 
 const RouteMap = ( {} ) => {
@@ -53,10 +53,6 @@ const RouteMap = ( {} ) => {
         setOptRoute(jsonData);
     }
 
-    const displayMarkers = (coordinates) => {
-       
-
-    };
     
     const displayRoutes = () => {
        
@@ -80,20 +76,23 @@ const RouteMap = ( {} ) => {
     }
 
 
-
     const calculateRoutes = () => {
         // Need A semicolon-separated list of {longitude},{latitude} coordinates.
         const coordinates = generateCoordinates();
         
         //Make GET request to Optimization API 
        getRoutesFromAPI(coordinates); 
-       displayMarkers(coordinates);
     }
 
+    const separateCoordinates = () => {
+        const allCoordinates = optRoute.trips[0].geometry;
+        console.log(allCoordinates)
+    }
         
     useEffect(() => {
         if(optRoute){
             displayRoutes();
+            separateCoordinates();
         }
     }, [optRoute]);
     
@@ -104,6 +103,7 @@ const RouteMap = ( {} ) => {
                 <div ref={mapContainerRef} className="map-container" />
             </div>
             <button onClick={calculateRoutes}>make routes</button>
+            <Marker />
         </>
      );
 }
