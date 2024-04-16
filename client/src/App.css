@@ -1,21 +1,27 @@
 .App {
   text-align: center;
 }
-
+#root{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  }
 footer {
-  height: 2rem; 
-  padding: 10px;
+  height: 2rem;
+  margin-top: 20px;
   text-align: center;
 }
-
 .footer-links {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+  background-color: #0cb896ca;
+  width: 100vw;
 }
-
-.footer-links p {
-  margin: 10px;
- }
  

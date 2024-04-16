@@ -43,7 +43,11 @@ function App() {
       <header>
         <p>This is the header. - Paraná Project</p>
       </header>
+
+      <main>
       <RouterProvider router={pageRoutes} />
+      </main>
+      
       <footer>
         <section className='footer-links'>
           <p>Conditions of Use & Sale</p>
