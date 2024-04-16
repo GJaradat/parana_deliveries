@@ -1,5 +1,5 @@
-import React,{ useEffect, useRef, useState } from "react";
-import mapboxgl from "mapbox-gl";
+import React,{ createElement, useEffect, useRef, useState } from "react";
+import mapboxgl, {Marker} from "mapbox-gl";
 import "../styles/RouteMapStyles.css";
 
 const RouteMap = ( {} ) => {
@@ -36,29 +36,18 @@ const RouteMap = ( {} ) => {
     useEffect(() => {
         if (routes !== null){
         
-        routes.forEach(route => {
-                // Create a HTML element for each marker
-                route.deliveries.forEach(delivery => {
-                    const el = document.createElement('div');
-                    el.className = 'marker'; 
-                    let coord = [delivery.location.longitude,delivery.location.latitude]
-                    // Make a popup to attach to marker
-                    const popup = new mapboxgl.Popup().setHTML(  
-                        `<h3>Delivery #${delivery.location.id}</h3>
-                        <p>${delivery.location.address}</p>` 
-                       );  
-
-                    // Make a marker for each coordinate and add to the map
-                    new mapboxgl.Marker(el).setLngLat(coord).addTo(map.current).setPopup(popup);
-                })
-            
-            });
+            routes.forEach((route)=> {
+                displayMarkers(route);
+            })
         }
     },[routes])
 
     const generateRoutes = async () => {
-        const response = await fetch("http://localhost:8080/routes/generateRoutes");
-        const jsonData = await response.json();
+        const response = await fetch("http://localhost:8080/routes/generateRoutes",{
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify()
+    })
     }
 
     const getRoutes = async () => {
@@ -103,6 +92,22 @@ const RouteMap = ( {} ) => {
             }
           });
 
+    }
+
+    const displayMarkers = (route) => {
+        // Create a HTML element for each marker
+        route.deliveries.forEach(delivery => {
+            const el = createElement('div', {className: 'marker'});
+            let coord = [delivery.location.longitude,delivery.location.latitude]
+            // Make a popup to attach to marker
+            const popup = new mapboxgl.Popup().setHTML(  
+                `<h3>Delivery #${delivery.location.id}</h3>
+                <p>${delivery.location.address}</p>` 
+               );  
+
+            // Make a marker for each coordinate and add to the map
+            new mapboxgl.Marker(el).setLngLat(coord).addTo(map.current).setPopup(popup);
+        })
     }
 
     const calculateRoutes = async () => {
