@@ -35,7 +35,7 @@ const RoutesContainer = () => {
 
     const filteredRoutes = routes.filter((route)=>{
         if(sortValue){
-            return route.routeStatus.toLowerCase().includes(sortValue.toLowerCase());
+            return route.status.toLowerCase().includes(sortValue.toLowerCase());
         }
         if(searchValue){
             return route.truck.name.toLowerCase().includes(searchValue.toLowerCase());
