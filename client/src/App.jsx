@@ -41,13 +41,13 @@ function App() {
   return (
     <>
       <header>
-        <p>This is the header. - Paraná Project</p>
+        <h1>Paraná Deliveries</h1>
       </header>
 
       <main>
       <RouterProvider router={pageRoutes} />
       </main>
-      
+
       <footer>
         <section className='footer-links'>
           <p>Conditions of Use & Sale</p>

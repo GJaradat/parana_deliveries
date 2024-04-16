@@ -6,6 +6,17 @@
   flex-direction: column;
   min-height: 100vh;
 }
+
+h1 {
+  text-align: center;
+  background-color: #F5CE92;
+  /* color: ; */
+  font-size: 60px;
+  padding: 7px;
+ 
+
+}
+
 main {
   display: flex;
   flex-direction: column;

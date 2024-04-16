@@ -39,7 +39,7 @@ h3 {
     justify-content: space-around;
 }
 
-.truck_search {
+.search {
     margin-left: 40px;
     width: 350px;
     max-width: 30vw;
@@ -47,7 +47,7 @@ h3 {
     border-radius: 10px;
     float: left;
     padding-left: 10px;
-    border-color: black;
+    border-color: #000000;
     border-width: 2px;
 }
 
@@ -60,7 +60,7 @@ h3 {
     width: 350px;
 }
 
-#sort_text {
+.sort_text {
     float:left;
     text-align: center;
     width: 250px;
