@@ -10,8 +10,7 @@ const RouteMap = ( {} ) => {
     const [lat,setLat] = useState(51.501476);
     const [lng,setLng] = useState(-0.140634);
     const [zoom, setZoom] = useState(12);
-    const [route, setRoute] = useState(null);
-    const [optRoute, setOptRoute] = useState(null);
+    const [optRoutes, setOptRoutes] = useState([]);
 
     const [routes, setRoutes] = useState(null);
 
@@ -37,11 +36,9 @@ const RouteMap = ( {} ) => {
     useEffect(() => {
         if (routes !== null){
         console.log(routes);
-        getRoute();
         routes.forEach(route => {
                 // Create a HTML element for each marker
                 route.deliveries.forEach(delivery => {
-                    console.log(delivery.location)
                     const el = document.createElement('div');
                     el.className = 'marker'; 
                     let coord = [delivery.location.longitude,delivery.location.latitude]
@@ -59,19 +56,6 @@ const RouteMap = ( {} ) => {
         }
     },[routes])
 
-
-    const getRoute = async () => {
-        const response = await fetch("http://localhost:8080/routes/1");
-        const jsonData = await response.json();
-        setRoute(jsonData);
-    }
-
-    // const getRoutes = async () => {
-    //     const response = await fetch("http://localhost:8080/routes");
-    //     const jsonData = await response.json();
-    //     setRoutes(jsonData);
-    // }
-
     const generateRoutes = async () => {
         const response = await fetch("http://localhost:8080/routes/generateRoutes");
         const jsonData = await response.json();
@@ -83,7 +67,14 @@ const RouteMap = ( {} ) => {
         setRoutes(jsonData);
     }
 
-    const generateCoordinates = () => {
+    const getRoutesFromAPI = async (coordinates) => {
+        const response = await fetch (`https://api.mapbox.com/optimized-trips/v1/mapbox/driving/${coordinates}?access_token=${mapboxgl.accessToken}&geometries=geojson`);
+        const jsonData = await response.json();
+        setOptRoutes([...jsonData]);
+        console.log(optRoutes)
+    }
+
+    const generateCoordinates = (route) => {
         
         const coordinatesArray = ["-0.140634,51.501476"];  // first coordinates are always warehouse
 
@@ -94,19 +85,8 @@ const RouteMap = ( {} ) => {
         })
         return coordinatesArray.join(";");
     }
-
-    const getRoutesFromAPI = async (coordinates) => {
-        const response = await fetch (`https://api.mapbox.com/optimized-trips/v1/mapbox/driving/${coordinates}?access_token=${mapboxgl.accessToken}&geometries=geojson`);
-        const jsonData = await response.json();
-        setOptRoute(jsonData);
-    }
-
-    const displayMarkers = (coordinates) => {
-       
-
-    };
     
-    const displayRoutes = () => {
+    const displayRoutes = (optRoute) => {
        
         const tripLine = optRoute.trips[0].geometry;
 
@@ -125,28 +105,42 @@ const RouteMap = ( {} ) => {
             }
           });
 
-        
-          
-        
     }
 
 
 
-    const calculateRoutes = () => {
-        // Need A semicolon-separated list of {longitude},{latitude} coordinates.
-        const coordinates = generateCoordinates();
-        
-        //Make GET request to Optimization API 
-       getRoutesFromAPI(coordinates); 
-       displayMarkers(coordinates);
-    }
+    const calculateRoutes = async () => {
+        // Optimise each route
 
+        routes.forEach(( route ) => {
+            // Need A semicolon-separated list of {longitude},{latitude} coordinates.
+            const coordinates = generateCoordinates(route);
+            console.log(coordinates);
+            
+            //Make GET request to Optimization API 
+            getRoutesFromAPI(coordinates); 
+
+        })
+    }
+    // const fetchPokemon = async () => {
+    //     const response = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=1302")
+    //     const pokemonData = await response.json();
+    //     const urlObjects = pokemonData.results;
+    //     const pokemonRequests = urlObjects.map(async urlObject => {
+    //         const pokemonResponse = await fetch(urlObject.url);
+    //         return await pokemonResponse.json();
+    //     });
+    //     const pokemonInfo = await Promise.all(pokemonRequests);
+    //     setPokemon(pokemonInfo);
+    // }
         
     useEffect(() => {
-        if(optRoute){
-            displayRoutes();
+        if(optRoutes){
+            optRoutes.map( optRoute => {
+                displayRoutes(optRoute);
+            })
         }
-    }, [optRoute]);
+    }, [optRoutes]);
     
 
     return ( 
