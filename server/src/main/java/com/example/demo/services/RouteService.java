@@ -91,7 +91,7 @@ public class RouteService {
         for(int i=0; i < k; i++){
             Random random = new Random();
             double randomLat = boundary[0] + (random.nextDouble() * (boundary[1] - boundary[0]));
-            double randomLng = boundary[2] + (random.nextDouble() * (boundary[3] - boundary[4]));
+            double randomLng = boundary[2] + (random.nextDouble() * (boundary[3] - boundary[2]));
             Double[] newCentroid = {randomLat, randomLng};
             ClusterDTO newCluster = new ClusterDTO(newCentroid);
             clusters.add(newCluster);
@@ -107,8 +107,8 @@ public class RouteService {
         ArrayList<ClusterDTO> clusters = initialiseCentroids(k, boundary);
 
         int repeats = 0;
-        boolean clusterSizesCoolAndGood = false;
-        while(repeats < 50 && !clusterSizesCoolAndGood) {
+        boolean clusterSizesValid = false;
+        while(repeats < 50 && !clusterSizesValid) {
             // 3. assign each delivery to closest centroid
             for(ClusterDTO cluster : clusters) {
                 cluster.setDeliveries(new ArrayList<>());
@@ -134,7 +134,7 @@ public class RouteService {
                 clusterSizesAllowed.add(cluster.isSizeAllowed()); // put all cluster sizeIsAllowed properties into array
             }
             // 5. repeat from step 3
-            clusterSizesCoolAndGood = areAllTrue(clusterSizesAllowed);
+            clusterSizesValid = areAllTrue(clusterSizesAllowed);
             repeats++;
         }
 
