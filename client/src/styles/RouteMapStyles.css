@@ -3,7 +3,7 @@
     width: auto;
     margin-left: 20px;
     margin-right: 20px;
-    margin-top: 20px;
+    margin-top: 15px;
     border: 2px solid black;
     border-radius: 30px;
   }
@@ -27,4 +27,23 @@
     height: 50px;
     border-radius: 50%;
     cursor: pointer;
+  }
+
+  #make-route-button {
+    margin-top: 20px;
+    margin-left: 70px;
+    margin-bottom: 1px;
+    width: 90%;
+    height: 50px;
+
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #3C3F68;
+    transition-duration: 0.3s;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    font-size: large;
+    box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24),0 5px 5px 0 rgba(0,0,0,0.19);
   }
