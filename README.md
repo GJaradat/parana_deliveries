@@ -130,9 +130,37 @@ For a tutorial of the MapBox Optimisation API v1, click [here](https://docs.mapb
 ![image](https://github.com/GJaradat/parana_deliveries/assets/108727885/49960a12-3adf-4967-a71c-1985b945ab5b)
 
 ## API Routes Table
-*(TODO: Deliveries + Packages Route table)*
-![Trucks](https://github.com/GJaradat/parana_deliveries/assets/108727885/7c88bc3d-9f66-464e-bda7-2090402d593c)
-![Routes](https://github.com/GJaradat/parana_deliveries/assets/108727885/7f3bdd51-1d5d-4cec-ac12-93b3af7d2e6f)
+
+### Trucks
+|        | URL                              | Method  | Description                              | Example Request Body                       | Example Response |
+|--------|:--------------------------------:|:-------:|:-----------------------------------------|--------------------------------------------|------------------|
+| INDEX  | localhost:8080/trucks            | GET     | Returns all Truck entities               | N/A                                        | |
+| SHOW   | localhost:8080/trucks/:id        | GET     | Returns Truck entity with matching id    | N/A                                        | | 
+| UPDATE | localhost:8080/trucks/:id/status | PATCH   | Changes ```availability``` property of a Truck | ```"OUT_FOR_DELIVERY"```                   | ```{"id": 1, "name": "Sloth", "imageURL":"https://...", "capacity": 2000, "availability": "OUT_FOR_DELIVERY", "routes": [...]}```|
+| CREATE | localhost:8080/trucks            | POST    | Creates new Truck                        | ```{"name": "Piranha", "capacity": 1000}```|  ```{"id": 8, "name": "Piranha", "imageURL":"https://...", "capacity": 1000, "availability": "IN_DEPOT", "routes": []}```|
+
+### Routes
+|        | URL                              | Method  | Description                                                            | Example Request Body                       | Example Response |
+|--------|:--------------------------------:|:-------:|:-----------------------------------------------------------------------|--------------------------------------------|------------------|
+| INDEX  | localhost:8080/routes            | GET     | Returns all Route entities                                             | N/A                                        |  |
+| SHOW   | localhost:8080/routes/:id        | GET     | Returns Route entity with matching id                                  | N/A                                        |  | 
+| UPDATE | localhost:8080/trucks/:id/status | PATCH   | Changes ```status``` property of a Route                                     | ```"COMPLETED"```                          | ```{"id": 1, "deliveries": [...], "truck": {...}, "status": "COMPLETED"}``` |
+| CREATE | localhost:8080/trucks            | POST    | Creates new Route and assigns a Truck with ```IN_DEPOT``` availability | N/A                                        |  ```{"id": 7, "deliveries": [], "truck": {...}, "status": "PENDING}```|
+|        | localhost:8080/generateRoutes    | POST    | Clusters all undelivered deliveries and assigns them to a newly generated Route entity | N/A | ```[ {"id": 1, "deliveries": [...], "truck": {...}, "status": "IN_PROGRESS"}, ... ]``` |
+
+### Deliveries
+|        | URL                           | Method  | Description                                   | Example Request Body | Example Response |
+|--------|:-----------------------------:|:-------:|:----------------------------------------------|----------------------|------------------|
+| INDEX  | localhost:8080/deliveries     | GET     | Returns all Delivery entities                 | N/A                  | |
+| SHOW   | localhost:8080/deliveries/:id | GET     | Returns Delivery entity with matching id      | N/A                  | | 
+| UPDATE | localhost:8080/deliveries/:id | PATCH   | Sets ```isDelivered``` property to ```true``` | N/A                  | ```{"id": 8, "route": {...}, "location": {...}, "delivered":" true}```|
+| CREATE | localhost:8080/trucks         | POST    | Creates new Delivery                          | ```5```              |  ```{"id":50, "route": {}, "location": {"id": 5,...}, "delivered": false```|
+| DELETE | localhost:8080/deliveries/:id | DELETE  | Deletes Delivery entity with matching id      | N/A                  | ```1``` (id of deleted Delivery)|
+
+### Locations
+|        | URL                           | Method  | Description                 | Example Request Body                                                               | Example Response |
+|--------|:-----------------------------:|:-------:|:----------------------------|------------------------------------------------------------------------------------|------------------|
+| POST   | localhost:8080/locations      | POST    | Creates new Location entity | ```{"address": "Hightown Street", "latitude": 51.888808, "longitude": -0.403725}```| ```{"id":40, "address": "Hightown Street", "latitude": 51.888808, "longitude": -0.403725}```|
 
 
 ## Other Deliverables

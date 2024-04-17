@@ -37,8 +37,7 @@ const Route = ({route, patchRoutes}) => {
         <main>
         <section className="route-container">
             <h3>Route {route.id}</h3>
-            <button className="expand-button" onClick={handleExpandStatus}>{toggleButtonLable()}</button>
-            <button className="display-route-button" onClick={handleDisplayButton}>Display route</button>
+           
             <article id="statusContainer">
                 <p>Status: </p>
                 <select 
@@ -52,9 +51,11 @@ const Route = ({route, patchRoutes}) => {
                 </select>
                 <button className="update-status-button" onClick={handleClick}>Update Status</button>
             </article>
-                <p>Truck: {route.truck.name}</p>
+                <p id="truck">Truck: {route.truck.name}</p>
+            <button className="dark-button" onClick={handleExpandStatus}>{toggleButtonLable()}</button>
+            <button className="dark-button" onClick={handleDisplayButton}>Display route</button>
             {expandButtonStatus && <>
-                    <div>
+                    <div className="delivery-list">
                         <DeliveryList deliveries = {route.deliveries} />
                     </div> </> }
         </section>
