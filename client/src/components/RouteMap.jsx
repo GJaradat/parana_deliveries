@@ -85,7 +85,7 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes } ) => {
             'type': 'line',
             'source': `route${dispRouteIdx}`,
             'paint': {
-              'line-color': `${chooseColour(index)}`,
+              'line-color': `${chooseColour(dispRouteIdx)}`,
               'line-width': 4
             }
           });
