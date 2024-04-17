@@ -25,6 +25,9 @@ const RouteMap = ( { routes, deliveries } ) => {
           center: [lng, lat],
           zoom: zoom
         });
+        
+        // Warehouse marker
+        new mapboxgl.Marker({ className:"marker-warehouse", color:"none"}).setLngLat([lng,lat]).addTo(map.current);
         }, []);
         
     useEffect(() => {
@@ -90,8 +93,7 @@ const RouteMap = ( { routes, deliveries } ) => {
     const displayMarkers = (deliveries) => {
         // Create a HTML element for each marker
         deliveries.forEach(delivery => {
-            const className = delivery.isDelivered ? 'marker-delivered' : 'marker-not-delivered';
-            const el = createElement('div', {className: `${className}`});
+            const markercolor = delivery.isDelivered ? '#007B63' : '#F0BA19';
             let coord = [delivery.location.longitude,delivery.location.latitude]
 
             // Find which route has the delivery - to display on pop-up
@@ -110,7 +112,7 @@ const RouteMap = ( { routes, deliveries } ) => {
                );  
 
             // Make a marker for each coordinate and add to the map
-            const marker = new mapboxgl.Marker({className: `${className}`}).setLngLat(coord).addTo(map.current).setPopup(popup);
+            const marker = new mapboxgl.Marker({color: `${markercolor}`}).setLngLat(coord).addTo(map.current).setPopup(popup);
             setDisplayedMarkers(prevMarkers => [...prevMarkers, marker]);
         })
     }

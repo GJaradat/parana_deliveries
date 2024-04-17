@@ -25,9 +25,17 @@
   background: none;
 }
 
-.marker-delivered {
-  background-image: url("../assets/map-marker-delivered.png");
+.marker-warehouse{
+  background-image: url("../assets/logo_noname_parana.png"); 
   background-size: cover;
+  content-visibility: hidden;
+  width: 50px; 
+  height: 50px; 
+  border-radius: 50%;
+}
+
+.marker-delivered {
+  color: green;
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -35,9 +43,7 @@
 }
 
 .marker-not-delivered {
-  background: none;
-  background-image: url("../assets/map-marker-not-delivered.png");
-  background-size: cover;
+  color: rgb(204, 77, 77);
   width: 50px;
   height: 50px;
   border-radius: 50%;
