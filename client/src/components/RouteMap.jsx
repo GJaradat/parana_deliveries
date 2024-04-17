@@ -10,9 +10,8 @@ const RouteMap = ( { routes, deliveries } ) => {
     const [lat,setLat] = useState(51.501476);
     const [lng,setLng] = useState(-0.140634);
     const [zoom, setZoom] = useState(12);
+    const [displayedMarkers, setDisplayedMarkers] = useState([]);
     const [optRoutes, setOptRoutes] = useState([]);
-
-    // const [routes, setRoutes] = useState(null);
 
     mapboxgl.accessToken = `${process.env.REACT_APP_MAPBOX_KEY}`;
 
@@ -91,7 +90,8 @@ const RouteMap = ( { routes, deliveries } ) => {
     const displayMarkers = (deliveries) => {
         // Create a HTML element for each marker
         deliveries.forEach(delivery => {
-            const el = createElement('div', {className: 'marker'});
+            const className = delivery.isDelivered ? 'marker-delivered' : 'marker-not-delivered';
+            const el = createElement('div', {className: `${className}`});
             let coord = [delivery.location.longitude,delivery.location.latitude]
 
             // Find which route has the delivery - to display on pop-up
@@ -110,8 +110,16 @@ const RouteMap = ( { routes, deliveries } ) => {
                );  
 
             // Make a marker for each coordinate and add to the map
-            new mapboxgl.Marker(el).setLngLat(coord).addTo(map.current).setPopup(popup);
+            const marker = new mapboxgl.Marker({className: `${className}`}).setLngLat(coord).addTo(map.current).setPopup(popup);
+            setDisplayedMarkers(prevMarkers => [...prevMarkers, marker]);
         })
+    }
+
+    const clearMarkers = () => {
+        displayedMarkers.forEach( marker => {
+            marker.remove();
+        })
+        setDisplayedMarkers([]);
     }
 
     const calculateRoutes = async () => {
@@ -133,6 +141,7 @@ const RouteMap = ( { routes, deliveries } ) => {
                 <div ref={mapContainerRef} className="map-container" />
             </div>
             {routes && routes.length > 0 && <button onClick={calculateRoutes}>make routes</button>}
+            <button onClick={clearMarkers}>Clear markers</button>
         </>
      );
 }
