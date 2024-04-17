@@ -20,9 +20,8 @@ function App() {
       path: "/home",
       element:<HomepageContainer />
     },
-    {
-      path: "/",
-      element: <Navigation />,
+    { path: "/",
+      element: <Navigation/>,
       children: [
         {
           path: "/routes",
@@ -36,15 +35,14 @@ function App() {
           path: "/deliveries",
           element: <DeliveriesContainer />
         }
-      ]}
+      ]
+  }
+  
+ 
   ]);
 
   return (
     <>
-      <header>
-      <img id="headerLogo" src={logo} alt="logo"></img>
-      </header>
-
       <main>
       <RouterProvider router={pageRoutes} />
       </main>

@@ -2,9 +2,8 @@
   text-align: center;
 }
 
-header {
-  background-color: azure;
-  padding: 10px;
+body {
+  background-color: #0cb884ca;
 }
 
 #root{
@@ -13,8 +12,15 @@ header {
   min-height: 100vh;
 }
 
+
+header {
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
 #headerLogo{
-  max-width: 60%;
+  max-width: 100%;
   margin: 20px;
   height: 150px;
 
