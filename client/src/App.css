@@ -3,7 +3,7 @@
 }
 
 body {
-  background-color: azure;
+  background-color: #0cb884ca;
 }
 
 #root{
@@ -14,14 +14,13 @@ body {
 
 
 header {
-  background-color:#058b70;
   padding: 10px;
   display: grid;
   grid-template-columns: 1fr 2fr;
 }
 
 #headerLogo{
-  max-width: 60%;
+  max-width: 100%;
   margin: 20px;
   height: 150px;
 

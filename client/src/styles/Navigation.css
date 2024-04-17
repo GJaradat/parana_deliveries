@@ -1,9 +1,32 @@
+header {
+    background-image: url("../assets/header_image_2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
 #navbar {
     display: flex;
     justify-content: space-around;
     list-style-type: none;
     margin-top: 85px;
 }
-#fleetLink, #routesLink, #deliveriesLink {
+
+.navButton {
     text-decoration: none;
+
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+
+    border-radius: 4px;
+    background-color: #F6D779;
+    color: black;
+    font-size: 25px;
+}
+
+.navButton:hover {
+    font-weight: 600;
+    background-color: #F0BA19;
 }

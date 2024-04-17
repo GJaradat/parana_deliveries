@@ -10,15 +10,15 @@ const Navigation = () => {
       <nav>
                 <ul id="navbar">
                     <li>
-                        <Link id="fleetLink" to="/fleet">Fleet</Link>
+                        <Link className="navButton" to="/fleet">Fleet</Link>
                     </li> 
 
                     <li>
-                        <Link id="routesLink" to="/routes">Routes</Link>
+                        <Link className="navButton" to="/routes">Routes</Link>
                     </li>
 
                     <li>
-                        <Link id="deliveriesLink" to="/deliveries">Deliveries</Link>
+                        <Link className="navButton" to="/deliveries">Deliveries</Link>
                     </li>
                 </ul>
             </nav>
