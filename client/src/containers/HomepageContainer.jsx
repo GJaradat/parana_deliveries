@@ -19,7 +19,6 @@ const HomepageContainer = () => {
             <div id="logo-container">
                 <img src={logo} alt="logo" id="home-logo"></img>
             </div>
-            <p>Hello from Homepage Container</p>
             < Navigation/>
         </>
      );

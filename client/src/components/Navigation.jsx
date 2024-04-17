@@ -1,10 +1,13 @@
 import { Link, Outlet} from "react-router-dom";
+import logo from "../assets/logo_horizontal_parana.png";
 import "../styles/Navigation.css";
 
 const Navigation = () => {
     return ( 
         <>
-            <nav>
+     <header>
+      <img id="headerLogo" src={logo} alt="logo"></img>
+      <nav>
                 <ul id="navbar">
                     <li>
                         <Link id="fleetLink" to="/fleet">Fleet</Link>
@@ -19,7 +22,9 @@ const Navigation = () => {
                     </li>
                 </ul>
             </nav>
-        <Outlet />
+      </header>
+    <Outlet /> 
+
     </>
      );
 }
