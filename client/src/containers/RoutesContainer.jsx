@@ -4,6 +4,8 @@ import RouteMap from '../components/RouteMap';
 import RouteSort from '../components/RouteSort';
 import RouteSearch from '../components/RouteSearch';
 
+import "../styles/RoutesContainerStyles.css"
+
 const RoutesContainer = () => {
     
     const [routes, setRoutes] = useState([]);

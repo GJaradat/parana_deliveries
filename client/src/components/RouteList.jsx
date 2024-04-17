@@ -1,4 +1,5 @@
 import Route from './Route'
+import "../styles/RouteList.css"
 
 const RouteList = ({routes, patchRoutes}) => {
 
@@ -8,7 +9,9 @@ const RouteList = ({routes, patchRoutes}) => {
 
     return ( 
         <>
+        <div className="scroll-bar">
             {mappedRoutes}
+        </div>
         </>
      );
 }

@@ -1,0 +1,7 @@
+.scroll-bar {
+    width: 530px;
+    height: 1000px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}

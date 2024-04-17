@@ -30,29 +30,31 @@ const Route = ({route, patchRoutes}) => {
 
     return ( 
         <>
+        <main>
         <section className="route-container">
             <h3>Route {route.id}</h3>
-            <button onClick={handleExpandStatus}>{toggleButtonLable()}</button>
-            <button>Display route</button>
-
-        <article id="statusContainer">
-            <p>Status: </p>
-            <select 
-                className="updateStatusDropdown"
-                defaultValue={route.status}
-                onChange={(e) => {setRouteStatus(e.target.value)}}
-                >
-                <option value="PENDING">Pending</option>
-                <option value="IN_PROGRESS">In Progress</option>
-                <option value="COMPLETED">Completed</option>
-            </select>
-            <button onClick={handleClick}>Update Status</button>
-         </article>
-            <p>Truck: {route.truck.name}</p>
-                <div>
-                    <DeliveryList deliveries = {route.deliveries} />
-                </div>  
+            <button className="expand-button" onClick={handleExpandStatus}>{toggleButtonLable()}</button>
+            <button className="display-route-button">Display route</button>
+            {expandButtonStatus && <>
+            <article id="statusContainer">
+                <p>Status: </p>
+                <select 
+                    className="updateStatusDropdown"
+                    defaultValue={route.status}
+                    onChange={(e) => {setRouteStatus(e.target.value)}}
+                    >
+                    <option value="PENDING">Pending</option>
+                    <option value="IN_PROGRESS">In Progress</option>
+                    <option value="COMPLETED">Completed</option>
+                </select>
+                <button className="update-status-button" onClick={handleClick}>Update Status</button>
+            </article>
+                <p>Truck: {route.truck.name}</p>
+                    <div>
+                        <DeliveryList deliveries = {route.deliveries} />
+                    </div> </> }
         </section>
+        </main>
         </>
      );
 }
