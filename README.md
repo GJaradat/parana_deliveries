@@ -151,6 +151,15 @@ For a tutorial of the MapBox Optimisation API v1, click [here](https://docs.mapb
 | CREATE | localhost:8080/trucks            | POST    | Creates new Route and assigns a Truck with ```IN_DEPOT``` availability | N/A                                        |  ```{"id": 7, "deliveries": [], "truck": {...}, "status": "PENDING}```|
 |        | localhost:8080/generateRoutes    | POST    | Clusters all undelivered deliveries and assigns them to a newly generated Route entity | N/A | ```[ {"id": 1, "deliveries": [...], "truck": {...}, "status": "IN_PROGRESS"}, ... ]``` |
 
+### Deliveries
+|        | URL                           | Method  | Description                                   | Example Request Body | Example Response |
+|--------|:-----------------------------:|:-------:|:----------------------------------------------|----------------------|------------------|
+| INDEX  | localhost:8080/deliveries     | GET     | Returns all Delivery entities                 | N/A                  | |
+| SHOW   | localhost:8080/deliveries/:id | GET     | Returns Delivery entity with matching id      | N/A                  | | 
+| UPDATE | localhost:8080/deliveries/:id | PATCH   | Sets ```isDelivered``` property to ```true``` | N/A                  | ```{"id": 8, "route": {...}, "location": {...}, "delivered":" true}```|
+| CREATE | localhost:8080/trucks         | POST    | Creates new Delivery                          | ```5```              |  ```{"id":50, "route": {}, "location": {"id": 5,...}, "delivered": false```|
+| DELETE | localhost:8080/deliveries/:id | DELETE  | Deletes Delivery entity with matching id      | N/A                  | |
+
 
 ## Other Deliverables
 These can be found in the projectDeliverables folder and contain the following:
