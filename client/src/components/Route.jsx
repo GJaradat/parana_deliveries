@@ -43,8 +43,6 @@ const Route = ({route, patchRoutes, displayedRoutes, setDisplayedRoutes}) => {
         <main>
         <section className="route-container">
             <h3>Route {route.id}</h3>
-            <button className="expand-button" onClick={handleExpandStatus}>{toggleButtonLable()}</button>
-            <button className="display-route-button" onClick={handleDisplayButton}>{ routeVisible ? "Hide Route" : "Show Route" }</button>
             <article id="statusContainer">
                 <p>Status: </p>
                 <select 
@@ -60,7 +58,7 @@ const Route = ({route, patchRoutes, displayedRoutes, setDisplayedRoutes}) => {
             </article>
                 <p id="truck">Truck: {route.truck.name}</p>
             <button className="dark-button" onClick={handleExpandStatus}>{toggleButtonLable()}</button>
-            <button className="dark-button" onClick={handleDisplayButton}>Display route</button>
+            <button className="dark-button" onClick={handleDisplayButton}>{ routeVisible ? "Hide Route" : "Show Route" }</button>
             {expandButtonStatus && <>
                     <div className="delivery-list">
                         <DeliveryList deliveries = {route.deliveries} />
