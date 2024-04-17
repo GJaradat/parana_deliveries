@@ -61,11 +61,13 @@ const RouteMap = ( { routes, deliveries } ) => {
         })
         return coordinatesArray.join(";");
     }
-    
-    const randomHexColorCode = () => {
-        let n = (Math.random() * 0xfffff * 1000000).toString(16);
-        return '#' + n.slice(0, 6);
-      };
+
+    const routeColours = ["#009e73", "#F0BA19", "#0071b2", "#e69d00", "#d55c00", "#f079a7", "#000000"]
+
+    const chooseColour = (index) => {
+        const colourIndex = index % routeColours.length;
+        return routeColours[colourIndex];
+    }
 
     const displayRoutes = (optRoute, index) => {
        
@@ -81,7 +83,7 @@ const RouteMap = ( { routes, deliveries } ) => {
             'type': 'line',
             'source': `route${index}`,
             'paint': {
-              'line-color': `${randomHexColorCode()}`,
+              'line-color': `${chooseColour(index)}`,
               'line-width': 4
             }
           });

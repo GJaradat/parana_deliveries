@@ -22,11 +22,10 @@ const Navigation = () => {
                     </li>
                 </ul>
             </nav>
-      </header>
-    <Outlet /> 
-
+        </header>
+        <Outlet />
     </>
-     );
+    );
 }
  
 export default Navigation;
