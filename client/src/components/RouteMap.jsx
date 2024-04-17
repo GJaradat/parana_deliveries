@@ -2,7 +2,7 @@ import React,{ createElement, useEffect, useRef, useState } from "react";
 import mapboxgl, {Marker} from "mapbox-gl";
 import "../styles/RouteMapStyles.css";
 
-const RouteMap = ( {} ) => {
+const RouteMap = ( { routes, deliveries } ) => {
     
     const mapContainerRef = useRef(null);
     const map = useRef(null);
@@ -12,16 +12,12 @@ const RouteMap = ( {} ) => {
     const [zoom, setZoom] = useState(12);
     const [optRoutes, setOptRoutes] = useState([]);
 
-    const [routes, setRoutes] = useState(null);
+    // const [routes, setRoutes] = useState(null);
 
     mapboxgl.accessToken = `${process.env.REACT_APP_MAPBOX_KEY}`;
 
 
     useEffect(() => {
-       
-        if (routes === null){
-        generateRoutes();
-        }
 
         if (map.current) return; // initialize map only once
         map.current = new mapboxgl.Map({
@@ -30,32 +26,30 @@ const RouteMap = ( {} ) => {
           center: [lng, lat],
           zoom: zoom
         });
-        getRoutes();
         }, []);
         
     useEffect(() => {
         if (routes !== null){
-        
             routes.forEach((route)=> {
-                displayMarkers(route);
+                displayMarkers(route.deliveries);
             })
         }
     },[routes])
 
-    const generateRoutes = async () => {
-        const response = await fetch("http://localhost:8080/routes/generateRoutes",{
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify()
-    })
-    }
+    useEffect(() => {
+        if (deliveries !== null){
+            displayMarkers(deliveries);
+        }
+    },[deliveries])
 
-    const getRoutes = async () => {
-        const response = await fetch("http://localhost:8080/routes");
-        const jsonData = await response.json();
-        setRoutes(jsonData);
-    }
-    
+    useEffect(() => {
+        if(optRoutes){
+            optRoutes.map( (optRoute, index) => {
+                displayRoutes(optRoute, index);
+            })
+        }
+    }, [optRoutes]);
+
     const generateCoordinates = (route) => {
         
         const coordinatesArray = ["-0.140634,51.501476"];  // first coordinates are always warehouse
@@ -94,15 +88,25 @@ const RouteMap = ( {} ) => {
 
     }
 
-    const displayMarkers = (route) => {
+    const displayMarkers = (deliveries) => {
         // Create a HTML element for each marker
-        route.deliveries.forEach(delivery => {
+        deliveries.forEach(delivery => {
             const el = createElement('div', {className: 'marker'});
             let coord = [delivery.location.longitude,delivery.location.latitude]
+
+            // Find which route has the delivery - to display on pop-up
+            let thisRouteId;
+            if (typeof(delivery.route) === "undefined"){
+                thisRouteId = routes.find((route) => route.deliveries.includes(delivery)).id;
+            } else{
+                thisRouteId = delivery.route.id;
+            }
+
             // Make a popup to attach to marker
             const popup = new mapboxgl.Popup().setHTML(  
                 `<h3>Delivery #${delivery.location.id}</h3>
-                <p>${delivery.location.address}</p>` 
+                <h4>${delivery.location.address}</h4>
+                <p>${delivery.isDelivered ? 'Delivered' : `Out for delivery on Route ${thisRouteId}`}</p>` 
                );  
 
             // Make a marker for each coordinate and add to the map
@@ -114,30 +118,21 @@ const RouteMap = ( {} ) => {
         // Optimise each route
         const routeRequests = routes.map( async ( route ) => {
             const coordinate = generateCoordinates(route);
-            console.log(coordinate);
+            
             const currentOptRoute = await fetch (`https://api.mapbox.com/optimized-trips/v1/mapbox/driving/${coordinate}?access_token=${mapboxgl.accessToken}&geometries=geojson`);
             return await currentOptRoute.json();
         })
         const currentOptRoutes = await Promise.all(routeRequests);
         setOptRoutes(currentOptRoutes);
     
-    }
-        
-    useEffect(() => {
-        if(optRoutes){
-            optRoutes.map( (optRoute, index) => {
-                displayRoutes(optRoute, index);
-            })
-        }
-    }, [optRoutes]);
-    
+    }    
 
     return ( 
         <>
             <div>
                 <div ref={mapContainerRef} className="map-container" />
             </div>
-            <button onClick={calculateRoutes}>make routes</button>
+            {routes && routes.length > 0 && <button onClick={calculateRoutes}>make routes</button>}
         </>
      );
 }

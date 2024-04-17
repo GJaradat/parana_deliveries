@@ -1,0 +1,34 @@
+.route-container {
+    text-align: center;
+    background-color: #F6D779;
+    height: fit-content;
+    width: 500px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+    margin-left: 15px;
+}
+
+.expand-button {
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-right: 5px;
+    font-size: 12px;
+    background-color: #C0780C;
+    transition-duration: 0.3s;
+    cursor: pointer;
+    margin-left: 10px;
+    color: white;
+    box-shadow: 0 8px 10px 0 rgba(0,0,0,0.24),0 12px 20px 0 rgba(0,0,0,0.19);
+}
+
+.expand-button:hover {
+    color: #E0E0CE;
+    background-color: #99600A;
+}
+
+.expand-button:active {
+    transform: translateY(4px);
+    box-shadow: 0 8px 10px 0 rgba(0,0,0,0.24);
+}
+
