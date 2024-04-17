@@ -51,9 +51,9 @@ const Route = ({route, patchRoutes}) => {
                 </select>
                 <button className="update-status-button" onClick={handleClick}>Update Status</button>
             </article>
-                <p>Truck: {route.truck.name}</p>
-            <button className="expand-button" onClick={handleExpandStatus}>{toggleButtonLable()}</button>
-            <button className="display-route-button" onClick={handleDisplayButton}>Display route</button>
+                <p id="truck">Truck: {route.truck.name}</p>
+            <button className="dark-button" onClick={handleExpandStatus}>{toggleButtonLable()}</button>
+            <button className="dark-button" onClick={handleDisplayButton}>Display route</button>
             {expandButtonStatus && <>
                     <div>
                         <DeliveryList deliveries = {route.deliveries} />

@@ -10,26 +10,25 @@
     margin-top: 15px;
 }
 
-.expand-button {
+.dark-button {
     border: none;
     border-radius: 5px;
     padding: 5px 10px;
     margin-right: 5px;
-    font-size: 12px;
-    background-color: #C0780C;
+    font-size: 14px;
+    background-color: #3C3F68;
     transition-duration: 0.3s;
     cursor: pointer;
     margin-left: 10px;
     color: white;
-    box-shadow: 0 8px 10px 0 rgba(0,0,0,0.24),0 12px 20px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24),0 5px 5px 0 rgba(0,0,0,0.19);
 }
 
-.expand-button:hover {
-    color: #E0E0CE;
-    background-color: #99600A;
+.dark-button:hover {
+    background-color: #2D304E;
 }
 
-.expand-button:active {
+.dark-button:active {
     transform: translateY(4px);
     box-shadow: 0 8px 10px 0 rgba(0,0,0,0.24);
 }
@@ -50,3 +49,8 @@
     height: 30px;
     background-color: #da9938;
 }
+
+#truck {
+    margin-top: 2px;
+}
+
