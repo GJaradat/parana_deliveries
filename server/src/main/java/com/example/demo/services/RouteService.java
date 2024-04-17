@@ -39,6 +39,14 @@ public class RouteService {
         }
         Route routeToUpdate = targetRoute.get();
         routeToUpdate.setStatus(newStatus);
+        if(routeToUpdate.getStatus() == StatusEnum.COMPLETED) {
+            List<Delivery> routeDeliveries = routeToUpdate.getDeliveries();
+
+            for (Delivery delivery : routeDeliveries) {
+                delivery.setDelivered(true);
+                deliveryRepository.save(delivery);
+            };
+        };
         routeRepository.save(routeToUpdate);
         return routeToUpdate;
     }

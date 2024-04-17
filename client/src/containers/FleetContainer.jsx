@@ -56,7 +56,7 @@ const FleetContainer = () => {
     
     return ( 
         <>
-            <h2 id='fleet_title'>Delivery Fleet</h2>
+            <h2 className='page_title'>Delivery Fleet</h2>
             <section className='filteringForms'>
                 <TruckSearch setSearchValue={setSearchValue} />
                 <TruckSort setSortValue={setSortValue} />

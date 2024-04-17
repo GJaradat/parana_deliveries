@@ -13,15 +13,31 @@ const Truck = ({ truck, patchTrucks }) => {
             capacity: truck.capacity,
             routes: truck.routes
         };
+
+        if(availabilityState !== "OUT_FOR_DELIVERY" && !allRoutesComplete()){
+            alert("Truck availability cannot be updated: deliveries still in progress");
+            return null;
+        }
+
         patchTrucks(newTruck);
         alert("Truck availability successfully updated!")
+    }
+
+    const allRoutesComplete = () => {
+        let value = true;
+        truck.routes.forEach(route => {
+            if(route.status !== "COMPLETED"){
+                value = false;
+            }
+        });
+        return value;
     }
 
     
     return ( 
         <>
             <article className='truck'>
-                <h3>Truck: {truck.name}</h3>
+                <h3>{truck.name} Truck</h3>
                 <img id="truckImage" src={truck.imageURL} alt="truck picture"/> 
                 <p>Capacity: {truck.capacity}</p>
 

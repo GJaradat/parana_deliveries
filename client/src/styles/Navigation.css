@@ -1,5 +1,5 @@
 header{
-    background-image: url("../assets/header_image_2.jpg");
+    background-image: linear-gradient(0deg, rgba(20,20,20,0.7), rgba(20,20,20,0.1)), url("../assets/header_image_2.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;

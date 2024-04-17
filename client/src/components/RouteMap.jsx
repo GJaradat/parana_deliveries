@@ -8,11 +8,11 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes } ) => {
     const map = useRef(null);
     // Starting lattitude and longitude states (aka the 'warehouse' location)
     const [lat,setLat] = useState(51.501476);
-    const [lng,setLng] = useState(-0.140638);
-    const [zoom, setZoom] = useState(12);
+    const [lng,setLng] = useState(-0.140634);
+    const [zoom, setZoom] = useState(10);
     const [displayedMarkers, setDisplayedMarkers] = useState([]);
     const [displayedRouteLayers, setDisplayedRouteLayers] = useState([]);
-    
+
     mapboxgl.accessToken = `${process.env.REACT_APP_MAPBOX_KEY}`;
 
     useEffect(() => {
@@ -54,11 +54,13 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes } ) => {
             })
         }
     }, [displayedRoutes]);
-    
-    const randomHexColorCode = () => {
-        let n = (Math.random() * 0xfffff * 1000000).toString(16);
-        return '#' + n.slice(0, 6);
-      };
+
+    const routeColours = ["#009e73", "#F0BA19", "#0071b2", "#e69d00", "#d55c00", "#f079a7", "#000000"]
+
+    const chooseColour = (index) => {
+        const colourIndex = index % routeColours.length;
+        return routeColours[colourIndex];
+    }
 
     const displayRoutes = (dispRouteIdx) => {
        
@@ -83,7 +85,7 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes } ) => {
             'type': 'line',
             'source': `route${dispRouteIdx}`,
             'paint': {
-              'line-color': `${randomHexColorCode()}`,
+              'line-color': `${chooseColour(index)}`,
               'line-width': 4
             }
           });
@@ -144,10 +146,9 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes } ) => {
     return ( 
         <>
             <div>
+                {routes && routes.length > 0 && <button id='make-route-button'>Display All Routes</button>}
                 <div ref={mapContainerRef} className="map-container" />
             </div>
-            {/* {routes && routes.length > 0 && <button onClick={calculateRoutes}>make routes</button>} */}
-            
         </>
      );
 }

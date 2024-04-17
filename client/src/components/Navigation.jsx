@@ -1,5 +1,5 @@
 import { Link, Outlet } from "react-router-dom";
-import logo from "../assets/logo-horizontal-filled3.png";
+import logo from "../assets/logo_horizontal_parana.png";
 import "../styles/Navigation.css";
 
 const Navigation = () => {
@@ -22,11 +22,10 @@ const Navigation = () => {
                     </li>
                 </ul>
             </nav>
-      </header>
-    <Outlet /> 
-
+        </header>
+        <Outlet />
     </>
-     );
+    );
 }
  
 export default Navigation;
