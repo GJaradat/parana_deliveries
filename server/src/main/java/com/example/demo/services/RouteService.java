@@ -162,6 +162,8 @@ public class RouteService {
             // 5. repeat from step 3
             iterations++;
         }
+
+        clusters.removeIf(cluster -> cluster.getDeliveries().isEmpty());
         return clusters;
     }
 

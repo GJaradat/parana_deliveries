@@ -1,8 +1,10 @@
 import Navigation from "../components/Navigation";
 import logo from "../assets/logo_vertical_parana.png"
+import { useEffect } from "react";
 
 
 const HomepageContainer = () => {
+
     return ( 
         <>
             <div className="logo-container">

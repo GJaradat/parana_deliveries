@@ -18,10 +18,7 @@ const RouteMap = ( {} ) => {
 
 
     useEffect(() => {
-       
-        if (routes === null){
         generateRoutes();
-        }
 
         if (map.current) return; // initialize map only once
         map.current = new mapboxgl.Map({
@@ -30,8 +27,10 @@ const RouteMap = ( {} ) => {
           center: [lng, lat],
           zoom: zoom
         });
+
         getRoutes();
-        }, []);
+
+    }, []);
         
     useEffect(() => {
         if (routes !== null){
@@ -45,15 +44,14 @@ const RouteMap = ( {} ) => {
     const generateRoutes = async () => {
         const response = await fetch("http://localhost:8080/routes/generateRoutes",{
             method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify()
-    })
+            headers: {"Content-Type": "application/json"}
+        })
     }
 
     const getRoutes = async () => {
         const response = await fetch("http://localhost:8080/routes");
         const jsonData = await response.json();
-        setRoutes(jsonData);
+        setRoutes(jsonData ? jsonData.filter(route => route.deliveries.length !== 0) : null);
     }
     
     const generateCoordinates = (route) => {
