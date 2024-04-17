@@ -21,7 +21,7 @@ const Truck = ({ truck, patchTrucks }) => {
     return ( 
         <>
             <article className='truck'>
-                <h3>Truck: {truck.name}</h3>
+                <h3>{truck.name} Truck</h3>
                 <img id="truckImage" src={truck.imageURL} alt="truck picture"/> 
                 <p>Capacity: {truck.capacity}</p>
 
