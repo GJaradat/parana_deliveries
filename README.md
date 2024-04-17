@@ -158,7 +158,7 @@ For a tutorial of the MapBox Optimisation API v1, click [here](https://docs.mapb
 | SHOW   | localhost:8080/deliveries/:id | GET     | Returns Delivery entity with matching id      | N/A                  | | 
 | UPDATE | localhost:8080/deliveries/:id | PATCH   | Sets ```isDelivered``` property to ```true``` | N/A                  | ```{"id": 8, "route": {...}, "location": {...}, "delivered":" true}```|
 | CREATE | localhost:8080/trucks         | POST    | Creates new Delivery                          | ```5```              |  ```{"id":50, "route": {}, "location": {"id": 5,...}, "delivered": false```|
-| DELETE | localhost:8080/deliveries/:id | DELETE  | Deletes Delivery entity with matching id      | N/A                  | |
+| DELETE | localhost:8080/deliveries/:id | DELETE  | Deletes Delivery entity with matching id      | N/A                  | ```1``` (id of deleted Delivery)|
 
 
 ## Other Deliverables
