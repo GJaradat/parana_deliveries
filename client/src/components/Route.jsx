@@ -2,7 +2,7 @@ import { useState } from "react";
 import DeliveryList from "./DeliveryList";
 import "../styles/Route.css";
 
-const Route = ({route, patchRoutes}) => {
+const Route = ({route, patchRoutes, displayedRoutes, setDisplayedRoutes}) => {
 
     const [expandButtonStatus, setExpandButtonStatus] = useState(false)
 
@@ -29,7 +29,11 @@ const Route = ({route, patchRoutes}) => {
     }
 
     const handleDisplayButton = () => {
-        
+        if (displayedRoutes.includes(route.id)) {
+            setDisplayedRoutes(displayedRoutes => displayedRoutes.filter(id => id !== route.id));
+        } else {
+            setDisplayedRoutes(displayedRoutes => [...displayedRoutes, route.id]);
+        }
     }
 
     return ( 
