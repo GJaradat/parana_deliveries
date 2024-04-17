@@ -48,7 +48,7 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes } ) => {
             displayedRoutes.forEach( (dispRouteIdx) => {
                 if (!displayedRouteLayers.includes(dispRouteIdx)){
                     displayRoutes(dispRouteIdx);
-                    displayMarkers(routes[dispRouteIdx].deliveries);
+                    displayMarkers(routes[dispRouteIdx-1].deliveries);
                     setDisplayedRouteLayers(displayedRouteLayers => [...displayedRouteLayers, dispRouteIdx])
                 }
             })
@@ -64,7 +64,7 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes } ) => {
 
     const displayRoutes = (dispRouteIdx) => {
        
-        const tripLine = optRoutes[dispRouteIdx].trips[0].geometry;
+        const tripLine = optRoutes[dispRouteIdx-1].trips[0].geometry;
 
         // Check if the source already exists and remove it if it does
         if (map.current.getSource(`route${dispRouteIdx}`)) {
@@ -138,7 +138,7 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes } ) => {
                 setDisplayedRouteLayers(prevLayers => prevLayers.filter(layerIdx => layerIdx !== dispRouteIdx));
 
                 // remove markers
-                clearMarkers(routes[dispRouteIdx].deliveries);
+                clearMarkers(routes[dispRouteIdx-1].deliveries);
             }
         });
     }
