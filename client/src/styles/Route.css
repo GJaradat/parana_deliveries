@@ -1,17 +1,11 @@
-/* main {
-    display: inline-flex;
-    justify-content: center;
-    margin-left: 50px;
-    margin-right: 50px;
-} */
-
 .route-container {
     text-align: center;
     background-color: #F6D779;
     height: fit-content;
     width: 500px;
-    padding-bottom: 15px;
+    padding-bottom: 10px;
     border-radius: 10px;
+    margin-left: 15px;
 }
 
 .expand-button {
@@ -38,6 +32,3 @@
     box-shadow: 0 8px 10px 0 rgba(0,0,0,0.24);
 }
 
-.route-container h3 {
-    
-}

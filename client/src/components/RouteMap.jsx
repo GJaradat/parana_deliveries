@@ -18,10 +18,6 @@ const RouteMap = ( { routes, deliveries } ) => {
 
 
     useEffect(() => {
-       
-        if (routes === null){
-        generateRoutes();
-        }
 
         if (map.current) return; // initialize map only once
         map.current = new mapboxgl.Map({
@@ -54,13 +50,6 @@ const RouteMap = ( { routes, deliveries } ) => {
         }
     }, [optRoutes]);
 
-    const generateRoutes = async () => {
-        const response = await fetch("http://localhost:8080/routes/generateRoutes",{
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-    })
-    }
-    
     const generateCoordinates = (route) => {
         
         const coordinatesArray = ["-0.140634,51.501476"];  // first coordinates are always warehouse

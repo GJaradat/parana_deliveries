@@ -1,4 +1,8 @@
 .scroll-bar {
+    border: 1px solid black;
+    background-color: #11464A;
+    border-radius: 10px;
+    margin-left: 20px;
     width: 530px;
     height: 1000px;
     overflow-x: hidden;

@@ -28,14 +28,17 @@ const Route = ({route, patchRoutes}) => {
         return expandButtonStatus ? "Less" : "More";
     }
 
+    const handleDisplayButton = () => {
+        
+    }
+
     return ( 
         <>
         <main>
         <section className="route-container">
             <h3>Route {route.id}</h3>
             <button className="expand-button" onClick={handleExpandStatus}>{toggleButtonLable()}</button>
-            <button className="display-route-button">Display route</button>
-            {expandButtonStatus && <>
+            <button className="display-route-button" onClick={handleDisplayButton}>Display route</button>
             <article id="statusContainer">
                 <p>Status: </p>
                 <select 
@@ -50,6 +53,7 @@ const Route = ({route, patchRoutes}) => {
                 <button className="update-status-button" onClick={handleClick}>Update Status</button>
             </article>
                 <p>Truck: {route.truck.name}</p>
+            {expandButtonStatus && <>
                     <div>
                         <DeliveryList deliveries = {route.deliveries} />
                     </div> </> }

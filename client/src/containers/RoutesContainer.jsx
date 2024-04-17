@@ -4,7 +4,7 @@ import RouteMap from '../components/RouteMap';
 import RouteSort from '../components/RouteSort';
 import RouteSearch from '../components/RouteSearch';
 
-// import "../styles/RoutesContainerStyles.css"
+import "../styles/RoutesContainerStyles.css"
 
 const RoutesContainer = () => {
     
@@ -53,11 +53,15 @@ const RoutesContainer = () => {
     
     return ( 
         <section className='RoutesContainer'>
-            <h2>Delivery Routes</h2>
-            <RouteSearch setSearchValue={setSearchValue}/>
-            <RouteSort setSortValue={setSortValue}/>
-            <RouteList routes={filteredRoutes} patchRoutes={patchRoutes} />
-            <RouteMap routes={filteredRoutes} deliveries={null}/>
+                <h2>Delivery Routes</h2>
+                    <div>
+                    <RouteSearch setSearchValue={setSearchValue}/>
+                    <RouteSort setSortValue={setSortValue}/>
+                    </div>
+            <div id='Routes-content'>
+                <RouteList routes={filteredRoutes} patchRoutes={patchRoutes} />
+                <RouteMap routes={filteredRoutes} deliveries={null}/>
+            </div>
         </section>
      );
 }
