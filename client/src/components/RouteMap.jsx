@@ -36,6 +36,10 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes } ) => {
     },[deliveries])
 
     useEffect(() => {
+        // So map can render on deliveries page
+        if (!routes) return;
+
+        // Logic for toggling routes
         if(displayedRoutes.length >= 0){
             if (displayedRouteLayers.length > 0){
                 clearRoutes();
@@ -108,15 +112,18 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes } ) => {
 
             // Make a marker for each coordinate and add to the map
             const marker = new mapboxgl.Marker({color: `${delivery.delivered ? '#007B63' : '#F0BA19'}`}).setLngLat(coord).addTo(map.current).setPopup(popup);
-            setDisplayedMarkers(prevMarkers => [...prevMarkers, marker]);
+            setDisplayedMarkers(prevMarkers => [...prevMarkers, { id: delivery.id, marker: marker }]);
         })
     }
 
-    const clearMarkers = () => {
-        displayedMarkers.forEach( marker => {
-            marker.remove();
+    const clearMarkers = (clearedDeliveries) => {
+        
+        displayedMarkers.forEach( displayedMarker => {
+            if (clearedDeliveries.some(delivery => delivery.id === displayedMarker.id)){
+                displayedMarker.marker.remove();
+                setDisplayedMarkers(prevMarkers => prevMarkers.filter(marker => marker.id !== displayedMarker.id));
+            }
         })
-        setDisplayedMarkers([]);
     }
     
     const clearRoutes = () => {
@@ -127,6 +134,9 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes } ) => {
                 map.current.removeLayer(`route-line${dispRouteIdx}`);
                 map.current.removeSource(`route${dispRouteIdx}`);
                 setDisplayedRouteLayers(prevLayers => prevLayers.filter(layerIdx => layerIdx !== dispRouteIdx));
+
+                // remove markers
+                clearMarkers(routes[dispRouteIdx].deliveries);
             }
         });
     }
@@ -137,7 +147,7 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes } ) => {
                 <div ref={mapContainerRef} className="map-container" />
             </div>
             {/* {routes && routes.length > 0 && <button onClick={calculateRoutes}>make routes</button>} */}
-            <button onClick={clearMarkers}>Clear markers</button>
+            
         </>
      );
 }
