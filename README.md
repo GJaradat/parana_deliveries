@@ -160,6 +160,11 @@ For a tutorial of the MapBox Optimisation API v1, click [here](https://docs.mapb
 | CREATE | localhost:8080/trucks         | POST    | Creates new Delivery                          | ```5```              |  ```{"id":50, "route": {}, "location": {"id": 5,...}, "delivered": false```|
 | DELETE | localhost:8080/deliveries/:id | DELETE  | Deletes Delivery entity with matching id      | N/A                  | ```1``` (id of deleted Delivery)|
 
+### Locations
+|        | URL                           | Method  | Description                 | Example Request Body                                                               | Example Response |
+|--------|:-----------------------------:|:-------:|:----------------------------|------------------------------------------------------------------------------------|------------------|
+| POST   | localhost:8080/locations      | POST    | Creates new Location entity | ```{"address": "Hightown Street", "latitude": 51.888808, "longitude": -0.403725}```| ```{"id":40, "address": "Hightown Street", "latitude": 51.888808, "longitude": -0.403725}```|
+
 
 ## Other Deliverables
 These can be found in the projectDeliverables folder and contain the following:
