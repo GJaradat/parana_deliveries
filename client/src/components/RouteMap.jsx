@@ -13,6 +13,10 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes } ) => {
     const [displayedMarkers, setDisplayedMarkers] = useState([]);
     const [displayedRouteLayers, setDisplayedRouteLayers] = useState([]);
 
+    const [isAnimating, setIsAnimating] = useState(false);
+    const [currentPosition, setCurrentPosition] = useState(0);
+
+
     mapboxgl.accessToken = `${process.env.REACT_APP_MAPBOX_KEY}`;
 
     useEffect(() => {
@@ -27,6 +31,56 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes } ) => {
         
         // Warehouse marker
         new mapboxgl.Marker({ className:"marker-warehouse", color:"none"}).setLngLat([lng,lat]).addTo(map.current);
+
+
+        map.current.on('load', () => {
+
+            const point = {
+                'type': 'FeatureCollection',
+                'features': [
+                    {
+                        'type': 'Feature',
+                        'properties': {},
+                        'geometry': {
+                            'type': 'Point',
+                            'coordinates': origin
+                        }
+                    }
+                ]
+            };
+        
+            map.current.addSource('point', {
+                'type': 'geojson',
+                'data': point
+            });
+    
+            map.current.loadImage(
+                'https://i.ibb.co/MCy52Yr/truck-svgrepo-com-fotor-20240416105953.png',
+                (error, image) => {
+                    if (error) throw error;
+        
+                    map.current.addImage('truck', image);
+                
+        
+
+                map.current.addLayer({
+                    'id': 'point',
+                    'source': 'point',
+                    'type': 'symbol',
+                    'layout': {
+                        'icon-image': 'truck',
+                        'icon-size': 0.05,
+                        'icon-rotate': ['get', 'bearing'],
+                        'icon-rotation-alignment': 'map',
+                        'icon-allow-overlap': true,
+                        'icon-ignore-placement': true
+                    }
+                });
+            })
+        });
+    
+        
+        
         }, []);
 
     useEffect(() => {
@@ -48,23 +102,23 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes } ) => {
             displayedRoutes.forEach( (dispRouteIdx) => {
                 if (!displayedRouteLayers.includes(dispRouteIdx)){
                     displayRoutes(dispRouteIdx);
-                    displayMarkers(routes[dispRouteIdx].deliveries);
+                    displayMarkers(routes[dispRouteIdx-1].deliveries);
                     setDisplayedRouteLayers(displayedRouteLayers => [...displayedRouteLayers, dispRouteIdx])
                 }
             })
         }
     }, [displayedRoutes]);
 
-    const routeColours = ["#009e73", "#F0BA19", "#0071b2", "#e69d00", "#d55c00", "#f079a7", "#000000"]
-
+    
     const chooseColour = (index) => {
+        const routeColours = ["#009e73", "#F0BA19", "#0071b2", "#e69d00", "#d55c00", "#f079a7", "#000000"]
         const colourIndex = index % routeColours.length;
         return routeColours[colourIndex];
     }
 
     const displayRoutes = (dispRouteIdx) => {
        
-        const tripLine = optRoutes[dispRouteIdx].trips[0].geometry;
+        const tripLine = optRoutes[dispRouteIdx-1].trips[0].geometry;
 
         // Check if the source already exists and remove it if it does
         if (map.current.getSource(`route${dispRouteIdx}`)) {
@@ -138,10 +192,79 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes } ) => {
                 setDisplayedRouteLayers(prevLayers => prevLayers.filter(layerIdx => layerIdx !== dispRouteIdx));
 
                 // remove markers
-                clearMarkers(routes[dispRouteIdx].deliveries);
+                clearMarkers(routes[dispRouteIdx-1].deliveries);
             }
         });
     }
+
+    const animatePoint = () => {
+        const steps = 50;
+        if (!isAnimating) {
+            setIsAnimating(true);
+            const interval = setInterval(() => {
+                setCurrentPosition(prevPosition => prevPosition + 1);
+
+                // Deliver delivery
+                routes[0].deliveries.forEach(delivery => {
+                    const pointCoordinates = optRoutes[0].trips[0].geometry.coordinates[currentPosition];
+                    const deliveryCoordinates = [delivery.location.longitude, delivery.location.latitude];
+                    const distance = calculateDistance(pointCoordinates, deliveryCoordinates);
+    
+                    if (distance) {
+                        // The point is near the delivery location, deliver the delivery
+                        if(delivery.delivered === false){
+                            console.log(delivery)
+                            deliverDelivery(delivery);
+                        }
+                    }
+                });
+                if (currentPosition >= steps) {
+                    clearInterval(interval);
+                    setIsAnimating(false);
+                }
+            }, 250); // Adjust the interval as needed
+        }
+    };
+
+    const calculateDistance = (pointCoordinates, deliveryCoordinates) => {
+        const deltaLat = (Math.abs(pointCoordinates[1] - deliveryCoordinates[1]));
+        const deltaLng = (Math.abs(pointCoordinates[0] - deliveryCoordinates[0]));
+        const threshold = 0.25;
+        if ((deltaLat <= threshold)&&(deltaLng <= threshold)){
+            console.log(true)
+            return true;
+        }
+        return false;
+    }
+
+    useEffect(() => {
+        if (map.current && isAnimating) {
+            const newCoordinates = optRoutes[0].trips[0].geometry.coordinates[currentPosition];
+            const pointData = {
+                'type': 'FeatureCollection',
+                'features': [
+                    {
+                        'type': 'Feature',
+                        'geometry': {
+                            'type': 'Point',
+                            'coordinates': newCoordinates
+                        }
+                    }
+                ]
+            };
+            map.current.getSource('point').setData(pointData);
+        }
+    }, [currentPosition, isAnimating]);
+    
+    const deliverDelivery = async (delivery) => {
+        const response = await fetch(`http://localhost:8080/deliveries/${delivery.id}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    });
+    }
+    
 
     return ( 
         <>
@@ -149,6 +272,7 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes } ) => {
                 {routes && routes.length > 0 && <button id='make-route-button'>Display All Routes</button>}
                 <div ref={mapContainerRef} className="map-container" />
             </div>
+            <button onClick={animatePoint}>Animate Point</button>
         </>
      );
 }
