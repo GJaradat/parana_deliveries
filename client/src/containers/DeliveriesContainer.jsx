@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import DeliveryList from '../components/DeliveryList'
-import RouteMap from '../components/RouteMap';
+
+import RouteMap from "../components/RouteMap"
+
 
 const DeliveriesContainer = () => {
 
@@ -18,9 +20,7 @@ const DeliveriesContainer = () => {
 
     return ( 
         <>
-            <p>Hello from Deliveries Container</p>
-            <DeliveryList deliveries={deliveries} />
-            <RouteMap />
+            <RouteMap routes={null} deliveries={deliveries}/>
         </> 
     );
 }

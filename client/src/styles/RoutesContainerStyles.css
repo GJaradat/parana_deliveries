@@ -1,0 +1,10 @@
+.RoutesContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+#Routes-content{
+    display:grid;
+    grid-template-columns: 1fr 4fr;
+    
+}
