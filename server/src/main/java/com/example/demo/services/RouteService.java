@@ -108,8 +108,8 @@ public class RouteService {
     }
 
     private void reassignClusters(List<ClusterDTO> clusters,
-                 List<Delivery> deliveries,
-                 Map<Delivery, ClusterDTO> clusterMapCurrent) {
+                                  List<Delivery> deliveries,
+                                  Map<Delivery, ClusterDTO> clusterMapCurrent) {
         for(ClusterDTO cluster : clusters) {
             cluster.setDeliveries(new ArrayList<>());
         }

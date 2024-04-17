@@ -6,7 +6,13 @@
     width: 530px;
     height: 1000px;
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-y: hidden;
     margin-bottom: 10px;
     margin-top: 20px;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+}
+
+.scroll-bar:hover {
+    overflow-y: auto;
 }
