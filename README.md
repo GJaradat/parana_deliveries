@@ -130,9 +130,6 @@ For a tutorial of the MapBox Optimisation API v1, click [here](https://docs.mapb
 ![image](https://github.com/GJaradat/parana_deliveries/assets/108727885/49960a12-3adf-4967-a71c-1985b945ab5b)
 
 ## API Routes Table
-*(TODO: Deliveries + Packages Route table)*
-![Trucks](https://github.com/GJaradat/parana_deliveries/assets/108727885/7c88bc3d-9f66-464e-bda7-2090402d593c)
-![Routes](https://github.com/GJaradat/parana_deliveries/assets/108727885/7f3bdd51-1d5d-4cec-ac12-93b3af7d2e6f)
 
 ### Trucks
 |        | URL                              | Method  | Description                              | Example Request Body                       | Example Response |
