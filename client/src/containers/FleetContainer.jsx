@@ -50,8 +50,10 @@ const FleetContainer = () => {
     return ( 
         <>
             <h2 id='fleet_title'>Delivery Fleet</h2>
-            <TruckSearch setSearchValue={setSearchValue} />
-            <TruckSort setSortValue={setSortValue} />
+            <section className='filteringForms'>
+                <TruckSearch setSearchValue={setSearchValue} />
+                <TruckSort setSortValue={setSortValue} />
+            </section>
             <TruckList trucks={filteredTrucks} patchTrucks={patchTrucks}  />
         </>
      );

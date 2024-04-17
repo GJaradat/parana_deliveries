@@ -11,14 +11,20 @@ const HomepageContainer = () => {
             headers: {"Content-Type": "application/json"},
     })
     }
-    
-    useEffect(()=>{
+
+    useEffect(() => {
         generateRoutes();
-    },[]);
-    
+        document.body.classList.add('hide-header');
+
+        // Cleanup function to remove the class when the component unmounts
+        return () => {
+          document.body.classList.remove('hide-header');
+        };
+     }, []);
+
     return ( 
         <>
-            <div className="logo-container">
+            <div id="logo-container">
                 <img src={logo} alt="logo" id="home-logo"></img>
             </div>
             <p>Hello from Homepage Container</p>

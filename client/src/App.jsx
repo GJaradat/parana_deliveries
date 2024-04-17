@@ -7,6 +7,7 @@ import FleetContainer from './containers/FleetContainer';
 import HomepageContainer from './containers/HomepageContainer';
 import DeliveriesContainer from './containers/DeliveriesContainer';
 import Navigation from './components/Navigation';
+import logo from "./assets/logo_horizontal_parana.png";
 
 function App() {
 
@@ -41,9 +42,13 @@ function App() {
   return (
     <>
       <header>
-        <p>This is the header. - Paraná Project</p>
+      <img id="headerLogo" src={logo} alt="logo"></img>
       </header>
+
+      <main>
       <RouterProvider router={pageRoutes} />
+      </main>
+
       <footer>
         <section className='footer-links'>
           <p>Conditions of Use & Sale</p>
