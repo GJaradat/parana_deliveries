@@ -1,6 +1,6 @@
 .scroll-bar {
-    border: 1px solid black;
-    background-color: #11464A;
+    /* border: 0.5px solid black; */
+    background-color: #114c5058;
     border-radius: 10px;
     margin-left: 20px;
     width: 530px;

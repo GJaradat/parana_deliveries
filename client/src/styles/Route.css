@@ -34,3 +34,19 @@
     box-shadow: 0 8px 10px 0 rgba(0,0,0,0.24);
 }
 
+.title{
+    text-align: start;
+}
+
+#statusContainer{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.update-status-button {
+    border-radius: 7px;
+    margin-top: 10px;
+    height: 30px;
+    background-color: #da9938;
+}
