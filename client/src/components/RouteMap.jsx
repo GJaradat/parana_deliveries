@@ -9,7 +9,7 @@ const RouteMap = ( { routes, deliveries } ) => {
     // Starting lattitude and longitude states (aka the 'warehouse' location)
     const [lat,setLat] = useState(51.501476);
     const [lng,setLng] = useState(-0.140634);
-    const [zoom, setZoom] = useState(12);
+    const [zoom, setZoom] = useState(10);
     const [optRoutes, setOptRoutes] = useState([]);
 
     // const [routes, setRoutes] = useState(null);
