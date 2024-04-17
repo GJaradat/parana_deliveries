@@ -36,10 +36,17 @@ const FleetContainer = () => {
     }, []);
     
     //Other Functions
+
     const filteredTrucks = trucks.filter((truck)=> {
+        // accounts for someone filtering by truck name AND availability status
+        if(sortValue && searchValue){
+            return (truck.name.toLowerCase().includes(searchValue.toLowerCase()) && truck.availability.toLowerCase().includes(sortValue.toLowerCase()));
+        }
+        //only sorting by availability
         if(searchValue){
             return truck.name.toLowerCase().includes(searchValue.toLowerCase());
         }
+        //only sorting by truck name
         if(sortValue){
             return truck.availability.toLowerCase().includes(sortValue.toLowerCase());
         }
