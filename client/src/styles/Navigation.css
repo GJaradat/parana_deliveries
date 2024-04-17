@@ -10,27 +10,32 @@ header{
     justify-content: space-around;
     list-style-type: none;
     margin-top: 85px;
+    margin-right: 10%;
 }
 
 .navButton {
     text-decoration: none;
 
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
     padding-top: 7px;
     padding-bottom: 7px;
 
     position: absolute;
 
     border-radius: 4px;
-    background-color: #F6D779;
+    background-color: #F0BA19;
     color: #2D304E;
     font-size: 25px;
     font-weight: 600;
+    letter-spacing: 2px;
+
+    transition: 0.2s;
 }
 
 .navButton:hover {
     font-weight: 800;
-    background-color: #F0BA19;
-    transform: scale(1.05);
+    background-color: #ffbf00;
+    transform: scale(1.05)
 }
+
