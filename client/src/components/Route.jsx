@@ -2,11 +2,12 @@ import { useState } from "react";
 import DeliveryList from "./DeliveryList";
 import "../styles/Route.css";
 
-const Route = ({route, patchRoutes}) => {
+const Route = ({route, patchRoutes, displayedRoutes, setDisplayedRoutes}) => {
 
     const [expandButtonStatus, setExpandButtonStatus] = useState(false)
 
     const[routeStatus, setRouteStatus] = useState(route.status);
+    const [routeVisible, setRouteVisible] = useState(false);
 
     const handleClick = (e) => {
         e.preventDefault();
@@ -29,7 +30,12 @@ const Route = ({route, patchRoutes}) => {
     }
 
     const handleDisplayButton = () => {
-        
+        if (displayedRoutes.includes(route.id)) {
+            setDisplayedRoutes(displayedRoutes => displayedRoutes.filter(id => id !== route.id));
+        } else {
+            setDisplayedRoutes(displayedRoutes => [...displayedRoutes, route.id]);
+        }
+        setRouteVisible(!routeVisible);
     }
 
     return ( 
@@ -37,7 +43,8 @@ const Route = ({route, patchRoutes}) => {
         <main>
         <section className="route-container">
             <h3>Route {route.id}</h3>
-           
+            <button className="expand-button" onClick={handleExpandStatus}>{toggleButtonLable()}</button>
+            <button className="display-route-button" onClick={handleDisplayButton}>{ routeVisible ? "Hide Route" : "Show Route" }</button>
             <article id="statusContainer">
                 <p>Status: </p>
                 <select 

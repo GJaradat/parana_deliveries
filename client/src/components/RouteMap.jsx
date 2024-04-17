@@ -2,7 +2,7 @@ import React,{ createElement, useEffect, useRef, useState } from "react";
 import mapboxgl, {Marker} from "mapbox-gl";
 import "../styles/RouteMapStyles.css";
 
-const RouteMap = ( { routes, deliveries } ) => {
+const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes } ) => {
     
     const mapContainerRef = useRef(null);
     const map = useRef(null);
@@ -10,12 +10,10 @@ const RouteMap = ( { routes, deliveries } ) => {
     const [lat,setLat] = useState(51.501476);
     const [lng,setLng] = useState(-0.140634);
     const [zoom, setZoom] = useState(10);
-    const [optRoutes, setOptRoutes] = useState([]);
-
-    // const [routes, setRoutes] = useState(null);
+    const [displayedMarkers, setDisplayedMarkers] = useState([]);
+    const [displayedRouteLayers, setDisplayedRouteLayers] = useState([]);
 
     mapboxgl.accessToken = `${process.env.REACT_APP_MAPBOX_KEY}`;
-
 
     useEffect(() => {
 
@@ -26,15 +24,10 @@ const RouteMap = ( { routes, deliveries } ) => {
           center: [lng, lat],
           zoom: zoom
         });
-        }, []);
         
-    useEffect(() => {
-        if (routes !== null){
-            routes.forEach((route)=> {
-                displayMarkers(route.deliveries);
-            })
-        }
-    },[routes])
+        // Warehouse marker
+        new mapboxgl.Marker({ className:"marker-warehouse", color:"none"}).setLngLat([lng,lat]).addTo(map.current);
+        }, []);
 
     useEffect(() => {
         if (deliveries !== null){
@@ -43,24 +36,24 @@ const RouteMap = ( { routes, deliveries } ) => {
     },[deliveries])
 
     useEffect(() => {
-        if(optRoutes){
-            optRoutes.map( (optRoute, index) => {
-                displayRoutes(optRoute, index);
+        // So map can render on deliveries page
+        if (!routes) return;
+
+        // Logic for toggling routes
+        if(displayedRoutes.length >= 0){
+            if (displayedRouteLayers.length > 0){
+                clearRoutes();
+            }
+
+            displayedRoutes.forEach( (dispRouteIdx) => {
+                if (!displayedRouteLayers.includes(dispRouteIdx)){
+                    displayRoutes(dispRouteIdx);
+                    displayMarkers(routes[dispRouteIdx].deliveries);
+                    setDisplayedRouteLayers(displayedRouteLayers => [...displayedRouteLayers, dispRouteIdx])
+                }
             })
         }
-    }, [optRoutes]);
-
-    const generateCoordinates = (route) => {
-        
-        const coordinatesArray = ["-0.140634,51.501476"];  // first coordinates are always warehouse
-
-        route.deliveries.forEach((delivery) => {
-            const lng = delivery.location.longitude;
-            const lat = delivery.location.latitude;
-            coordinatesArray.push(lng+","+lat);
-        })
-        return coordinatesArray.join(";");
-    }
+    }, [displayedRoutes]);
 
     const routeColours = ["#009e73", "#F0BA19", "#0071b2", "#e69d00", "#d55c00", "#f079a7", "#000000"]
 
@@ -69,31 +62,39 @@ const RouteMap = ( { routes, deliveries } ) => {
         return routeColours[colourIndex];
     }
 
-    const displayRoutes = (optRoute, index) => {
+    const displayRoutes = (dispRouteIdx) => {
        
-        const tripLine = optRoute.trips[0].geometry;
+        const tripLine = optRoutes[dispRouteIdx].trips[0].geometry;
 
-        map.current.addSource(`route${index}`, {
+        // Check if the source already exists and remove it if it does
+        if (map.current.getSource(`route${dispRouteIdx}`)) {
+            map.current.removeSource(`route${dispRouteIdx}`);
+        }
+
+        // Check if the layer already exists and remove it if it does
+        if (map.current.getLayer(`route-line${dispRouteIdx}`)) {
+            map.current.removeLayer(`route-line${dispRouteIdx}`);
+        }
+        map.current.addSource(`route${dispRouteIdx}`, {
             'type':'geojson',
             'data':tripLine
         });
 
         map.current.addLayer({
-            'id': `route-line${index}`,
+            'id': `route-line${dispRouteIdx}`,
             'type': 'line',
-            'source': `route${index}`,
+            'source': `route${dispRouteIdx}`,
             'paint': {
               'line-color': `${chooseColour(index)}`,
               'line-width': 4
             }
           });
-
     }
 
     const displayMarkers = (deliveries) => {
         // Create a HTML element for each marker
         deliveries.forEach(delivery => {
-            const el = createElement('div', {className: 'marker'});
+            const markercolor = delivery.isDelivered === true ? '#007B63' : '#F0BA19';
             let coord = [delivery.location.longitude,delivery.location.latitude]
 
             // Find which route has the delivery - to display on pop-up
@@ -108,31 +109,44 @@ const RouteMap = ( { routes, deliveries } ) => {
             const popup = new mapboxgl.Popup().setHTML(  
                 `<h3>Delivery #${delivery.location.id}</h3>
                 <h4>${delivery.location.address}</h4>
-                <p>${delivery.isDelivered ? 'Delivered' : `Out for delivery on Route ${thisRouteId}`}</p>` 
+                <p>${delivery.delivered ? 'Delivered' : `Out for delivery on Route ${thisRouteId}`}</p>` 
                );  
 
             // Make a marker for each coordinate and add to the map
-            new mapboxgl.Marker(el).setLngLat(coord).addTo(map.current).setPopup(popup);
+            const marker = new mapboxgl.Marker({color: `${delivery.delivered ? '#007B63' : '#F0BA19'}`}).setLngLat(coord).addTo(map.current).setPopup(popup);
+            setDisplayedMarkers(prevMarkers => [...prevMarkers, { id: delivery.id, marker: marker }]);
         })
     }
 
-    const calculateRoutes = async () => {
-        // Optimise each route
-        const routeRequests = routes.map( async ( route ) => {
-            const coordinate = generateCoordinates(route);
-            
-            const currentOptRoute = await fetch (`https://api.mapbox.com/optimized-trips/v1/mapbox/driving/${coordinate}?access_token=${mapboxgl.accessToken}&geometries=geojson`);
-            return await currentOptRoute.json();
+    const clearMarkers = (clearedDeliveries) => {
+        
+        displayedMarkers.forEach( displayedMarker => {
+            if (clearedDeliveries.some(delivery => delivery.id === displayedMarker.id)){
+                displayedMarker.marker.remove();
+                setDisplayedMarkers(prevMarkers => prevMarkers.filter(marker => marker.id !== displayedMarker.id));
+            }
         })
-        const currentOptRoutes = await Promise.all(routeRequests);
-        setOptRoutes(currentOptRoutes);
+    }
     
-    }    
+    const clearRoutes = () => {
+        
+        displayedRouteLayers.forEach((dispRouteIdx) => {
+
+            if (!(displayedRoutes.includes(dispRouteIdx))){
+                map.current.removeLayer(`route-line${dispRouteIdx}`);
+                map.current.removeSource(`route${dispRouteIdx}`);
+                setDisplayedRouteLayers(prevLayers => prevLayers.filter(layerIdx => layerIdx !== dispRouteIdx));
+
+                // remove markers
+                clearMarkers(routes[dispRouteIdx].deliveries);
+            }
+        });
+    }
 
     return ( 
         <>
             <div>
-                {routes && routes.length > 0 && <button id='make-route-button' onClick={calculateRoutes}>Display All Routes</button>}
+                {routes && routes.length > 0 && <button id='make-route-button'>Display All Routes</button>}
                 <div ref={mapContainerRef} className="map-container" />
             </div>
         </>
