@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+header {
+  background-color: azure;
+  padding: 10px;
+}
+
 #root{
   display: flex;
   flex-direction: column;
@@ -10,8 +15,9 @@
 
 #headerLogo{
   max-width: 60%;
-  margin-top: 20px;
+  margin: 20px;
   height: 150px;
+
 
 
 }
