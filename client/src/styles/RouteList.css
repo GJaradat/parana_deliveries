@@ -8,5 +8,11 @@
     width: 530px;
     height: 1000px;
     overflow-x: hidden;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+}
+
+.scroll-bar:hover {
     overflow-y: auto;
 }
