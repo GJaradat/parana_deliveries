@@ -135,12 +135,21 @@ For a tutorial of the MapBox Optimisation API v1, click [here](https://docs.mapb
 ![Routes](https://github.com/GJaradat/parana_deliveries/assets/108727885/7f3bdd51-1d5d-4cec-ac12-93b3af7d2e6f)
 
 ### Trucks
-|        | URL                              | Method  | Description                              | Example Request Body                    | Example Response |
-|--------|:--------------------------------:|:-------:|:-----------------------------------------|-----------------------------------------|------------------|
-| INDEX  | localhost:8080/trucks            | GET     | Returns all Truck entities               | N/A                                     | ```[ {"id": 1, "name": "Sloth", "imageURL":"https://...", "capacity": 2000, "availability": "IN_DEPOT", "routes": [...]}, ... ]```
-| SHOW   | localhost:8080/trucks/:id        | GET     | Returns Truck entity with matching id    | N/A                                     | ```{"id": 2, "name": "Gorilla", "imageURL":"https://...", "capacity": 500, "availability": "OUT_FOR_DELIVERY", "routes": [...]}```|
-| UPDATE | localhost:8080/trucks/:id/status | PATCH   | Changes availability property of a Truck | ```"OUT_FOR_DELIVERY"```                | ```{"id": 1, "name": "Sloth", "imageURL":"https://...", "capacity": 2000, "availability": "OUT_FOR_DELIVERY", "routes": [...]}```|
-| CREATE | localhost:8080/trucks            | POST    | Creates new Truck                        | ```"name": "Piranha", "capacity": 1000```|  ```{"id": 1, "name": "Piranha", "imageURL":"https://...", "capacity": 1000, "availability": "IN_DEPOT", "routes": []}```|
+|        | URL                              | Method  | Description                              | Example Request Body                       | Example Response |
+|--------|:--------------------------------:|:-------:|:-----------------------------------------|--------------------------------------------|------------------|
+| INDEX  | localhost:8080/trucks            | GET     | Returns all Truck entities               | N/A                                        | ```[ {"id": 1, "name": "Sloth", "imageURL":"https://...", "capacity": 2000, "availability": "IN_DEPOT", "routes": [...]}, ... ]```
+| SHOW   | localhost:8080/trucks/:id        | GET     | Returns Truck entity with matching id    | N/A                                        | ```{"id": 2, "name": "Gorilla", "imageURL":"https://...", "capacity": 500, "availability": "OUT_FOR_DELIVERY", "routes": [...]}```| 
+| UPDATE | localhost:8080/trucks/:id/status | PATCH   | Changes availability property of a Truck | ```"OUT_FOR_DELIVERY"```                   | ```{"id": 1, "name": "Sloth", "imageURL":"https://...", "capacity": 2000, "availability": "OUT_FOR_DELIVERY", "routes": [...]}```|
+| CREATE | localhost:8080/trucks            | POST    | Creates new Truck                        | ```{"name": "Piranha", "capacity": 1000}```|  ```{"id": 8, "name": "Piranha", "imageURL":"https://...", "capacity": 1000, "availability": "IN_DEPOT", "routes": []}```|
+
+### Routes
+|        | URL                              | Method  | Description                                                            | Example Request Body                       | Example Response |
+|--------|:--------------------------------:|:-------:|:-----------------------------------------------------------------------|--------------------------------------------|------------------|
+| INDEX  | localhost:8080/routes            | GET     | Returns all Route entities                                             | N/A                                        | ```[ {"id": 1, "deliveries": [...], "truck": {...}, "status": "IN_PROGRESS"}, ... ]``` |
+| SHOW   | localhost:8080/routes/:id        | GET     | Returns Route entity with matching id                                  | N/A                                        | ```{"id": 3, "deliveries": [...], "truck": {...}, "status": "IN_PROGRESS"}``` | 
+| UPDATE | localhost:8080/trucks/:id/status | PATCH   | Changes status property of a Route                                     | ```"COMPLETED"```                          | ```{"id": 1, "deliveries": [...], "truck": {...}, "status": "COMPLETED"}``` |
+| CREATE | localhost:8080/trucks            | POST    | Creates new Route and assigns a Truck with ```IN_DEPOT``` availability | N/A                                        |  ```{"id": 7, "deliveries": [], "truck": {...}, "status": "PENDING}```|
+|        | localhost:8080/generateRoutes    | POST    | Clusters all undelivered deliveries and assigns them to a newly generated Route entity | N/A | ```[ {"id": 1, "deliveries": [...], "truck": {...}, "status": "IN_PROGRESS"}, ... ]``` |
 
 
 ## Other Deliverables
