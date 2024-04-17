@@ -52,8 +52,12 @@ const RoutesContainer = () => {
     return ( 
         <>
             <h2>Delivery Routes</h2>
-            <RouteSearch setSearchValue={setSearchValue}/>
-            <RouteSort setSortValue={setSortValue}/>
+
+            <section className='filteringForms'>
+                <RouteSearch setSearchValue={setSearchValue}/>
+                <RouteSort setSortValue={setSortValue}/>
+            </section>
+
             <RouteList routes={filteredRoutes} patchRoutes={patchRoutes} />
             <RouteMap />
         </>

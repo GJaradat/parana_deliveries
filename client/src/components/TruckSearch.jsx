@@ -3,7 +3,7 @@ const TruckSearch = ( {setSearchValue} ) => {
         <>
             <form >
                 <input 
-                    className="truck_search"
+                    className="search"
                     type="text"
                     placeholder="Search Truck Name..."
                     onChange={(event)=>{setSearchValue(event.target.value)}}

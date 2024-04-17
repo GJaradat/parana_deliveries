@@ -5,7 +5,7 @@ const TruckSort = ( {setSortValue} ) => {
         <>
         <section className="sort">
             <select 
-                    id="sort_text"
+                    className="sort_text"
                     defaultValue="select-availability-status"
                     onChange={(event) => setSortValue(event.target.value)}>
                 <option disabled value={"select-availability-status"}>Sort by Availability</option>
