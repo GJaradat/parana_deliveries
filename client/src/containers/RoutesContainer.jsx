@@ -98,7 +98,7 @@ const RoutesContainer = () => {
                     
             <div id='Routes-content'>
                 <RouteList routes={filteredRoutes} patchRoutes={patchRoutes} displayedRoutes={displayedRoutes} setDisplayedRoutes={setDisplayedRoutes}/>
-                <RouteMap routes={filteredRoutes} deliveries={null} optRoutes={optRoutes} displayedRoutes={displayedRoutes}/>
+                <RouteMap routes={filteredRoutes} deliveries={null} optRoutes={optRoutes} displayedRoutes={displayedRoutes} setDisplayedRoutes={setDisplayedRoutes}/>
             </div>
         </section>
      );

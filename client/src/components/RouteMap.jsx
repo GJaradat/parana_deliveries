@@ -2,7 +2,7 @@ import React,{ createElement, useEffect, useRef, useState } from "react";
 import mapboxgl, {Marker} from "mapbox-gl";
 import "../styles/RouteMapStyles.css";
 
-const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes } ) => {
+const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes, setDisplayedRoutes } ) => {
     
     const mapContainerRef = useRef(null);
     const map = useRef(null);
@@ -10,6 +10,8 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes } ) => {
     const [lat,setLat] = useState(51.501476);
     const [lng,setLng] = useState(-0.140634);
     const [zoom, setZoom] = useState(10);
+    const [routesVisible, setRoutesVisible] = useState(false);
+
     const [displayedMarkers, setDisplayedMarkers] = useState([]);
     const [displayedRouteLayers, setDisplayedRouteLayers] = useState([]);
 
@@ -143,10 +145,23 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes } ) => {
         });
     }
 
+    const handleDisplayAll = () => {
+        const displayAll = routes.map( async ( route ) => {
+            if (displayedRoutes.includes(route.id)) {
+                await setDisplayedRoutes(displayedRoutes => displayedRoutes.filter(id => id !== route.id));
+            } else {
+                await setDisplayedRoutes(displayedRoutes => [...displayedRoutes, route.id]);
+            }
+        })
+        const finished = Promise.all(displayAll)
+        setRoutesVisible(!routesVisible);
+
+    }
+
     return ( 
         <>
             <div>
-                {routes && routes.length > 0 && <button id='make-route-button'>Display All Routes</button>}
+                {routes && routes.length > 0 && <button id='make-route-button' onClick={handleDisplayAll}>{ routesVisible ? "Hide All Routes" : "Show All Routes" }</button>}
                 <div ref={mapContainerRef} className="map-container" />
             </div>
         </>
