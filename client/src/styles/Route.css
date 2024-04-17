@@ -1,0 +1,15 @@
+main {
+    display: inline-flex;
+    justify-content: center;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.route-container {
+    text-align: center;
+    background-color: #F6D779;
+    height: fit-content;
+    width: 500px;
+    padding-bottom: 15px;
+    border-radius: 10px;
+}

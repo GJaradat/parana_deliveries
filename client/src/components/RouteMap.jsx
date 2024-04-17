@@ -2,7 +2,7 @@ import React,{ createElement, useEffect, useRef, useState } from "react";
 import mapboxgl, {Marker} from "mapbox-gl";
 import "../styles/RouteMapStyles.css";
 
-const RouteMap = ( {} ) => {
+const RouteMap = ( { routes, deliveries } ) => {
     
     const mapContainerRef = useRef(null);
     const map = useRef(null);
@@ -12,7 +12,7 @@ const RouteMap = ( {} ) => {
     const [zoom, setZoom] = useState(12);
     const [optRoutes, setOptRoutes] = useState([]);
 
-    const [routes, setRoutes] = useState(null);
+    // const [routes, setRoutes] = useState(null);
 
     mapboxgl.accessToken = `${process.env.REACT_APP_MAPBOX_KEY}`;
 
@@ -30,30 +30,27 @@ const RouteMap = ( {} ) => {
           center: [lng, lat],
           zoom: zoom
         });
-        getRoutes();
         }, []);
         
     useEffect(() => {
         if (routes !== null){
-        
             routes.forEach((route)=> {
-                displayMarkers(route);
+                displayMarkers(route.deliveries);
             })
         }
     },[routes])
+
+    useEffect(() => {
+        if (deliveries !== null){
+            displayMarkers(deliveries);
+        }
+    },[deliveries])
 
     const generateRoutes = async () => {
         const response = await fetch("http://localhost:8080/routes/generateRoutes",{
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify()
     })
-    }
-
-    const getRoutes = async () => {
-        const response = await fetch("http://localhost:8080/routes");
-        const jsonData = await response.json();
-        setRoutes(jsonData);
     }
     
     const generateCoordinates = (route) => {
@@ -94,9 +91,9 @@ const RouteMap = ( {} ) => {
 
     }
 
-    const displayMarkers = (route) => {
+    const displayMarkers = (deliveries) => {
         // Create a HTML element for each marker
-        route.deliveries.forEach(delivery => {
+        deliveries.forEach(delivery => {
             const el = createElement('div', {className: 'marker'});
             let coord = [delivery.location.longitude,delivery.location.latitude]
             // Make a popup to attach to marker

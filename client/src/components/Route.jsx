@@ -1,7 +1,10 @@
 import { useState } from "react";
 import DeliveryList from "./DeliveryList";
+import "../styles/Route.css";
 
 const Route = ({route, patchRoutes}) => {
+
+    const [expandButtonStatus, setExpandButtonStatus] = useState(false)
 
     const[routeStatus, setRouteStatus] = useState(route.status);
 
@@ -17,9 +20,21 @@ const Route = ({route, patchRoutes}) => {
         alert("Route status successfully updated!")
     }
 
+    const handleExpandStatus = () => {
+        setExpandButtonStatus((expandButtonStatus) => !expandButtonStatus);
+    }
+
+    const toggleButtonLable = () => {
+        return expandButtonStatus ? "Less" : "More";
+    }
+
     return ( 
         <>
+        <section className="route-container">
             <h3>Route {route.id}</h3>
+            <button onClick={handleExpandStatus}>{toggleButtonLable()}</button>
+            <button>Display route</button>
+
         <article id="statusContainer">
             <p>Status: </p>
             <select 
@@ -37,6 +52,7 @@ const Route = ({route, patchRoutes}) => {
                 <div>
                     <DeliveryList deliveries = {route.deliveries} />
                 </div>  
+        </section>
         </>
      );
 }
