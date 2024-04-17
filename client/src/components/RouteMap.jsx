@@ -132,9 +132,9 @@ const RouteMap = ( { routes, deliveries } ) => {
     return ( 
         <>
             <div>
+                {routes && routes.length > 0 && <button id='make-route-button' onClick={calculateRoutes}>Display All Routes</button>}
                 <div ref={mapContainerRef} className="map-container" />
             </div>
-            {routes && routes.length > 0 && <button onClick={calculateRoutes}>make routes</button>}
         </>
      );
 }

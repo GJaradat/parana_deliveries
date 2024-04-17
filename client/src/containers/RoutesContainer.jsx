@@ -58,6 +58,7 @@ const RoutesContainer = () => {
                     <RouteSearch setSearchValue={setSearchValue}/>
                     <RouteSort setSortValue={setSortValue}/>
                     </div>
+                    
             <div id='Routes-content'>
                 <RouteList routes={filteredRoutes} patchRoutes={patchRoutes} />
                 <RouteMap routes={filteredRoutes} deliveries={null}/>

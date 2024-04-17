@@ -40,6 +40,7 @@
 #statusContainer{
     display: flex;
     justify-content: center;
+    padding: 10px;
    
 }
 
@@ -54,3 +55,23 @@
     margin-top: 2px;
 }
 
+.delivery-list {
+    align-items: center;
+    margin: 30px;
+}
+
+#delivery {
+    text-align: start;
+    border-color: #413763;
+    border-style: solid;
+    border-radius: 5px;
+    margin: 5px;
+    border-width: 2px;
+    padding: 10px;
+    background-color: #504476;
+    color: white;
+}
+
+#delivery-id {
+    font-weight: bold;
+}
