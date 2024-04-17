@@ -1,4 +1,4 @@
-header {
+header{
     background-image: url("../assets/header_image_2.jpg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -20,13 +20,17 @@ header {
     padding-top: 7px;
     padding-bottom: 7px;
 
+    position: absolute;
+
     border-radius: 4px;
     background-color: #F6D779;
-    color: black;
+    color: #2D304E;
     font-size: 25px;
+    font-weight: 600;
 }
 
 .navButton:hover {
-    font-weight: 600;
+    font-weight: 800;
     background-color: #F0BA19;
+    transform: scale(1.05);
 }
