@@ -2,15 +2,22 @@
   text-align: center;
 }
 
-header {
+body {
   background-color: azure;
-  padding: 10px;
 }
 
 #root{
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+
+
+header {
+  background-color:#058b70;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
 }
 
 #headerLogo{
