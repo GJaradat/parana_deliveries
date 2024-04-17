@@ -134,6 +134,14 @@ For a tutorial of the MapBox Optimisation API v1, click [here](https://docs.mapb
 ![Trucks](https://github.com/GJaradat/parana_deliveries/assets/108727885/7c88bc3d-9f66-464e-bda7-2090402d593c)
 ![Routes](https://github.com/GJaradat/parana_deliveries/assets/108727885/7f3bdd51-1d5d-4cec-ac12-93b3af7d2e6f)
 
+### Trucks
+|        | URL                              | Method  | Description                              | Example Request Body                    | Example Response |
+|--------|:--------------------------------:|:-------:|:-----------------------------------------|-----------------------------------------|------------------|
+| INDEX  | localhost:8080/trucks            | GET     | Returns all Truck entities               | N/A                                     | ```[ {"id": 1, "name": "Sloth", "imageURL":"https://...", "capacity": 2000, "availability": "IN_DEPOT", "routes": [...]}, ... ]```
+| SHOW   | localhost:8080/trucks/:id        | GET     | Returns Truck entity with matching id    | N/A                                     | ```{"id": 2, "name": "Gorilla", "imageURL":"https://...", "capacity": 500, "availability": "OUT_FOR_DELIVERY", "routes": [...]}```|
+| UPDATE | localhost:8080/trucks/:id/status | PATCH   | Changes availability property of a Truck | ```"OUT_FOR_DELIVERY"```                | ```{"id": 1, "name": "Sloth", "imageURL":"https://...", "capacity": 2000, "availability": "OUT_FOR_DELIVERY", "routes": [...]}```|
+| CREATE | localhost:8080/trucks            | POST    | Creates new Truck                        | ```"name": "Piranha", "capacity": 1000```|  ```{"id": 1, "name": "Piranha", "imageURL":"https://...", "capacity": 1000, "availability": "IN_DEPOT", "routes": []}```|
+
 
 ## Other Deliverables
 These can be found in the projectDeliverables folder and contain the following:
