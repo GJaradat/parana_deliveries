@@ -4,6 +4,8 @@ import RouteMap from '../components/RouteMap';
 import RouteSort from '../components/RouteSort';
 import RouteSearch from '../components/RouteSearch';
 
+import "../styles/RoutesContainerStyles.css"
+
 const RoutesContainer = () => {
     
     const [routes, setRoutes] = useState([]);
@@ -50,17 +52,17 @@ const RoutesContainer = () => {
     })
     
     return ( 
-        <>
-            <h2>Delivery Routes</h2>
-
-            <section className='filteringForms'>
-                <RouteSearch setSearchValue={setSearchValue}/>
-                <RouteSort setSortValue={setSortValue}/>
-            </section>
-
-            <RouteList routes={filteredRoutes} patchRoutes={patchRoutes} />
-            <RouteMap />
-        </>
+        <section className='RoutesContainer'>
+                <h2>Delivery Routes</h2>
+                    <div>
+                    <RouteSearch setSearchValue={setSearchValue}/>
+                    <RouteSort setSortValue={setSortValue}/>
+                    </div>
+            <div id='Routes-content'>
+                <RouteList routes={filteredRoutes} patchRoutes={patchRoutes} />
+                <RouteMap routes={filteredRoutes} deliveries={null}/>
+            </div>
+        </section>
      );
 }
  

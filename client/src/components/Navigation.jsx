@@ -1,25 +1,30 @@
-import { Link, Outlet} from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
+import logo from "../assets/logo-horizontal-filled3.png";
 import "../styles/Navigation.css";
 
 const Navigation = () => {
     return ( 
         <>
+        <header>
+            <img id="headerLogo" src={logo} alt="logo" />
             <nav>
                 <ul id="navbar">
                     <li>
-                        <Link id="fleetLink" to="/fleet">Fleet</Link>
+                        <Link className="navButton" to="/fleet">Fleet</Link>
                     </li> 
 
                     <li>
-                        <Link id="routesLink" to="/routes">Routes</Link>
+                        <Link className="navButton" to="/routes">Routes</Link>
                     </li>
 
                     <li>
-                        <Link id="deliveriesLink" to="/deliveries">Deliveries</Link>
+                        <Link className="navButton" to="/deliveries">Deliveries</Link>
                     </li>
                 </ul>
             </nav>
-        <Outlet />
+      </header>
+    <Outlet /> 
+
     </>
      );
 }

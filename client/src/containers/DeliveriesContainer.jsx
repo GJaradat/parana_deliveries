@@ -18,6 +18,7 @@ const DeliveriesContainer = () => {
 
     return ( 
         <>
+            <RouteMap routes={null} deliveries={deliveries}/>
             <p>Hello from Deliveries Container</p>
             <DeliveryList deliveries={deliveries} />
             <RouteMap />

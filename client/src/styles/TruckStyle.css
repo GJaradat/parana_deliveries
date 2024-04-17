@@ -1,10 +1,6 @@
-body {
-    background-color: #058b70;
-}
-
 #fleet_title {
     margin-left: 40px;
-    color: white;
+    color: #2D304E;
     font-size: xx-large;
 }
 
@@ -47,7 +43,7 @@ h3 {
     border-radius: 10px;
     float: left;
     padding-left: 10px;
-    border-color: #000000;
+    border-color: #2D304E;
     border-width: 2px;
 }
 
@@ -67,8 +63,9 @@ h3 {
     height: 45px;
     border-radius: 10px;
     background-color: white;
-    border-color: black;
-    border-width: 2px;
+    border-color: #2D304E;
+    border-width: 3px;
+    border-style: inset;
     font-size: 16px;
 }
 
