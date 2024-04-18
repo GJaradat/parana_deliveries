@@ -1,3 +1,25 @@
 .hide-header header{
     display: none;
 }
+
+#logoContainer {
+    margin-left: 35%;
+    margin-right: 50%;
+    margin-top: 90px;
+}
+/* 
+#crown{
+    max-width: 0px;
+    max-height: 1px;
+
+
+}
+ */
+
+ /* #homepage {
+    background-image: url("../assets/homepageImage.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: top;
+ } */

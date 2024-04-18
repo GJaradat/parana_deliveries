@@ -1,6 +1,8 @@
+import "../styles/HomePageStyle.css";
+import crown from "../assets/crown.png";
 import Navigation from "../components/Navigation";
-import logo from "../assets/logo_vertical_parana.png"
-import {useEffect} from "react"
+import logo from "../assets/logo_vertical_parana.png";
+import {useEffect} from "react";
 
 
 const HomepageContainer = () => {
@@ -23,12 +25,15 @@ const HomepageContainer = () => {
      }, []);
 
     return ( 
-        <>
-            <div id="logo-container">
+        <section id="homepage">
+        {/* <div id="crown">
+            <img src={crown} alt="crown"/>
+        </div> */}
+            <div id="logoContainer">
                 <img src={logo} alt="logo" id="home-logo"></img>
             </div>
             < Navigation/>
-        </>
+        </section>
      );
 }
  
