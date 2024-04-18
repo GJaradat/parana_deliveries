@@ -61,6 +61,9 @@ function App() {
           <p>Accessibility</p>
           <p>© 1997-2024 Paraná Inc. or its affiliates</p>
         </section>
+        <audio controls>
+            <source src="Rainforest.mp3" type="audio/mpeg"/>
+        </audio>
       </footer>
     </>
   );
