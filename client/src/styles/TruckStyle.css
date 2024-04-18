@@ -95,4 +95,11 @@ h3 {
     margin-top: 10px;
     height: 30px;
     background-color: #da9938;
+    cursor: pointer;
 }
+
+#sound-button {
+    all: unset;
+    cursor: pointer;
+}
+

@@ -55,14 +55,14 @@ const FleetContainer = () => {
 
     
     return ( 
-        <>
+        <section className='main'>
             <h2 className='page_title'>Delivery Fleet</h2>
             <section className='filteringForms'>
                 <TruckSearch setSearchValue={setSearchValue} />
                 <TruckSort setSortValue={setSortValue} />
             </section>
             <TruckList trucks={filteredTrucks} patchTrucks={patchTrucks}  />
-        </>
+        </section>
      );
 }
  
