@@ -41,6 +41,17 @@ const Truck = ({ truck, patchTrucks }) => {
         setIsOpen(!modalIsOpen)
     }
 
+    const modalStyle = {content: {
+        height: "10%",
+        width: "20%",
+        margin: "auto",
+        textAlign: "center",
+        color:"#11464A",
+        backgroundColor: "white"
+    },
+    overlay: {
+        backgroundColor: 'rgba(64,46,83, 0.65)'
+    }}
     
     return ( 
         <>
@@ -71,16 +82,10 @@ const Truck = ({ truck, patchTrucks }) => {
                     isOpen={modalIsOpen}
                     onRequestClose={toggleModal}
                     contentLabel="Update Status Message"
-                    style={
-                        {content: {
-                            height: "10%",
-                            width: "20%",
-                            margin: "auto"
-                        }}
-                    }
+                    style={modalStyle}
                 >
-                    <div className="update-message">
-                        <h4>Truck availability successfully updated!</h4>
+                    <div id="update-message">
+                        <h3>Truck availability successfully updated!</h3>
                     </div>
                 </ReactModal>
 
