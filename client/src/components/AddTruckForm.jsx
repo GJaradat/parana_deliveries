@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "../styles/AddTruckFormStyles.css"
 
 const AddTruckForm = ({trucks, setTrucks, postTruck}) => {
     const[truckName, setTruckName] = useState("");
@@ -24,7 +25,7 @@ const AddTruckForm = ({trucks, setTrucks, postTruck}) => {
 
     return ( 
         <section id="addTruckContainer">
-        <h3>Add New Animal (Truck):</h3>
+        <h3 id="addtruckTitle">Add New Animal (Truck):</h3>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="newTruckName"> New Truck Name: </label>
                 <input id="newTruckName"type="text" required value={truckName} onChange={(e)=>{setTruckName(e.target.value)}} />
@@ -34,7 +35,7 @@ const AddTruckForm = ({trucks, setTrucks, postTruck}) => {
 
                 <label htmlFor="newTruckCapacity"> Capacity: </label>
                 <input id="newTruckCapacity"type="number" min={0}  value={capacity} required onChange={(e)=>{setCapacity(e.target.value)}} />
-                <input type="submit" />
+                <input className="dark-button"type="submit" />
 
             </form>
         </section>
