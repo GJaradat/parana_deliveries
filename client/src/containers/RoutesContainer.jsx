@@ -90,13 +90,13 @@ const RoutesContainer = () => {
     })
 
     const handleDisplayAll = () => {
-        const displayAll = routes.map( ( route ) => {
+
+        const displayAll = filteredRoutes.map( ( route ) => {
             if (routesVisible) {
                 setDisplayedRoutes(displayedRoutes => displayedRoutes.filter(id => id !== route.id));
             } else {
                 setDisplayedRoutes(displayedRoutes => [...displayedRoutes, route.id]);
             }
-            //displayedRoutes.includes(route.id)
         })
         const finished = Promise.all(displayAll)
         setRoutesVisible(!routesVisible);
