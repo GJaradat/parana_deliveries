@@ -7,7 +7,6 @@ import FleetContainer from './containers/FleetContainer';
 import HomepageContainer from './containers/HomepageContainer';
 import DeliveriesContainer from './containers/DeliveriesContainer';
 import Navigation from './components/Navigation';
-import logo from "./assets/logo_horizontal_parana.png";
 
 function App() {
 

@@ -27,7 +27,6 @@ const FleetContainer = () => {
             body: JSON.stringify(truck.availability)
         });
         await loadTrucks();
-        console.log(truck.availability);
     }
 
 
