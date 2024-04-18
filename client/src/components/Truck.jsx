@@ -97,7 +97,7 @@ const Truck = ({ truck, patchTrucks }) => {
                         <h3>Truck availability successfully updated!</h3>
                     </div>
                 </ReactModal>
-                
+            </section>
         </>
      );
 }
