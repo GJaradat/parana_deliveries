@@ -49,7 +49,7 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes, routesVisib
             displayedRoutes.forEach( (dispRouteIdx) => {
                 if (!displayedRouteLayers.includes(dispRouteIdx)){
                     displayRoutes(dispRouteIdx);
-                    displayMarkers(routes[dispRouteIdx-1].deliveries);
+                    displayMarkers(routes.find(route => route.id === dispRouteIdx).deliveries);
                     setDisplayedRouteLayers(displayedRouteLayers => [...displayedRouteLayers, dispRouteIdx])
                 }
             })
@@ -139,7 +139,7 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes, routesVisib
                 setDisplayedRouteLayers(prevLayers => prevLayers.filter(layerIdx => layerIdx !== dispRouteIdx));
 
                 // remove markers
-                clearMarkers(routes[dispRouteIdx-1].deliveries);
+                clearMarkers(routes.find(route => route.id === dispRouteIdx).deliveries);
             }
         });
     }
