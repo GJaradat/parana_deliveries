@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DeliveryList from "./DeliveryList";
 import "../styles/Route.css";
 import ReactModal from "react-modal";
 
-const Route = ({route, patchRoutes, displayedRoutes, setDisplayedRoutes}) => {
+const Route = ({route, patchRoutes, displayedRoutes, setDisplayedRoutes, routesVisible}) => {
 
     const [expandButtonStatus, setExpandButtonStatus] = useState(false)
 
@@ -45,6 +45,14 @@ const Route = ({route, patchRoutes, displayedRoutes, setDisplayedRoutes}) => {
         setIsOpen(!modalIsOpen)
     }
 
+    useEffect(()=>{
+        if (routesVisible){
+            setRouteVisible(true);
+        } else {
+            setRouteVisible(false);
+        }
+    }, [routesVisible])
+
     return ( 
         <>
         <main>
@@ -57,7 +65,6 @@ const Route = ({route, patchRoutes, displayedRoutes, setDisplayedRoutes}) => {
                     defaultValue={route.status}
                     onChange={(e) => {setRouteStatus(e.target.value)}}
                     >
-                    <option value="PENDING">Pending</option>
                     <option value="IN_PROGRESS">In Progress</option>
                     <option value="COMPLETED">Completed</option>
                 </select>
