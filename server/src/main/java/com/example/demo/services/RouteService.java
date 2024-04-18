@@ -23,7 +23,7 @@ public class RouteService {
     DeliveryRepository deliveryRepository;
 
     public List<Route> getAllRoutes() {
-        return routeRepository.findAll();
+        return routeRepository.findAllByOrderByIdAsc();
     }
 
     public Optional<Route> getRouteById(long id){
