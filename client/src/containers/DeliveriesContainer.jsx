@@ -26,7 +26,6 @@ const DeliveriesContainer = () => {
                 <RouteMap routes={null} deliveries={deliveries}/>
             </section>
         </section>
-        </section>
 
     );
 }
