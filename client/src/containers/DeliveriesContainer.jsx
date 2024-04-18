@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
-import DeliveryList from '../components/DeliveryList'
-
-import RouteMap from "../components/RouteMap"
+import RouteMap from "../components/RouteMap";
 
 
 const DeliveriesContainer = () => {
@@ -14,13 +12,22 @@ const DeliveriesContainer = () => {
         setDeliveries(jsonData);
     }
 
+    const postDelivery = async (deliveryDTO) => {
+        const response = await fetch("http://localhost:8080/deliveries",{
+            method:"POST",
+            headers: {"Content-Type": "application/json"},
+            body:JSON.stringify(deliveryDTO)
+        });
+        const savedDelivery = await response.json()
+        setDeliveries([...deliveries,savedDelivery])
+    }
     useEffect(() => {
         loadDeliveries();
     }, [])
 
     return ( 
         <>
-            <RouteMap routes={null} deliveries={deliveries}/>
+            <RouteMap routes={null} deliveries={deliveries} postDelivery={postDelivery} />
         </> 
     );
 }

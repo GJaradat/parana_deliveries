@@ -1,5 +1,6 @@
 import React,{ createElement, useEffect, useRef, useState } from "react";
 import mapboxgl, {Marker} from "mapbox-gl";
+import DeliveryForm from "./DeliveryForm";
 import "../styles/RouteMapStyles.css";
 
 const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes, routesVisible, handleDisplayAll } ) => {
@@ -154,6 +155,9 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes, routesVisib
                     <span id="delivered-label">Delivered</span> <span id="not-delivered-label">Out for delivery</span>
                 </div>
                 <div ref={mapContainerRef} className="map-container" />
+            </div>
+            <div>
+                <DeliveryForm />
             </div>
         </>
      );
