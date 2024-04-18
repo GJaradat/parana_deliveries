@@ -1,0 +1,26 @@
+#addTruckContainer {
+    margin-left: 40px;
+    margin-top: 20px;
+    
+    padding-bottom: 10px;
+    padding-left: 10px;
+    width: 55%;
+
+    border: 2px solid black;
+    border-radius: 7px;
+    border-color: #2D304E;
+    border-width: 3px;
+    border-style: inset;
+    
+}
+
+#addtruckTitle{
+    color:#3c3f59;
+    font-size: 20px;
+}
+
+#newTruckName, #newTruckImage, #newTruckCapacity {
+    background-color: rgb(247, 238, 228);
+    border-radius: 5px;
+    margin-right: 3px;
+}
