@@ -82,6 +82,7 @@ const Truck = ({ truck, patchTrucks }) => {
                     isOpen={modalIsOpen}
                     onRequestClose={toggleModal}
                     contentLabel="Update Status Message"
+                    ariaHideApp={false}
                     style={modalStyle}
                 >
                     <div id="update-message">
