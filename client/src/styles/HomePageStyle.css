@@ -3,10 +3,14 @@
 }
 
 #logoContainer {
-    margin-left: 35%;
+    margin-left: 38%;
     margin-right: 50%;
-    margin-top: 90px;
+    margin-top: 40px;
+    max-height: 400px;
+    padding-bottom: 100px;
 }
+
+
 /* 
 #crown{
     max-width: 0px;
