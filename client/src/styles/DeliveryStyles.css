@@ -1,0 +1,11 @@
+#deliveries-map {
+    width: 85%;
+    height: 75w;
+    align-content: center;
+    margin: auto;
+}
+
+#deliveries-map .map-key{
+    margin-top: 25px;
+    margin-right: 10%;
+}
