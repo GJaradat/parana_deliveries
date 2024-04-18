@@ -32,10 +32,12 @@ header {
   flex-grow: 1;
   padding-bottom: 10px;
   }
+
 footer {
   height: 2rem;
   text-align: center;
 }
+
 .footer-links {
   display: flex;
   flex-wrap: wrap;
@@ -44,4 +46,28 @@ footer {
   background-color: #07ad8cca;
   width: 100vw;
 }
+
+.footer-link {
+  all: unset;
+  cursor: pointer;
+}
  
+
+.audio {
+  margin-top: 10px;
+}
+
+audio::-webkit-media-controls-panel {
+    background-color: #00B893;
+    
+  }
+
+audio::-webkit-media-controls-play-button{
+  background-color: #008F72;
+  border-radius: 50px;
+}
+
+audio::-webkit-media-controls-mute-button{
+  background-color: #008F72;
+  border-radius: 50px;
+}

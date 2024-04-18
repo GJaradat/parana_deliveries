@@ -6,7 +6,9 @@ const Navigation = () => {
     return ( 
         <>
         <header>
-            <img id="headerLogo" src={logo} alt="logo" />
+            <Link id="homeButton" to="/home">
+                <img id="headerLogo" src={logo} alt="logo" />
+            </Link>
             <nav>
                 <ul id="navbar">
                     <li>

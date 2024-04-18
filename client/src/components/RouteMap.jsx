@@ -2,7 +2,7 @@ import React,{ createElement, useEffect, useRef, useState } from "react";
 import mapboxgl, {Marker} from "mapbox-gl";
 import "../styles/RouteMapStyles.css";
 
-const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes, setDisplayedRoutes } ) => {
+const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes, routesVisible, handleDisplayAll } ) => {
     
     const mapContainerRef = useRef(null);
     const map = useRef(null);
@@ -10,7 +10,6 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes, setDisplaye
     const [lat,setLat] = useState(51.501476);
     const [lng,setLng] = useState(-0.140634);
     const [zoom, setZoom] = useState(10);
-    const [routesVisible, setRoutesVisible] = useState(false);
 
     const [displayedMarkers, setDisplayedMarkers] = useState([]);
     const [displayedRouteLayers, setDisplayedRouteLayers] = useState([]);
@@ -50,14 +49,14 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes, setDisplaye
             displayedRoutes.forEach( (dispRouteIdx) => {
                 if (!displayedRouteLayers.includes(dispRouteIdx)){
                     displayRoutes(dispRouteIdx);
-                    displayMarkers(routes[dispRouteIdx-1].deliveries);
+                    displayMarkers(routes.find(route => route.id === dispRouteIdx).deliveries);
                     setDisplayedRouteLayers(displayedRouteLayers => [...displayedRouteLayers, dispRouteIdx])
                 }
             })
         }
     }, [displayedRoutes]);
 
-    const routeColours = ["#009e73", "#F0BA19", "#0071b2", "#e69d00", "#d55c00", "#f079a7", "#000000"]
+    const routeColours = ["#009e73", "#522888", "#0071B2", "#E69D00", "#F079A7", "#D55C00", "#000000"]
 
     const chooseColour = (index) => {
         const colourIndex = index % routeColours.length;
@@ -140,28 +139,20 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes, setDisplaye
                 setDisplayedRouteLayers(prevLayers => prevLayers.filter(layerIdx => layerIdx !== dispRouteIdx));
 
                 // remove markers
-                clearMarkers(routes[dispRouteIdx-1].deliveries);
+                clearMarkers(routes.find(route => route.id === dispRouteIdx).deliveries);
             }
         });
     }
 
-    const handleDisplayAll = () => {
-        const displayAll = routes.map( async ( route ) => {
-            if (displayedRoutes.includes(route.id)) {
-                await setDisplayedRoutes(displayedRoutes => displayedRoutes.filter(id => id !== route.id));
-            } else {
-                await setDisplayedRoutes(displayedRoutes => [...displayedRoutes, route.id]);
-            }
-        })
-        const finished = Promise.all(displayAll)
-        setRoutesVisible(!routesVisible);
-
-    }
+    
 
     return ( 
         <>
             <div>
                 {routes && routes.length > 0 && <button id='make-route-button' onClick={handleDisplayAll}>{ routesVisible ? "Hide All Routes" : "Show All Routes" }</button>}
+                <div className="map-key">
+                    <span id="delivered-label">Delivered</span> <span id="not-delivered-label">Out for delivery</span>
+                </div>
                 <div ref={mapContainerRef} className="map-container" />
             </div>
         </>

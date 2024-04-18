@@ -36,10 +36,16 @@ function App() {
           element: <DeliveriesContainer />
         }
       ]
-  }
-  
- 
+    }
   ]);
+
+  const displayPrivacyNotice = () => {
+    alert("We literally know where you live")
+  }
+
+  const cookieTime = () => {
+    alert("Have a cookie 🍪")
+  }
 
   return (
     <>
@@ -48,12 +54,17 @@ function App() {
       {/* </main> */}
 
       <footer>
+        <div className='audio'>
+          <audio controls>
+            <source src="Rainforest.mp3" type="audio/mpeg"/>
+          </audio>
+        </div>
         <section className='footer-links'>
-          <p>Conditions of Use & Sale</p>
-          <p>Privacy Notice</p>
-          <p>Cookies Notice</p>
-          <p>Interest-Based Ads Notice</p>
-          <p>© 1996-2024, Paraná.com, Inc. or its affiliates</p>
+          <p>T&Cs</p>
+          <button onClick={displayPrivacyNotice} className='footer-link'>Privacy Notice</button>
+          <button onClick={cookieTime} className='footer-link'>Cookies Notice</button>
+          <p>Accessibility</p>
+          <p>© 1997-2024 Paraná Inc. or its affiliates</p>
         </section>
       </footer>
     </>
