@@ -3,6 +3,7 @@ import '../styles/TruckStyle.css';
 const Truck = ({ truck, patchTrucks }) => {
 
     const[availabilityState, setAvailabilityState] = useState(truck.availability);
+    
 
     const handleClick = (e) =>{
         e.preventDefault();
@@ -35,7 +36,7 @@ const Truck = ({ truck, patchTrucks }) => {
 
     const handleAudioClick = () => {
         let audio = new Audio();
-        audio.src= "Rainforest.mp3";
+        audio.src= `${truck.name}.mp3`;
         audio.play();
     }
 
@@ -43,7 +44,9 @@ const Truck = ({ truck, patchTrucks }) => {
         <>
             <article className='truck'>
                 <h3>{truck.name} Truck</h3>
-                <img id="truckImage" src={truck.imageURL} alt="truck picture"/> 
+                <button id="sound-button" onClick={handleAudioClick}>
+                    <img id="truckImage" src={truck.imageURL} alt="truck picture"/>
+                </button> 
                 <p>Capacity: {truck.capacity} kg</p>
 
                 <article id='availabilityContainer'>
@@ -60,8 +63,6 @@ const Truck = ({ truck, patchTrucks }) => {
                     </select>
                     <button id="availabilityButton" onClick={handleClick}>Update</button>
                 </article>
-                <button id="sound-button" onClick={handleAudioClick}>Play</button>
-              
             </article>
 
         </>
