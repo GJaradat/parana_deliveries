@@ -82,6 +82,7 @@ const Route = ({route, patchRoutes, displayedRoutes, setDisplayedRoutes, routesV
                     isOpen={modalIsOpen}
                     onRequestClose={toggleModal}
                     contentLabel="Update Status Message"
+                    ariaHideApp={false}
                     style={
                         {content: {
                             height: "10%",
