@@ -33,7 +33,12 @@ const Truck = ({ truck, patchTrucks }) => {
         return value;
     }
 
-    
+    const handleAudioClick = () => {
+        let audio = new Audio();
+        audio.src= "Rainforest.mp3";
+        audio.play();
+    }
+
     return ( 
         <>
             <article className='truck'>
@@ -55,6 +60,7 @@ const Truck = ({ truck, patchTrucks }) => {
                     </select>
                     <button id="availabilityButton" onClick={handleClick}>Update</button>
                 </article>
+                <button id="sound-button" onClick={handleAudioClick}>Play</button>
               
             </article>
 
