@@ -53,6 +53,18 @@ const Route = ({route, patchRoutes, displayedRoutes, setDisplayedRoutes, routesV
         }
     }, [routesVisible])
 
+    const modalStyle = {content: {
+        height: "10%",
+        width: "20%",
+        margin: "auto",
+        textAlign: "center",
+        color:"#11464A",
+        backgroundColor: "white"
+    },
+    overlay: {
+        backgroundColor: 'rgba(64,46,83, 0.65)'
+    }}
+
     return ( 
         <>
         <main>
@@ -83,16 +95,10 @@ const Route = ({route, patchRoutes, displayedRoutes, setDisplayedRoutes, routesV
                     onRequestClose={toggleModal}
                     contentLabel="Update Status Message"
                     ariaHideApp={false}
-                    style={
-                        {content: {
-                            height: "10%",
-                            width: "20%",
-                            margin: "auto"
-                        }}
-                    }
+                    style={modalStyle}
                 >
                     <div className="update-message">
-                        <h4>Route status successfully updated!</h4>
+                        <h3>Route status successfully updated!</h3>
                     </div>
                 </ReactModal>
 
