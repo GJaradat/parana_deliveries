@@ -45,7 +45,6 @@ const RoutesContainer = () => {
             body: JSON.stringify(route.status)
         });
         await loadRoutes();
-        console.log(route.status);
     }
 
     const generateCoordinates = (route) => {
