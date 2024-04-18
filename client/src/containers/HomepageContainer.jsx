@@ -34,7 +34,7 @@ const HomepageContainer = () => {
                 <img src={logo} alt="logo" id="home-logo"></img>
             </div>
             <nav>
-                <ul id="navbar">
+                <ul id ="homepageNav">
                     <li>
                         <Link className="navButton" to="/fleet">Fleet</Link>
                     </li> 
