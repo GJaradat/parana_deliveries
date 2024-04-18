@@ -1,26 +1,14 @@
 .map-container {
-    height: 1000px;
-    width: auto;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 15px;
-    border: 2px solid black;
-    border-radius: 30px;
-    z-index: 0;
-  }
+  height: 1000px;
+  width: auto;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 15px;
+  border: 2px solid black;
+  border-radius: 30px;
+  z-index: 0;
+}
   
-.sidebar {
-    background-color: rgb(35 55 75 / 90%);
-    color: #fff;
-    padding: 6px 12px;
-    font-family: monospace;
-    z-index: 1;
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin: 12px;
-    border-radius: 4px;
-  }
 
 .mapbox-gl marker{
   background: none;
@@ -34,6 +22,7 @@
   height: 50px; 
   border-radius: 50%;
 }
+
 #make-route-button {
   margin-top: 20px;
   margin-left: 70px;
@@ -59,8 +48,10 @@
   margin: 50px;
 
   text-align: center;
+  align-self: right;
 
   z-index: 1;
+  right: 0;
   position: absolute;
   background-color: #3c3f68e0;
   color: white;
