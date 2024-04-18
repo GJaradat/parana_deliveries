@@ -1,7 +1,3 @@
-.hide-header header{
-    display: none;
-}
-
 #logoContainer {
     margin-left: 37%;
     margin-top: 100px;
@@ -23,6 +19,7 @@
 
  #homepage {
     background-image: url("../assets/homepageImage.jpeg");
+    /* background-image: url("../assets/test.gif"); */
     background-repeat: no-repeat;
     background-size: cover;
     background-position-x: center;
@@ -32,9 +29,3 @@
     flex-direction: column;
     flex-grow: 1;
  }
-
- /* #homepageBackground {
-    position: fixed;
-    z-index: -1;
-    width: 100%;
- } */
