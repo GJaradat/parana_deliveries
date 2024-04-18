@@ -58,7 +58,7 @@ function App() {
           <audio controls>
             <source src="Rainforest.mp3" type="audio/mpeg"/>
           </audio>
-        </div>
+        <div/>
         <section className='footer-links'>
           <p>T&Cs</p>
           <button onClick={displayPrivacyNotice} className='footer-link'>Privacy Notice</button>
