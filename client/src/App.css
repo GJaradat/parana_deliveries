@@ -46,4 +46,9 @@ footer {
   background-color: #0cb896ca;
   width: 100vw;
 }
+
+.footer-link {
+  all: unset;
+  cursor: pointer;
+}
  

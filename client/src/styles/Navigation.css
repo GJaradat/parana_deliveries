@@ -5,6 +5,11 @@ header{
     background-position: center center;
 }
 
+#homeButton {
+    all: unset;
+    cursor: pointer;
+}
+
 #navbar {
     display: flex;
     justify-content: space-around;
