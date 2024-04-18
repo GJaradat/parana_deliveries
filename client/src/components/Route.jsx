@@ -69,7 +69,7 @@ const Route = ({route, patchRoutes, displayedRoutes, setDisplayedRoutes, routesV
         <>
         <main>
         <section className="route-container">
-            <h3>Route {route.id}</h3>
+            <h3 id="route-title">Route {route.id}</h3>
             <article id="statusContainer">
                 <p>Status: </p>
                 <select 

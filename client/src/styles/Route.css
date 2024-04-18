@@ -76,3 +76,8 @@
 #delivery-id {
     font-weight: bold;
 }
+
+#route-title {
+    padding-top: 15px;
+    margin: 0px;
+}
