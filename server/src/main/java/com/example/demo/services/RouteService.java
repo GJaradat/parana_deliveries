@@ -44,10 +44,10 @@ public class RouteService {
             for (Delivery delivery : routeDeliveries) {
                 delivery.setDelivered(true);
                 deliveryRepository.save(delivery);
-            };
+            }
             Truck routeTruck = routeToUpdate.getTruck();
             routeTruck.setAvailability(AvailabilityEnum.IN_DEPOT);
-        };
+        }
         routeRepository.save(routeToUpdate);
         return routeToUpdate;
     }
@@ -191,7 +191,6 @@ public class RouteService {
             }
             Route newRoute = createRoute();
             newRoute.setDeliveries(cluster.getDeliveries());
-            newRoute.setStatus(StatusEnum.IN_PROGRESS);
             routeRepository.save(newRoute);
             newRoutes.add(newRoute);
             for(Delivery delivery : newRoute.getDeliveries()){
