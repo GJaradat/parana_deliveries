@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import DeliveryList from "./DeliveryList";
 import "../styles/Route.css";
+import ReactModal from "react-modal";
 
 const Route = ({route, patchRoutes, displayedRoutes, setDisplayedRoutes, routesVisible}) => {
 
@@ -8,6 +9,8 @@ const Route = ({route, patchRoutes, displayedRoutes, setDisplayedRoutes, routesV
 
     const[routeStatus, setRouteStatus] = useState(route.status);
     const [routeVisible, setRouteVisible] = useState(false);
+
+    const [modalIsOpen, setIsOpen] = useState(false);
 
     const handleClick = (e) => {
         e.preventDefault();
@@ -18,14 +21,14 @@ const Route = ({route, patchRoutes, displayedRoutes, setDisplayedRoutes, routesV
             truck: route.truck
         }
         patchRoutes(newRoute);
-        alert("Route status successfully updated!")
+        toggleModal();
     }
 
     const handleExpandStatus = () => {
         setExpandButtonStatus((expandButtonStatus) => !expandButtonStatus);
     }
 
-    const toggleButtonLable = () => {
+    const toggleButtonLabel = () => {
         return expandButtonStatus ? "Less" : "More";
     }
 
@@ -36,6 +39,10 @@ const Route = ({route, patchRoutes, displayedRoutes, setDisplayedRoutes, routesV
             setDisplayedRoutes(displayedRoutes => [...displayedRoutes, route.id]);
         }
         setRouteVisible(!routeVisible);
+    }
+
+    const toggleModal = () => {
+        setIsOpen(!modalIsOpen)
     }
 
     useEffect(()=>{
@@ -64,12 +71,31 @@ const Route = ({route, patchRoutes, displayedRoutes, setDisplayedRoutes, routesV
                 <button className="update-status-button" onClick={handleClick}>Update Status</button>
             </article>
                 <p id="truck">Truck: {route.truck.name}</p>
-            <button className="dark-button" onClick={handleExpandStatus}>{toggleButtonLable()}</button>
-            <button className="dark-button" onClick={handleDisplayButton}>{ (routeVisible) ? "Hide Route" : "Show Route" }</button>
+            <button className="dark-button" onClick={handleExpandStatus}>{toggleButtonLabel()}</button>
+            <button className="dark-button" onClick={handleDisplayButton}>{ routeVisible ? "Hide Route" : "Show Route" }</button>
             {expandButtonStatus && <>
                     <div className="delivery-list">
                         <DeliveryList deliveries = {route.deliveries} />
                     </div> </> }
+                <ReactModal 
+                    portalClassName="modal"
+                    isOpen={modalIsOpen}
+                    onRequestClose={toggleModal}
+                    contentLabel="Update Status Message"
+                    style={
+                        {content: {
+                            height: "10%",
+                            width: "20%",
+                            margin: "auto"
+                        }}
+                    }
+                >
+                    <div className="update-message">
+                        <h4>Route status successfully updated!</h4>
+                    </div>
+                </ReactModal>
+
+
         </section>
         </main>
         </>
