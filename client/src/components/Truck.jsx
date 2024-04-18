@@ -39,7 +39,7 @@ const Truck = ({ truck, patchTrucks }) => {
             <article className='truck'>
                 <h3>{truck.name} Truck</h3>
                 <img id="truckImage" src={truck.imageURL} alt="truck picture"/> 
-                <p>Capacity: {truck.capacity}</p>
+                <p>Capacity: {truck.capacity} kg</p>
 
                 <article id='availabilityContainer'>
                     <p>Availability: </p>
