@@ -41,12 +41,13 @@ public class RouteService {
         routeToUpdate.setStatus(newStatus);
         if(routeToUpdate.getStatus() == StatusEnum.COMPLETED) {
             List<Delivery> routeDeliveries = routeToUpdate.getDeliveries();
-
             for (Delivery delivery : routeDeliveries) {
                 delivery.setDelivered(true);
                 deliveryRepository.save(delivery);
-            };
-        };
+            }
+            Truck routeTruck = routeToUpdate.getTruck();
+            routeTruck.setAvailability(AvailabilityEnum.IN_DEPOT);
+        }
         routeRepository.save(routeToUpdate);
         return routeToUpdate;
     }
@@ -58,8 +59,8 @@ public class RouteService {
         if(availableTrucks.isEmpty()){
             return null;
         }
-        // create new route that will have this truck assigned to it and a status of ...PENDING
-        Route newRoute = new Route(availableTrucks.get(0), StatusEnum.PENDING);
+        // create new route that will have this truck assigned to it and a status of ...IN_PROGRESS
+        Route newRoute = new Route(availableTrucks.get(0), StatusEnum.IN_PROGRESS);
         availableTrucks.get(0).setAvailability(AvailabilityEnum.OUT_FOR_DELIVERY);
         routeRepository.save(newRoute);
         return newRoute;
@@ -190,7 +191,6 @@ public class RouteService {
             }
             Route newRoute = createRoute();
             newRoute.setDeliveries(cluster.getDeliveries());
-            newRoute.setStatus(StatusEnum.IN_PROGRESS);
             routeRepository.save(newRoute);
             newRoutes.add(newRoute);
             for(Delivery delivery : newRoute.getDeliveries()){
