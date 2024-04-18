@@ -56,7 +56,7 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes, routesVisib
         }
     }, [displayedRoutes]);
 
-    const routeColours = ["#009e73", "#F0D319", "#0071B2", "#E69D00", "#F079A7", "#D55C00", "#000000"]
+    const routeColours = ["#009e73", "#522888", "#0071B2", "#E69D00", "#F079A7", "#D55C00", "#000000"]
 
     const chooseColour = (index) => {
         const colourIndex = index % routeColours.length;
