@@ -25,6 +25,8 @@ const DeliveriesContainer = () => {
             <section id="deliveries-map">
                 <RouteMap routes={null} deliveries={deliveries}/>
             </section>
+        </section>
+
     );
 }
  
