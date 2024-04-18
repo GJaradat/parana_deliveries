@@ -19,13 +19,14 @@ const DeliveriesContainer = () => {
     }, [])
 
     return ( 
-        <>
+
+        <section className='main'>
             <h2 className='page_title'>Deliveries</h2>
             <section id="deliveries-map">
                 <RouteMap routes={null} deliveries={deliveries}/>
             </section>
-            
-        </> 
+        </section>
+
     );
 }
  
