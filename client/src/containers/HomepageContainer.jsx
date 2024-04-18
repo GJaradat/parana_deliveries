@@ -32,9 +32,6 @@ const HomepageContainer = () => {
 
     return ( 
         <section id="homepage">
-        {/* <div id="crown">
-            <img src={crown} alt="crown"/>
-        </div> */}
 
 {/*         
              <BackgroundVideo source={background} />
