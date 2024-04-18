@@ -4,11 +4,10 @@
 
 #logoContainer {
     margin-left: 37%;
-    margin-right: 50%;
     margin-top: 100px;
     max-height: 400px;
     padding-bottom: 100px;
-    max-width: 20%;
+    max-width: 10%;
 }
 
 
@@ -37,9 +36,15 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position-x: center;
-    background-position-y: top;
+    background-position-y: 25%;
 
     display: flex;
     flex-direction: column;
     flex-grow: 1;
  }
+
+ /* #homepageBackground {
+    position: fixed;
+    z-index: -1;
+    width: 100%;
+ } */

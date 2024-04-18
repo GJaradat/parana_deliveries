@@ -1,9 +1,14 @@
 import "../styles/HomePageStyle.css";
 import crown from "../assets/crown.png";
-import Navigation from "../components/Navigation";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo_vertical_parana.png";
 import {useEffect} from "react";
+
+import React from 'react';
+// import {SafeAreaView, StatusBar, StyleSheet, Text, View} from 'react-native';
+// import {BackgroundVideo} from './src/components/VideoBackground';
+
+// const background = require('./src/assets/backgroundVid.mp4');
 
 
 const HomepageContainer = () => {
@@ -30,6 +35,18 @@ const HomepageContainer = () => {
         {/* <div id="crown">
             <img src={crown} alt="crown"/>
         </div> */}
+
+{/*         
+             <BackgroundVideo source={background} />
+     <View style={styles.overlay} />
+     <SafeAreaView style={styles.contentWrapper}>
+       <StatusBar
+         backgroundColor="transparent"
+         translucent={true}
+         hidden={false}
+       />
+       </SafeAreaView> */}
+
             <div id="logoContainer">
                 <img src={logo} alt="logo" id="home-logo"></img>
             </div>
