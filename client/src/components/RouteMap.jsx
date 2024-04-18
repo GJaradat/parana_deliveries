@@ -49,14 +49,14 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes, routesVisib
             displayedRoutes.forEach( (dispRouteIdx) => {
                 if (!displayedRouteLayers.includes(dispRouteIdx)){
                     displayRoutes(dispRouteIdx);
-                    displayMarkers(routes[dispRouteIdx-1].deliveries);
+                    displayMarkers(routes.find(route => route.id === dispRouteIdx).deliveries);
                     setDisplayedRouteLayers(displayedRouteLayers => [...displayedRouteLayers, dispRouteIdx])
                 }
             })
         }
     }, [displayedRoutes]);
 
-    const routeColours = ["#009e73", "#F0BA19", "#0071b2", "#e69d00", "#d55c00", "#f079a7", "#000000"]
+    const routeColours = ["#009e73", "#F0D319", "#0071B2", "#E69D00", "#F079A7", "#D55C00", "#000000"]
 
     const chooseColour = (index) => {
         const colourIndex = index % routeColours.length;
@@ -139,7 +139,7 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes, routesVisib
                 setDisplayedRouteLayers(prevLayers => prevLayers.filter(layerIdx => layerIdx !== dispRouteIdx));
 
                 // remove markers
-                clearMarkers(routes[dispRouteIdx-1].deliveries);
+                clearMarkers(routes.find(route => route.id === dispRouteIdx).deliveries);
             }
         });
     }
