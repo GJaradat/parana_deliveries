@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import '../styles/TruckStyle.css';
+import ReactModal from 'react-modal';
 const Truck = ({ truck, patchTrucks }) => {
 
     const[availabilityState, setAvailabilityState] = useState(truck.availability);
-    
+
+    const [modalIsOpen, setIsOpen] = useState(false);
 
     const handleClick = (e) =>{
         e.preventDefault();
@@ -15,13 +17,15 @@ const Truck = ({ truck, patchTrucks }) => {
             routes: truck.routes
         };
 
+        
         if(availabilityState !== "OUT_FOR_DELIVERY" && !allRoutesComplete()){
-            alert("Truck availability cannot be updated: deliveries still in progress");
+            alert("Truck availability cannot be updated: deliveries still in progress")
             return null;
         }
-
+        
         patchTrucks(newTruck);
-        alert("Truck availability successfully updated!")
+        toggleModal();
+        
     }
 
     const allRoutesComplete = () => {
@@ -40,9 +44,26 @@ const Truck = ({ truck, patchTrucks }) => {
         audio.play();
     }
 
+
+    const toggleModal = () => {
+        setIsOpen(!modalIsOpen)
+    }
+
+    const modalStyle = {content: {
+        height: "10%",
+        width: "20%",
+        margin: "auto",
+        textAlign: "center",
+        color:"#11464A",
+        backgroundColor: "white"
+    },
+    overlay: {
+        backgroundColor: 'rgba(64,46,83, 0.65)'
+    }}
+    
     return ( 
         <>
-            <article className='truck'>
+            <section className='truck'>
                 <h3>{truck.name} Truck</h3>
                 <button id="sound-button" onClick={handleAudioClick}>
                     <img id="truckImage" src={truck.imageURL} alt="truck picture"/>
@@ -55,7 +76,7 @@ const Truck = ({ truck, patchTrucks }) => {
                     <select name="editAvailabilityDropdown" 
                     className="updateStatusDropdown" 
                     defaultValue={truck.availability} 
-                    onChange={(e)=>{setAvailabilityState(e.target.value)}}
+                    onChange={(e) => setAvailabilityState(e.target.value)}
                     >
                         <option value="IN_DEPOT"> In Depot</option>
                         <option value="OUT_FOR_DELIVERY">Out For Delivery</option>
@@ -63,8 +84,20 @@ const Truck = ({ truck, patchTrucks }) => {
                     </select>
                     <button id="availabilityButton" onClick={handleClick}>Update</button>
                 </article>
-            </article>
 
+            <ReactModal 
+                    portalClassName="modal"
+                    isOpen={modalIsOpen}
+                    onRequestClose={toggleModal}
+                    contentLabel="Update Status Message"
+                    ariaHideApp={false}
+                    style={modalStyle}
+                >
+                    <div id="update-message">
+                        <h3>Truck availability successfully updated!</h3>
+                    </div>
+                </ReactModal>
+                
         </>
      );
 }

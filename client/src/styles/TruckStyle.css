@@ -48,6 +48,7 @@ h3 {
     padding-left: 10px;
     border-color: #2D304E;
     border-width: 2px;
+    background-color: rgb(247, 238, 228);
 }
 
 .sort {
@@ -70,6 +71,7 @@ h3 {
     border-width: 3px;
     border-style: inset;
     font-size: 16px;
+    background-color: rgb(247, 238, 228)
 }
 
 #availabilityContainer{
@@ -100,3 +102,4 @@ h3 {
     all: unset;
     cursor: pointer;
 }
+
