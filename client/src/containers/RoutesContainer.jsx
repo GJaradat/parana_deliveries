@@ -15,6 +15,7 @@ const RoutesContainer = () => {
     const [displayedRoutes, setDisplayedRoutes] = useState([]);
 
     const [routesLoaded, setRoutesLoaded] = useState(false);
+    const [routesVisible, setRoutesVisible] = useState(false);
 
     mapboxgl.accessToken = `${process.env.REACT_APP_MAPBOX_KEY}`;
 
@@ -87,6 +88,20 @@ const RoutesContainer = () => {
         }
         return route;
     })
+
+    const handleDisplayAll = () => {
+        const displayAll = routes.map( ( route ) => {
+            if (routesVisible) {
+                setDisplayedRoutes(displayedRoutes => displayedRoutes.filter(id => id !== route.id));
+            } else {
+                setDisplayedRoutes(displayedRoutes => [...displayedRoutes, route.id]);
+            }
+            //displayedRoutes.includes(route.id)
+        })
+        const finished = Promise.all(displayAll)
+        setRoutesVisible(!routesVisible);
+
+    }
     
     return ( 
         <section className='RoutesContainer'>
@@ -97,8 +112,8 @@ const RoutesContainer = () => {
                     </div>
                     
             <div id='Routes-content'>
-                <RouteList routes={filteredRoutes} patchRoutes={patchRoutes} displayedRoutes={displayedRoutes} setDisplayedRoutes={setDisplayedRoutes}/>
-                <RouteMap routes={filteredRoutes} deliveries={null} optRoutes={optRoutes} displayedRoutes={displayedRoutes} setDisplayedRoutes={setDisplayedRoutes}/>
+                <RouteList routes={filteredRoutes} patchRoutes={patchRoutes} displayedRoutes={displayedRoutes} setDisplayedRoutes={setDisplayedRoutes} routesVisible={routesVisible}/>
+                <RouteMap routes={filteredRoutes} deliveries={null} optRoutes={optRoutes} displayedRoutes={displayedRoutes} handleDisplayAll={handleDisplayAll} routesVisible={routesVisible}/>
             </div>
         </section>
      );

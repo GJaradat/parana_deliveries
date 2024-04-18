@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DeliveryList from "./DeliveryList";
 import "../styles/Route.css";
 
-const Route = ({route, patchRoutes, displayedRoutes, setDisplayedRoutes}) => {
+const Route = ({route, patchRoutes, displayedRoutes, setDisplayedRoutes, routesVisible}) => {
 
     const [expandButtonStatus, setExpandButtonStatus] = useState(false)
 
@@ -38,6 +38,14 @@ const Route = ({route, patchRoutes, displayedRoutes, setDisplayedRoutes}) => {
         setRouteVisible(!routeVisible);
     }
 
+    useEffect(()=>{
+        if (routesVisible){
+            setRouteVisible(true);
+        } else {
+            setRouteVisible(false);
+        }
+    }, [routesVisible])
+
     return ( 
         <>
         <main>
@@ -57,7 +65,7 @@ const Route = ({route, patchRoutes, displayedRoutes, setDisplayedRoutes}) => {
             </article>
                 <p id="truck">Truck: {route.truck.name}</p>
             <button className="dark-button" onClick={handleExpandStatus}>{toggleButtonLable()}</button>
-            <button className="dark-button" onClick={handleDisplayButton}>{ routeVisible ? "Hide Route" : "Show Route" }</button>
+            <button className="dark-button" onClick={handleDisplayButton}>{ (routeVisible) ? "Hide Route" : "Show Route" }</button>
             {expandButtonStatus && <>
                     <div className="delivery-list">
                         <DeliveryList deliveries = {route.deliveries} />
