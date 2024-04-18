@@ -18,12 +18,12 @@ const Truck = ({ truck, patchTrucks }) => {
 
         
         if(availabilityState !== "OUT_FOR_DELIVERY" && !allRoutesComplete()){
-            toggleModal();
+            alert("Truck availability cannot be updated: deliveries still in progress")
             return null;
         }
-
+        
         patchTrucks(newTruck);
-        alert("Truck availability cannot be updated: deliveries still in progress")
+        toggleModal();
         
     }
 
