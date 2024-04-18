@@ -109,7 +109,7 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes, setDisplaye
 
             // Make a popup to attach to marker
             const popup = new mapboxgl.Popup().setHTML(  
-                `<h3>Delivery #${delivery.location.id}</h3>
+                `<h3>Delivery #${delivery.id}</h3>
                 <h4>${delivery.location.address}</h4>
                 <p>${delivery.delivered ? 'Delivered' : `Out for delivery on Route ${thisRouteId}`}</p>` 
                );  
