@@ -32,10 +32,14 @@
 }
  */
 
- /* #homepage {
+ #homepage {
     background-image: url("../assets/homepageImage.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position-x: center;
     background-position-y: top;
- } */
+
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+ }

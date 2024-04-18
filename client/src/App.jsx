@@ -43,9 +43,9 @@ function App() {
 
   return (
     <>
-      <main>
+      {/* <main> */}
       <RouterProvider router={pageRoutes} />
-      </main>
+      {/* </main> */}
 
       <footer>
         <section className='footer-links'>

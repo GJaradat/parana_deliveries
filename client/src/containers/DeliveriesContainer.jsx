@@ -19,9 +19,9 @@ const DeliveriesContainer = () => {
     }, [])
 
     return ( 
-        <>
+        <section className='main'>
             <RouteMap routes={null} deliveries={deliveries}/>
-        </> 
+        </section> 
     );
 }
  
