@@ -50,7 +50,6 @@ const Route = ({route, patchRoutes, displayedRoutes, setDisplayedRoutes}) => {
                     defaultValue={route.status}
                     onChange={(e) => {setRouteStatus(e.target.value)}}
                     >
-                    <option value="PENDING">Pending</option>
                     <option value="IN_PROGRESS">In Progress</option>
                     <option value="COMPLETED">Completed</option>
                 </select>
