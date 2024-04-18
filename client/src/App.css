@@ -54,7 +54,8 @@ footer {
  
 
 .audio {
-  margin-top: 10px;
+  padding-top: 10px;
+  background-color: #07ad8cca;
 }
 
 audio::-webkit-media-controls-panel {
