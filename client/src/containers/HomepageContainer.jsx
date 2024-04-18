@@ -1,6 +1,8 @@
-import Navigation from "../components/Navigation";
-import logo from "../assets/logo_vertical_parana.png"
-import {useEffect} from "react"
+import "../styles/HomePageStyle.css";
+import { Link } from "react-router-dom";
+import logo from "../assets/logo_vertical_parana.png";
+import {useEffect} from "react";
+import React from 'react';
 
 
 const HomepageContainer = () => {
@@ -13,22 +15,30 @@ const HomepageContainer = () => {
     }
 
     useEffect(() => {
-        generateRoutes();
-        document.body.classList.add('hide-header');
-
-        // Cleanup function to remove the class when the component unmounts
-        return () => {
-          document.body.classList.remove('hide-header');
-        };
-     }, []);
+        generateRoutes();},
+    []);
 
     return ( 
-        <>
-            <div id="logo-container">
+        <section id="homepage">
+            <div id="logoContainer">
                 <img src={logo} alt="logo" id="home-logo"></img>
             </div>
-            < Navigation/>
-        </>
+            <nav>
+                <ul id ="homepageNav">
+                    <li>
+                        <Link className="navButton" to="/fleet">Fleet</Link>
+                    </li> 
+
+                    <li>
+                        <Link className="navButton" to="/routes">Routes</Link>
+                    </li>
+
+                    <li>
+                        <Link className="navButton" to="/deliveries">Deliveries</Link>
+                    </li>
+                </ul>
+            </nav>
+        </section>
      );
 }
  

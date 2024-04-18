@@ -49,9 +49,9 @@ function App() {
 
   return (
     <>
-      <main>
+      {/* <main> */}
       <RouterProvider router={pageRoutes} />
-      </main>
+      {/* </main> */}
 
       <footer>
         <div className='audio'>

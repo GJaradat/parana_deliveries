@@ -1,3 +1,30 @@
-.hide-header header{
-    display: none;
+#logoContainer {
+    margin-left: 37%;
+    margin-top: 100px;
+    max-height: 400px;
+    padding-bottom: 100px;
+    max-width: 10%;
 }
+
+
+#homepageNav {
+    display: flex;
+    justify-content: space-around;
+    list-style-type: none;
+    margin-top: 85px;
+    margin-right: 12%;
+    padding-bottom: 0;
+   
+}
+
+ #homepage {
+    background-image: url("../assets/homepageImage.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: 25%;
+
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+ }
