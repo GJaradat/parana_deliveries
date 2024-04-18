@@ -4,6 +4,7 @@ import ReactModal from 'react-modal';
 const Truck = ({ truck, patchTrucks }) => {
 
     const[availabilityState, setAvailabilityState] = useState(truck.availability);
+
     const [modalIsOpen, setIsOpen] = useState(false);
 
     const handleClick = (e) =>{
@@ -37,6 +38,13 @@ const Truck = ({ truck, patchTrucks }) => {
         return value;
     }
 
+    const handleAudioClick = () => {
+        let audio = new Audio();
+        audio.src= `${truck.name}.mp3`;
+        audio.play();
+    }
+
+
     const toggleModal = () => {
         setIsOpen(!modalIsOpen)
     }
@@ -57,7 +65,9 @@ const Truck = ({ truck, patchTrucks }) => {
         <>
             <section className='truck'>
                 <h3>{truck.name} Truck</h3>
-                <img id="truckImage" src={truck.imageURL} alt="truck picture"/> 
+                <button id="sound-button" onClick={handleAudioClick}>
+                    <img id="truckImage" src={truck.imageURL} alt="truck picture"/>
+                </button> 
                 <p>Capacity: {truck.capacity} kg</p>
 
                 <article id='availabilityContainer'>
@@ -74,8 +84,6 @@ const Truck = ({ truck, patchTrucks }) => {
                     </select>
                     <button id="availabilityButton" onClick={handleClick}>Update</button>
                 </article>
-              
-            </section>
 
             <ReactModal 
                     portalClassName="modal"
@@ -89,7 +97,6 @@ const Truck = ({ truck, patchTrucks }) => {
                         <h3>Truck availability successfully updated!</h3>
                     </div>
                 </ReactModal>
-
                 
         </>
      );
