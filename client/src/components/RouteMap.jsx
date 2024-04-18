@@ -150,6 +150,9 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes, routesVisib
         <>
             <div>
                 {routes && routes.length > 0 && <button id='make-route-button' onClick={handleDisplayAll}>{ routesVisible ? "Hide All Routes" : "Show All Routes" }</button>}
+                <div className="map-key">
+                    <span id="delivered-label">Delivered</span> <span id="not-delivered-label">Out for delivery</span>
+                </div>
                 <div ref={mapContainerRef} className="map-container" />
             </div>
         </>
