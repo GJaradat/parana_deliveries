@@ -111,7 +111,7 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes, setDisplaye
             const popup = new mapboxgl.Popup().setHTML(  
                 `<h3>Delivery #${delivery.id}</h3>
                 <h4>${delivery.location.address}</h4>
-                <p>${delivery.delivered ? 'Delivered' : `Out for delivery on Route ${thisRouteId}`}</p>` 
+                <p>${delivery.delivered ? `Delivered (Route ${thisRouteId})` : `Out for delivery on Route ${thisRouteId}`}</p>` 
                );  
 
             // Make a marker for each coordinate and add to the map
