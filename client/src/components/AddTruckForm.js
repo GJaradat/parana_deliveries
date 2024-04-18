@@ -26,7 +26,7 @@ const AddTruckForm = ({trucks, setTrucks, postTruck}) => {
     return ( 
         <section id="addTruckContainer">
         <h3 id="addtruckTitle">Add New Animal (Truck):</h3>
-            <form onSubmit={handleSubmit}>
+            <form id="truck-form" onSubmit={handleSubmit}>
                 <label htmlFor="newTruckName"> New Truck Name: </label>
                 <input id="newTruckName"type="text" required value={truckName} onChange={(e)=>{setTruckName(e.target.value)}} />
 

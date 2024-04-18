@@ -1,26 +1,33 @@
 #addTruckContainer {
-    margin-left: 40px;
-    margin-top: 20px;
-    
+    margin-left: 25%;
+    margin-right: 50%;
+    margin-top: 50px;
     padding-bottom: 10px;
     padding-left: 10px;
     width: 55%;
-
     border: 2px solid black;
     border-radius: 7px;
-    border-color: #2D304E;
-    border-width: 3px;
+    border-color: #413763;
+    border-width: 2px;
     border-style: inset;
-    
+    background-color: #CBCDE2;
+    box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 5px 5px 0 rgba(0,0,0,0.19);
 }
 
 #addtruckTitle{
     color:#3c3f59;
     font-size: 20px;
+    margin-left: 7px;
 }
 
 #newTruckName, #newTruckImage, #newTruckCapacity {
     background-color: rgb(247, 238, 228);
     border-radius: 5px;
     margin-right: 3px;
+}
+
+#truck-form {
+    display: flex;
+    justify-content: space-around;
+    font-weight: 500;
 }
