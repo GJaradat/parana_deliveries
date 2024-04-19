@@ -41,6 +41,10 @@ const Truck = ({ truck, patchTrucks }) => {
     const handleAudioClick = () => {
         let audio = new Audio();
         audio.src= `${truck.name}.mp3`;
+
+        if(truck.id >7){
+            return alert('Animal sound coming soon!')
+        }
         audio.play();
     }
 
