@@ -28,7 +28,7 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes, routesVisib
         
         // Warehouse marker
         new mapboxgl.Marker({ className:"marker-warehouse", color:"none"}).setLngLat([lng,lat]).addTo(map.current);
-        }, []);
+    }, []);
 
     useEffect(() => {
         if (deliveries !== null){
@@ -89,7 +89,7 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes, routesVisib
               'line-color': `${chooseColour(dispRouteIdx)}`,
               'line-width': 4
             }
-          });
+        });
     }
 
     const displayMarkers = (deliveries) => {
@@ -156,7 +156,7 @@ const RouteMap = ( { routes, deliveries, optRoutes, displayedRoutes, routesVisib
                 <div ref={mapContainerRef} className="map-container" />
             </div>
         </>
-     );
+    );
 }
  
 export default RouteMap;
