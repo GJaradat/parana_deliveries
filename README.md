@@ -167,7 +167,10 @@ For a tutorial of the MapBox Optimisation API v1, click [here](https://docs.mapb
 These can be found in the projectDeliverables folder and contain the following:
 - Business Case
 - Risk Register
-- Retrospectives
+
+## Retrospectives
+![image](https://github.com/GJaradat/parana_deliveries/assets/149251586/b1e39bcc-d1eb-47f1-9282-fd58191d083a)
+![image](https://github.com/GJaradat/parana_deliveries/assets/149251586/80683cfd-fa3b-48a0-86ef-abe18d5463a4)
 
 ## Credits and Acknowledgements
 **Project Team**
