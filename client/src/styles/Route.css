@@ -8,6 +8,7 @@
     margin-left: 15px;
     margin-bottom: 15px;
     margin-top: 15px;
+    box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 5px 5px 0 rgba(0,0,0,0.19);
 }
 
 .dark-button {
@@ -49,6 +50,7 @@
     margin-top: 10px;
     height: 30px;
     background-color: #da9938;
+    cursor: pointer;
 }
 
 #truck {
@@ -74,4 +76,9 @@
 
 #delivery-id {
     font-weight: bold;
+}
+
+#route-title {
+    padding-top: 15px;
+    margin: 0px;
 }

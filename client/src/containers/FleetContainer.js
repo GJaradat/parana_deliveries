@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import TruckList from '../components/TruckList'
 import TruckSearch from '../components/TruckSearch';
 import TruckSort from '../components/TruckSort';
+import AddTruckForm from '../components/AddTruckForm';
 
 const FleetContainer = () => {
 
@@ -26,7 +27,17 @@ const FleetContainer = () => {
             body: JSON.stringify(truck.availability)
         });
         await loadTrucks();
-        console.log(truck.availability);
+    }
+
+
+    const postTruck = async (truck) => {
+        const response = await fetch("http://localhost:8080/trucks", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(truck)
+        });
+        const savedTruck = await response.json();
+        setTrucks([...trucks, savedTruck]);
     }
 
    
@@ -55,14 +66,15 @@ const FleetContainer = () => {
 
     
     return ( 
-        <>
+        <section className='main'>
             <h2 className='page_title'>Delivery Fleet</h2>
             <section className='filteringForms'>
                 <TruckSearch setSearchValue={setSearchValue} />
                 <TruckSort setSortValue={setSortValue} />
             </section>
+            <AddTruckForm trucks={filteredTrucks} setTrucks={setTrucks} postTruck={postTruck}/>
             <TruckList trucks={filteredTrucks} patchTrucks={patchTrucks}  />
-        </>
+        </section>
      );
 }
  
