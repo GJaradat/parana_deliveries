@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "../styles/AddTruckFormStyles.css"
 
-const AddTruckForm = ({trucks, setTrucks, postTruck}) => {
+const AddTruckForm = ({postTruck}) => {
     const[truckName, setTruckName] = useState("");
     const[capacity, setCapacity] = useState(0);
     const[URL,setURL] = useState("");
