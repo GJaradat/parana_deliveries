@@ -119,10 +119,12 @@ For a tutorial of the MapBox Optimisation API v1, click [here](https://docs.mapb
   - User can view past deliveries via status filtering
 
 ## Diagrams
-*(Preliminary)*
-*(TODO: Wireframes and Component Diagram)*
 ### Wireframes
+![image](https://github.com/GJaradat/parana_deliveries/assets/149251586/5cee59c7-8a65-4cbd-ada7-fba2b1fe4d8a)
+
 ### Component Diagram
+![image](https://github.com/GJaradat/parana_deliveries/assets/149251586/cfede41e-5a43-4731-9d06-6a1d0b07a5af)
+
 ### UML Diagram
 ![image](https://github.com/GJaradat/parana_deliveries/assets/108727885/a5d06a99-7969-4b34-bdad-7321dbe691bb)
 
