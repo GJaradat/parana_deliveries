@@ -5,12 +5,15 @@
 1. [Introduction](#introduction)
 2. [Technology](#technology)
 3. [Installation instructions](#installation-instructions)
-4. [MVP and Extensions](#mvp-and-extensions)
-5. [Coming Soon](#coming-soon)
-6. [Diagrams](#diagrams)
-7. [API Routes Table](#api-routes-table)
-8. [Other Deliverables](#other-deliverables)
-9. [Credits and Acknowledgements](#credits-and-acknowledgements)
+4. [Contributing instructions](#contributing-instructions)
+5. [MVP and Extensions](#mvp-and-extensions)
+6. [Coming Soon](#coming-soon)
+7. [Diagrams](#diagrams)
+8. [API Routes Table](#api-routes-table)
+9. [Retrospectives](#retrospectives)
+10. [Other Deliverables](#other-deliverables)
+11. [Credits and Acknowledgements](#credits-and-acknowledgements)
+12. [Licences](#licences)
 
 ## Introduction
 The aim of this project is to create a logistics application for a (fictional) online retailer called Paraná. The main features are managing vehicles and deliveries, and generating routes for distribution of deliveries. Routes are generated dynamically based on the locations of deliveries, with the help of MapBox Optimisation API v1. This was created as a final project for the 13th cohort of the [Bright Network Technology Academy](https://techacademy.brightnetwork.co.uk/).
@@ -39,11 +42,8 @@ Purpose of Technology usage: The objective is to enhance learning and skill deve
 - react-modal
 
 ### External APIs Used
-1. [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js/api/) to display the maps which can display markers of delivery locations.
+1. [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js/api/) to display the maps and display markers of the delivery locations.
 2. [Optimization API v1](https://docs.mapbox.com/api/navigation/optimization-v1/#example-request-retrieve-an-optimization) to calculate the shortest distance of a given route.
-
-Please note that to use these APIs you need to create an account on the Mapbox website and create an access token. 
-For instructions on generating a token, click [here](https://docs.mapbox.com/help/tutorials/use-mapbox-gl-js-with-react/).
 
 For a tutorial of the MapBox GL JS API, click [here](https://docs.mapbox.com/help/tutorials/use-mapbox-gl-js-with-react/).
 
@@ -51,23 +51,44 @@ For a tutorial of the MapBox Optimisation API v1, click [here](https://docs.mapb
 
 ## Installation Instructions
 - In the terminal, navigate to the directory you want to copy the repository into. 
-- Run the command `git clone git@github.com:GJaradat/parana_deliveries.git`
+- Run the command `git clone git@github.com:GJaradat/parana_deliveries.git`.
 - Run the command `git pull` to ensure you have the latest version.
   
-(backend setup)
-1. Install Postman, Postico, PostgreSQL, and your preferred IDE.
-2. Open the server directory in your preferred IDE (we used IntelliJ).
-3. In the terminal, create the linked database by running the command `createdb deliveries_db`.
-4. Run the server.
+**backend setup**
+1. Install Postman, Postico, PostgreSQL, and (optional)your preferred IDE.
+2. In the terminal, navigate to the server directory.
+3. Run the command `createdb deliveries_db` to create the linked database.
+4. Run the command `./mvnw spring-boot:run` to run the server.
+5. Open Postman.(*Optional:* Import the `Parana Deliveries.postman_collection.json` file into your Postman to access all of the repo endpoints with example payloads.) 
+6. On Postman, make a ```POST``` request to the ```http://localhost:8080/routes/generateRoutes``` endpoint. 
 
-(frontend setup)
+**frontend setup**
 1. Download Node.js.
-2. Open the client directory in your preferred IDE (we used VSCode).
-3. In the client folder, create the file .env
-4. In the .env file paste the code `REACT_APP_MAPBOX_KEY = [your mapbox access key here]`.
-5. In the terminal, run the command `npm i`.
-6. In the terminal, run the command `npm i mapbox-gl`.
-7. Run the frontend application by entering the command `npm start` in the termainal.
+2. Create an access token on the MapBox website (for instructions on this, click [here](https://www.educative.io/answers/how-to-generate-mapbox-access-tokens)).
+3. Open the client directory in your preferred IDE (we used VSCode).
+4. In the client folder, create an `.env` file.
+5. In the .env file, paste the code `REACT_APP_MAPBOX_KEY = [your mapbox access key here]`.
+6. In the terminal, run the commands `npm i` and `npm i mapbox-gl` to download all of the dependencies.
+7. Run the command `npm start`to open the frontend application.
+
+## Contributing Instructions
+We appreciate your interest in contributing to the Capstone Project. We welcome contributions of all kinds, from bug reports and documentation improvements to new features and code changes.
+
+Find below our contributing guidelines. By following these guidelines, you'll help us to maintain a high quality codebase and make the review process smoother for everyone.
+
+1. **Fork the Repository:** Create a fork of the Capstone Project repository on GitHub.
+
+2. **Create a Branch:** Clone the forked repository to your local machine & create a new branch for your contribution.
+
+3. **Make Changes:** Make your changes to the code & ensure your changes follow our coding style.
+
+4. **Commit Your Changes:** Commit your changes to your local branch with a descriptive commit message.
+
+5. **Push Your Changes:** Push your changes to your forked repository on GitHub.
+
+6. **Create a Pull Request:** Open a pull request from your branch to the main branch of the upstream repository.
+
+7. **Review and Feedback:** We will review your pull request and provide feedback.
 
 ## MVP and Extensions
 ### MVP
@@ -114,16 +135,17 @@ For a tutorial of the MapBox Optimisation API v1, click [here](https://docs.mapb
   - Map points are colour coded based on the status of the delivery
  
   ## COMING SOON
-  **(Backend)**
-  - Delete vehicles
-  - Add/Delete vehicles based on demand
-  - Display all packages
-  - Display a specified package
-  - Display a delivery's packages
-  - Route assigning to a vehicle now accounts for the maximum weight capacity of that vehicle
+ **(Backend)**
+ - Delete vehicles
+ - Add/Delete vehicles based on demand
+ - Display all packages
+ - Display a specified package
+ - Display a delivery's packages
+ - Route assigning to a vehicle now accounts for the maximum weight capacity of that vehicle
+    
   **(Frontend)**
-    - Use external API to dynamically generate the routes instead of the clustering algorithm, allowing for greater accuracy
-    - Delivery Page: localhost:3000/deliveries
+  - Use external API to dynamically generate the routes instead of the clustering algorithm, allowing for greater accuracy
+  - Delivery Page: localhost:3000/deliveries
       - User can filter deliveries by package to enable package tracking
 
 ## Diagrams
@@ -172,16 +194,15 @@ For a tutorial of the MapBox Optimisation API v1, click [here](https://docs.mapb
 |--------|:-----------------------------:|:-------:|:----------------------------|------------------------------------------------------------------------------------|------------------|
 | POST   | localhost:8080/locations      | POST    | Creates new Location entity | ```{"address": "Hightown Street", "latitude": 51.888808, "longitude": -0.403725}```| ```{"id":40, "address": "Hightown Street", "latitude": 51.888808, "longitude": -0.403725}```|
 
+## Retrospectives
+![image](https://github.com/GJaradat/parana_deliveries/assets/108727885/14f2586b-6533-4ffa-8cc7-901d8402ded8)
+
+![image](https://github.com/GJaradat/parana_deliveries/assets/149251586/80683cfd-fa3b-48a0-86ef-abe18d5463a4)
 
 ## Other Deliverables
 These can be found in the Project_Deliverables folder and contain the following:
 - Business Case
 - Risk Register
-
-## Retrospectives
-![image](https://github.com/GJaradat/parana_deliveries/assets/108727885/14f2586b-6533-4ffa-8cc7-901d8402ded8)
-
-![image](https://github.com/GJaradat/parana_deliveries/assets/149251586/80683cfd-fa3b-48a0-86ef-abe18d5463a4)
 
 ## Credits and Acknowledgements
 **Project Team**
@@ -190,3 +211,7 @@ These can be found in the Project_Deliverables folder and contain the following:
 - Leila Peltier (https://github.com/L1ly-42)
 - Yeabsira Negash (https://github.com/Y-Negash)
 - Zarrin Rahman (https://github.com/z-for-zarrin)
+
+## Licences
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
