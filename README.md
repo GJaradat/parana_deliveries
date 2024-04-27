@@ -6,10 +6,11 @@
 2. [Technology](#technology)
 3. [Installation instructions](#installation-instructions)
 4. [MVP and Extensions](#mvp-and-extensions)
-5. [Diagrams](#diagrams)
-6. [API Routes Table](#api-routes-table)
-7. [Other Deliverables](#other-deliverables)
-8. [Credits and Acknowledgements](#credits-and-acknowledgements)
+5. [Coming Soon](#coming-soon)
+6. [Diagrams](#diagrams)
+7. [API Routes Table](#api-routes-table)
+8. [Other Deliverables](#other-deliverables)
+9. [Credits and Acknowledgements](#credits-and-acknowledgements)
 
 ## Introduction
 The aim of this project is to create a logistics application for a (fictional) online retailer called Paraná. The main features are managing vehicles and deliveries, and generating routes for distribution of deliveries. Routes are generated dynamically based on the locations of deliveries, with the help of MapBox Optimisation API v1. This was created as a final project for the 13th cohort of the [Bright Network Technology Academy](https://techacademy.brightnetwork.co.uk/).
@@ -35,7 +36,7 @@ Purpose of Technology usage: The objective is to enhance learning and skill deve
 
 ### React Libraries Used:
 - react-router-dom
-- *react-modal(?)*
+- react-modal
 
 ### External APIs Used
 1. [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js/api/) to display the maps which can display markers of delivery locations.
@@ -73,11 +74,12 @@ For a tutorial of the MapBox Optimisation API v1, click [here](https://docs.mapb
 **(Backend)**
 - Display all Trucks
 - Display a specified Truck
-- Update the availability status of a Truck (In Depot/Out For Delivery/Under Maintenance)
+- Update the availability status of a Truck (```IN_DEPOT```/```OUT_FOR_DELIVERY```/```UNDER_MAINTENANCE```)
 - Display all delivery Routes
 - Display a specified delivery Route
-- Update the status of a Route (```PENDING```/```IN_PROGRESS```/```COMPLETE```)
+- Update the status of a Route (```IN_PROGRESS```/```COMPLETE```)
 - Add a new Route
+- Generate routes via a clustering algorithm
 - Display all Delivery locations
 - Display a specifed Delivery location
 
@@ -88,48 +90,54 @@ For a tutorial of the MapBox Optimisation API v1, click [here](https://docs.mapb
    - User can see all vehicles and their details
    - User can search for vehicles by name
    - User can filter vehicles by availability status
-   - User can edit the availability ststus of a vehicle (COMING SOON)
+   - User can edit the availability status of a vehicle
 - Delivery Routes Page: localhost:3000/routes
    - User can see all routes and their details
    - User can search for routes by the name of their assigned vehicle
    - User can filter routes by status
-   - User can edit the status of a route (COMING SOON)
-- Add Basic CSS Styling to the webpages
-  
-(use external API to dynamically generate routes and display them on a map) - COMING SOON
+   - User can edit the status of a route
 
 ### Extensions
 **(Backend)**
-- Add/Delete vehicles based on demand
-- Display all packages
-- Display a specified package
 - Update the status of a delivery
-- Display a delivery's packages
 - Add a new delivery
-- Route assigning to a vehicle now accounts for the maximum weight capacity of that vehicle
-
+- Add vehicles
+  
 **(Frontend)**
 - Delivery Fleet Page: localhost:3000/fleet
-  - Display the page as a series of dropdown menus that will open up to show more information about the selected vehicle
+  - User can add a new vehicle 
 - Delivery Routes Page: localhost:3000/routes
   - Use maps to visualise the individual routes
+  - Map points are colour coded based on the status of the delivery
 - Delivery Page: localhost:3000/deliveries
-  - User can view all deliveries 
-  - User can filter deliveries by package to enable package tracking
-  - User can view past deliveries via status filtering
+  - User can view all deliveries on a map
+  - Map points are colour coded based on the status of the delivery
+ 
+  ## COMING SOON
+  **(Backend)**
+  - Delete vehicles
+  - Add/Delete vehicles based on demand
+  - Display all packages
+  - Display a specified package
+  - Display a delivery's packages
+  - Route assigning to a vehicle now accounts for the maximum weight capacity of that vehicle
+  **(Frontend)**
+    - Use external API to dynamically generate the routes instead of the clustering algorithm, allowing for greater accuracy
+    - Delivery Page: localhost:3000/deliveries
+      - User can filter deliveries by package to enable package tracking
 
 ## Diagrams
 ### Wireframes
-![image](https://github.com/GJaradat/parana_deliveries/assets/149251586/5cee59c7-8a65-4cbd-ada7-fba2b1fe4d8a)
+![wireframes](https://github.com/GJaradat/parana_deliveries/assets/108727885/37ac3e77-fd05-442a-a07a-bc49b044a633)
 
 ### Component Diagram
-![image](https://github.com/GJaradat/parana_deliveries/assets/149251586/cfede41e-5a43-4731-9d06-6a1d0b07a5af)
+![component_diagram](https://github.com/GJaradat/parana_deliveries/assets/149251586/cfede41e-5a43-4731-9d06-6a1d0b07a5af)
 
 ### UML Diagram
-![image](https://github.com/GJaradat/parana_deliveries/assets/108727885/a5d06a99-7969-4b34-bdad-7321dbe691bb)
+![uml](https://github.com/GJaradat/parana_deliveries/assets/108727885/51a6880b-c9ec-42e0-8d0a-9243f2ceb45d)
 
 ### Entity Relationship Diagram
-![image](https://github.com/GJaradat/parana_deliveries/assets/108727885/49960a12-3adf-4967-a71c-1985b945ab5b)
+![ERD](https://github.com/GJaradat/parana_deliveries/assets/108727885/93142e12-db5b-47e6-9921-a56c3bb9ecbc)
 
 ## API Routes Table
 
@@ -139,25 +147,25 @@ For a tutorial of the MapBox Optimisation API v1, click [here](https://docs.mapb
 | INDEX  | localhost:8080/trucks            | GET     | Returns all Truck entities               | N/A                                        | |
 | SHOW   | localhost:8080/trucks/:id        | GET     | Returns Truck entity with matching id    | N/A                                        | | 
 | UPDATE | localhost:8080/trucks/:id/status | PATCH   | Changes ```availability``` property of a Truck | ```"OUT_FOR_DELIVERY"```                   | ```{"id": 1, "name": "Sloth", "imageURL":"https://...", "capacity": 2000, "availability": "OUT_FOR_DELIVERY", "routes": [...]}```|
-| CREATE | localhost:8080/trucks            | POST    | Creates new Truck                        | ```{"name": "Piranha", "capacity": 1000}```|  ```{"id": 8, "name": "Piranha", "imageURL":"https://...", "capacity": 1000, "availability": "IN_DEPOT", "routes": []}```|
+| CREATE | localhost:8080/trucks            | POST    | Creates new Truck                        | ```{"name": "Piranha", "imageURL": "https://exampleImage.jpg", "capacity": 1000}```|  ```{"id": 8, "name": "Piranha", "imageURL":"https://exampleImage.jpg", "capacity": 1000, "availability": "IN_DEPOT", "routes": []}```|
 
 ### Routes
-|        | URL                              | Method  | Description                                                            | Example Request Body                       | Example Response |
+|        | URL                              | Method  | Description                                                            | Example Request Body | Example Response |
 |--------|:--------------------------------:|:-------:|:-----------------------------------------------------------------------|--------------------------------------------|------------------|
-| INDEX  | localhost:8080/routes            | GET     | Returns all Route entities                                             | N/A                                        |  |
-| SHOW   | localhost:8080/routes/:id        | GET     | Returns Route entity with matching id                                  | N/A                                        |  | 
-| UPDATE | localhost:8080/trucks/:id/status | PATCH   | Changes ```status``` property of a Route                                     | ```"COMPLETED"```                          | ```{"id": 1, "deliveries": [...], "truck": {...}, "status": "COMPLETED"}``` |
-| CREATE | localhost:8080/trucks            | POST    | Creates new Route and assigns a Truck with ```IN_DEPOT``` availability | N/A                                        |  ```{"id": 7, "deliveries": [], "truck": {...}, "status": "PENDING}```|
-|        | localhost:8080/generateRoutes    | POST    | Clusters all undelivered deliveries and assigns them to a newly generated Route entity | N/A | ```[ {"id": 1, "deliveries": [...], "truck": {...}, "status": "IN_PROGRESS"}, ... ]``` |
+| INDEX  | localhost:8080/routes            | GET     | Returns all Route entities                                             | N/A                  |  |
+| SHOW   | localhost:8080/routes/:id        | GET     | Returns Route entity with matching id                                  | N/A                  |  | 
+| UPDATE | localhost:8080/routes/:id/status | PATCH   | Changes ```status``` property of a Route                               | ```"COMPLETED"```    | ```{"id": 1, "deliveries": [...], "truck": {...}, "status": "COMPLETED"}``` |
+| CREATE | localhost:8080/routes            | POST    | Creates new Route and assigns it to a Truck that had an ```IN_DEPOT``` availability | N/A                  |  ```{"id": 7, "deliveries": [...], "truck": {...}, "status": "IN_PROGRESS"}```|
+| generate routes       | localhost:8080/routes/generateRoutes    | POST    | Clusters all undelivered deliveries and assigns them to a newly generated Route entity | N/A | ```[ {"id": 1, "deliveries": [...], "truck": {...}, "status": "IN_PROGRESS"}, ... ]``` |
 
 ### Deliveries
-|        | URL                           | Method  | Description                                   | Example Request Body | Example Response |
-|--------|:-----------------------------:|:-------:|:----------------------------------------------|----------------------|------------------|
-| INDEX  | localhost:8080/deliveries     | GET     | Returns all Delivery entities                 | N/A                  | |
-| SHOW   | localhost:8080/deliveries/:id | GET     | Returns Delivery entity with matching id      | N/A                  | | 
-| UPDATE | localhost:8080/deliveries/:id | PATCH   | Sets ```isDelivered``` property to ```true``` | N/A                  | ```{"id": 8, "route": {...}, "location": {...}, "delivered":" true}```|
-| CREATE | localhost:8080/trucks         | POST    | Creates new Delivery                          | ```5```              |  ```{"id":50, "route": {}, "location": {"id": 5,...}, "delivered": false```|
-| DELETE | localhost:8080/deliveries/:id | DELETE  | Deletes Delivery entity with matching id      | N/A                  | ```1``` (id of deleted Delivery)|
+|        | URL                           | Method  | Description                                                          | Example Request Body | Example Response |
+|--------|:-----------------------------:|:-------:|:---------------------------------------------------------------------|----------------------|------------------|
+| INDEX  | localhost:8080/deliveries     | GET     | Returns all Delivery entities                                        | N/A                  |                  |
+| SHOW   | localhost:8080/deliveries/:id | GET     | Returns Delivery entity with matching id                             | N/A                  |                  | 
+| UPDATE | localhost:8080/deliveries/:id | PATCH   | Toggles ```isDelivered``` property between ```true``` and ```false```| N/A                  | ```{"id": 8, "route": {...}, "location": {...}, "delivered":" true}```|
+| CREATE | localhost:8080/deliveries     | POST    | Creates new Delivery and assigns it to the location with the id given in the request body| ```5```|```{"id":50, "route": {}, "location": {"id": 5,...}, "delivered": false```|
+| DELETE | localhost:8080/deliveries/:id | DELETE  | Deletes Delivery entity with matching id                             | N/A                  | ```1``` (id of deleted Delivery)|
 
 ### Locations
 |        | URL                           | Method  | Description                 | Example Request Body                                                               | Example Response |
@@ -166,12 +174,13 @@ For a tutorial of the MapBox Optimisation API v1, click [here](https://docs.mapb
 
 
 ## Other Deliverables
-These can be found in the projectDeliverables folder and contain the following:
+These can be found in the Project_Deliverables folder and contain the following:
 - Business Case
 - Risk Register
 
 ## Retrospectives
-![image](https://github.com/GJaradat/parana_deliveries/assets/149251586/b1e39bcc-d1eb-47f1-9282-fd58191d083a)
+![image](https://github.com/GJaradat/parana_deliveries/assets/108727885/14f2586b-6533-4ffa-8cc7-901d8402ded8)
+
 ![image](https://github.com/GJaradat/parana_deliveries/assets/149251586/80683cfd-fa3b-48a0-86ef-abe18d5463a4)
 
 ## Credits and Acknowledgements
