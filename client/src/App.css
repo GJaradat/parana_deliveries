@@ -2,10 +2,6 @@
   text-align: center;
 }
 
-/* body {
-  background-color: #0cb884ca;
-} */
-
 #root{
   display: flex;
   flex-direction: column;

@@ -8,6 +8,12 @@ public class TruckDTO {
 
     public TruckDTO() {}
 
+    public TruckDTO(String name, String imageURL, int capacity) {
+        this.name = name;
+        this.imageURL = imageURL;
+        this.capacity = capacity;
+    }
+
     public String getName() {
         return name;
     }
